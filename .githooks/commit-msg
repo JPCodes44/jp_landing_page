@@ -2,8 +2,12 @@
 set -euo pipefail
 msg_file="$1"
 
-if ! grep -Eq '^\[spec:[^]]+\] ' "$msg_file"; then
-  echo "commit message must start with [spec:<task-id>]"
-  echo "example: [spec:auth-login-fix] tighten invalid credential flow"
-  exit 1
+branch=$(git symbolic-ref --short HEAD 2>/dev/null || true)
+
+if [[ "$branch" == agent/* ]]; then
+  if ! grep -Eq '^\[spec:[^]]+\] ' "$msg_file"; then
+    echo "commit message must start with [spec:<task-id>]"
+    echo "example: [spec:auth-login-fix] tighten invalid credential flow"
+    exit 1
+  fi
 fi
