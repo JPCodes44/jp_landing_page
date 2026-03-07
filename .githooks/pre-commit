@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# pre-commit hook
+# Runs secret scan, spec validation, and file scope check on staged changes.
+
+set -uo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+SCRIPT_DIR="${REPO_ROOT}/scripts"
+
+echo "[pre-commit] Running quality gates on staged changes..."
+exec bash "${SCRIPT_DIR}/run_quality_gates.sh" --staged
