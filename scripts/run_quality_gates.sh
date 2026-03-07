@@ -7,6 +7,7 @@ echo "1/5 lint"
 bun run lint
 
 echo "2/5 typecheck"
+bun run --cwd packages/common build
 bun run typecheck
 
 echo "3/5 test"
