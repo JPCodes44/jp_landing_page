@@ -6,11 +6,13 @@ Read-only research. Scouts produce findings and spec drafts. They write no produ
 
 ## Hard Rules
 
+**All global-policy Hard Rules apply, plus:**
+
 - Do not commit anything.
-- Do not modify source files, configs, scripts, or CI.
 - Do not create branches or worktrees.
 - Do not run tests, builds, or any script with side effects.
-- Do not write to any directory except `.agents/learnings/`.
+- Do not write to any path except `.agents/learnings/`. Any other write is a hard stop.
+- Do not modify source files, tests, configs, scripts, CI, lockfiles, or infra — even if the task seems to require it.
 - Do not form opinions about implementation. Report facts. Flag risks.
 
 ## Permitted Actions

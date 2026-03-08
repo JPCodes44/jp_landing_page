@@ -1,0 +1,142 @@
+name: PR Reviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  reviewer:
+    name: Automated Reviewer
+    if: startsWith(github.head_ref, 'agent/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+          # Use a token that can push back to the PR branch
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch main for diff base
+        run: git fetch origin main
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Resolve task ID
+        id: task
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          TASK_ID="${BRANCH#agent/}"
+          echo "task_id=${TASK_ID}" >> "$GITHUB_OUTPUT"
+
+      - name: Run quality gates
+        id: quality_gates
+        run: |
+          set +e
+          OUTPUT=$(bash scripts/run_quality_gates.sh 2>&1)
+          EXIT_CODE=$?
+          set -e
+          # Write output to a file to avoid multiline escaping issues
+          echo "${OUTPUT}" > /tmp/quality_gates_output.txt
+          echo "exit_code=${EXIT_CODE}" >> "$GITHUB_OUTPUT"
+
+      - name: Run reviewer
+        id: reviewer
+        env:
+          TASK_ID: ${{ steps.task.outputs.task_id }}
+        run: |
+          set +e
+          bash scripts/run_reviewer.sh "${TASK_ID}"
+          EXIT_CODE=$?
+          set -e
+          echo "exit_code=${EXIT_CODE}" >> "$GITHUB_OUTPUT"
+
+      - name: Commit review report
+        env:
+          TASK_ID: ${{ steps.task.outputs.task_id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          REPORT=".agents/logs/reviews/${TASK_ID}.md"
+          if [[ -f "${REPORT}" ]]; then
+            git add "${REPORT}"
+            git diff --staged --quiet || git commit -m "ci: reviewer report for ${TASK_ID}"
+            git push origin "HEAD:${{ github.head_ref }}"
+          else
+            echo "No report file found at ${REPORT}, skipping commit."
+          fi
+
+      - name: Comment review report on PR
+        uses: actions/github-script@v7
+        env:
+          TASK_ID: ${{ steps.task.outputs.task_id }}
+          REVIEWER_EXIT: ${{ steps.reviewer.outputs.exit_code }}
+          QUALITY_EXIT: ${{ steps.quality_gates.outputs.exit_code }}
+        with:
+          script: |
+            const fs = require('fs');
+            const taskId = process.env.TASK_ID;
+            const reviewerExit = parseInt(process.env.REVIEWER_EXIT || '1');
+            const qualityExit = parseInt(process.env.QUALITY_EXIT || '1');
+
+            const reportPath = `.agents/logs/reviews/${taskId}.md`;
+            let reportContent = '(report not generated)';
+            try {
+              reportContent = fs.readFileSync(reportPath, 'utf8');
+            } catch (e) {
+              reportContent = `Error reading report: ${e.message}`;
+            }
+
+            let qualityOutput = '(not captured)';
+            try {
+              qualityOutput = fs.readFileSync('/tmp/quality_gates_output.txt', 'utf8');
+            } catch (e) {
+              qualityOutput = `Error reading quality gates output: ${e.message}`;
+            }
+
+            const allPass = reviewerExit === 0 && qualityExit === 0;
+
+            const body = [
+              `## Automated Review: ${taskId}`,
+              ``,
+              `| Gate | Result |`,
+              `|------|--------|`,
+              `| Quality gates | ${qualityExit === 0 ? '✅ PASS' : '❌ FAIL'} |`,
+              `| Mechanical review | ${reviewerExit === 0 ? '✅ PASS' : '❌ FAIL'} |`,
+              ``,
+              `<details>`,
+              `<summary>Quality Gates Output</summary>`,
+              ``,
+              `\`\`\``,
+              qualityOutput.trim(),
+              `\`\`\``,
+              `</details>`,
+              ``,
+              `---`,
+              ``,
+              reportContent,
+              ``,
+              allPass
+                ? `**All automated checks passed. Awaiting human review.**`
+                : `**One or more automated checks failed. Fix the issues above before this PR can be merged.**`,
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+
+            if (!allPass) {
+              core.setFailed(`Automated review failed (reviewer=${reviewerExit}, quality=${qualityExit}). See PR comment.`);
+            }

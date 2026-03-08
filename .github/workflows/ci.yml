@@ -1,26 +1,35 @@
-name: CI
+name: ci
 
 on:
   push:
     branches: ["main"]
   pull_request:
-    branches: ["main"]
+  workflow_dispatch:
 
 jobs:
-  quality-gates:
-    name: Quality Gates
+  verify:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Bun
+      - name: setup bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Install dependencies
+      - name: install
         run: bun install
 
-      - name: Run quality gates
-        run: bash scripts/run_quality_gates.sh --pr
+      - name: lint
+        run: bun lint
+
+      - name: typecheck
+        run: bun typecheck
+
+      - name: test
+        run: bun test
+
+      - name: build
+        run: bun run build
