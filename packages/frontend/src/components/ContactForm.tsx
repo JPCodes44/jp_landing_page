@@ -1,4 +1,4 @@
-import { ContactFormSchema } from "@jp/common";
+import { ContactFormSchema } from "@jp/common/src/schemas";
 import { useState } from "react";
 import { submitContact } from "../api/contact";
 
