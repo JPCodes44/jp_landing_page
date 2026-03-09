@@ -24,6 +24,8 @@ agent/redesign-frame2
 - .agents/logs/reads/redesign-frame2.json
 - .agents/logs/runs/redesign-frame2.json
 - .agents/logs/reviews/redesign-frame2.md
+- .agents/logs/reviews/.gitkeep
+- .agents/logs/redesign-frame2-failure.md
 - .agents/logs/runs/redesign-and-animate-frame3.start
 - .agents/policies/04-reviewer-policy.md
 - .agents/specs/active/2026-03-09-redesign-and-animate-frame3.md
@@ -33,6 +35,9 @@ agent/redesign-frame2
 - packages/frontend/src/components/Frame1.tsx
 - scripts/prompt_worktree_hook.sh
 - scripts/run_quality_gates.sh
+- scripts/run_reviewer.sh
+- .githooks/post-commit
+- .agents/policies/00-agent-contract.md
 
 ## Forbidden files
 - package-lock.json
