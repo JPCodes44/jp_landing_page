@@ -15,12 +15,14 @@ agent/redesign-and-animate-frame5
 ../wt-redesign-and-animate-frame5
 
 ## Allowed files
-- `packages/frontend/src/components/Frame5.tsx`
-- `packages/frontend/src/components/Frame5.test.tsx`
-- `packages/frontend/src/theme/index.ts`
-- `packages/frontend/src/App.tsx`
-- `packages/frontend/src/App.test.tsx`
-- `.agents/specs/active/2026-03-09-redesign-and-animate-frame5.md`
+- packages/frontend/src/components/Frame5.tsx
+- packages/frontend/src/components/Frame5.test.tsx
+- packages/frontend/src/theme/index.ts
+- packages/frontend/src/App.tsx
+- packages/frontend/src/App.test.tsx
+- .agents/specs/active/2026-03-09-redesign-and-animate-frame5.md
+- .agents/logs/reads/redesign-and-animate-frame5.json
+- .agents/logs/runs/redesign-and-animate-frame5.json
 
 ## Forbidden files
 - package-lock.json
