@@ -1,6 +1,6 @@
 # Review Report: redesign-frame2
 
-Generated: 2026-03-09T06:18:41Z
+Generated: 2026-03-09T06:56:56Z
 
 ---
 
@@ -37,8 +37,19 @@ Summary: Quality gates passed on agent/redesign-frame2
 ```
 out-of-scope file changes detected:
   - .agents/logs/reads/redesign-frame2.json
+  - .agents/logs/redesign-frame2-failure.md
+  - .agents/logs/reviews/redesign-frame2.md
+  - .agents/logs/runs/redesign-frame2.json
+  - .agents/policies/03-reviewer-policy.md
   - .agents/specs/active/2026-03-08-redesign-frame2.md
+  - biome.json
   - packages/frontend/src/vite-env.d.ts
+  - packages/frontend/styles/assets/2d/visuals/bell.png
+  - packages/frontend/styles/assets/2d/visuals/calendar.png
+  - packages/frontend/styles/assets/2d/visuals/slider.png
+  - packages/frontend/styles/assets/2d/visuals/tasks.png
+  - packages/frontend/styles/assets/2d/visuals/temperature.png
+  - packages/frontend/styles/assets/2d/visuals/workflow.png
 ```
 
 ### 4. Secrets Scan
@@ -51,6 +62,7 @@ out-of-scope file changes detected:
 ### 5. Commit Messages
 
 - **Result: [PASS]**
+  - `84121c7`: OK — [spec:redesign-frame2] Refine Frame2 visual layout
   - `42e58e1`: OK — [spec:redesign-frame2] Add Frame2 "What I do" section component
 
 
@@ -70,6 +82,7 @@ out-of-scope file changes detected:
 New functions/classes introduced:
 ```
 const App = () => {
+const App = () => {
 ```
 
 ### J2. Dead Code [REVIEW REQUIRED]
@@ -84,7 +97,7 @@ export default function App() {
 
 vi.mock / jest.mock / stub usage in diff:
 ```
-(none detected)
+vi.mock / jest.mock / stub usage in diff:
 ```
 
 ### J4. Config Drift [REVIEW REQUIRED]
@@ -92,12 +105,17 @@ vi.mock / jest.mock / stub usage in diff:
 Config files changed:
 ```
 .agents/logs/reads/redesign-frame2.json
+.agents/logs/runs/redesign-frame2.json
+biome.json
 ```
 
 ### J5. Blast Radius — New Exports & Dependencies [REVIEW REQUIRED]
 
 New exported symbols:
 ```
+export default function App() {
+export default App;
+export default Frame2;
 export default App;
 export default Frame2;
 ```
