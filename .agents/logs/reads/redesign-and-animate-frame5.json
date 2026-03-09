@@ -1,0 +1,20 @@
+{
+  "task_id": "redesign-and-animate-frame5",
+  "timestamp": "2026-03-09T00:00:00Z",
+  "classification": "frontend-implementation",
+  "spec_path": ".agents/specs/active/2026-03-09-redesign-and-animate-frame5.md",
+  "relevant_files": [
+    "packages/frontend/src/components/Frame3.tsx",
+    "packages/frontend/src/components/Frame3.test.tsx",
+    "packages/frontend/src/theme/index.ts",
+    "packages/frontend/src/App.tsx"
+  ],
+  "planned_reads": [
+    "packages/frontend/src/components/Frame3.tsx",
+    "packages/frontend/src/components/Frame3.test.tsx",
+    "packages/frontend/src/theme/index.ts",
+    "packages/frontend/src/App.tsx"
+  ],
+  "why_sufficient": "Frame3 provides the sticky-section scroll pattern. theme/index.ts shows existing constants. App.tsx shows how frames are composed. Frame3.test.tsx shows test patterns.",
+  "summary": "Create Frame5.tsx with 3-state scroll animation (heading large+muted → small+opaque, rect appears, rect expands fullscreen). Add to App.tsx after Frame4."
+}

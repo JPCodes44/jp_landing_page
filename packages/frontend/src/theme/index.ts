@@ -75,3 +75,17 @@ export const ANIM_SCROLL_END = "top 20%";
 
 // Nav
 export const NAV_GAP = "gap-10";
+
+// Frame5
+export const FRAME5_CONTAINER_HEIGHT = "300vh";
+export const FRAME5_HEADING_INITIAL_SIZE = "9rem";
+export const FRAME5_HEADING_FINAL_SIZE = "3.5rem";
+export const FRAME5_HEADING_INITIAL_TOP = "38vh";
+export const FRAME5_HEADING_FINAL_TOP = "5.5rem";
+export const FRAME5_HEADING_INITIAL_OPACITY = 0.35;
+export const FRAME5_RECT_INITIAL_INSET = "10%";
+export const FRAME5_RECT_INITIAL_HEIGHT = "30vh";
+export const FRAME5_RECT_INITIAL_TOP = "12rem";
+export const FRAME5_RECT_BG_COLOR = "#d0ccc8";
+export const FRAME5_SECTION_DARK_BG = "#1a1918";
+export const FRAME5_VIDEO_BG_COLOR = "#c2f0c2";

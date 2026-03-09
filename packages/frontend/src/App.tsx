@@ -2,6 +2,7 @@ import Frame1 from "./components/Frame1";
 import Frame2 from "./components/Frame2";
 import Frame3 from "./components/Frame3";
 import Frame4 from "./components/Frame4";
+import Frame5 from "./components/Frame5";
 import {
   FONT_SIZE_LOGO,
   FONT_SIZE_NAV_LINK,
@@ -76,6 +77,7 @@ const App = () => {
         <Frame2 />
         <Frame3 />
         <Frame4 />
+        <Frame5 />
       </main>
     </div>
   );
