@@ -59,12 +59,15 @@ jobs:
         run: |
           BRANCH="${{ github.head_ref }}"
           SLUG="${BRANCH#agent/}"
-          SPEC="spec_path=.agents/specs/active/${SLUG}.md"
-          echo "$SPEC" >> "$GITHUB_OUTPUT"
-          if [[ ! -f ".agents/specs/active/${SLUG}.md" ]]; then
-            echo "spec_exists=false" >> "$GITHUB_OUTPUT"
-          else
+          # Prefer date-prefixed spec (YYYY-MM-DD-<slug>.md), fall back to plain
+          SPEC_PATH=$(find .agents/specs/active -maxdepth 1 -name "*-${SLUG}.md" 2>/dev/null | sort | tail -1 || true)
+          [[ -z "$SPEC_PATH" && -f ".agents/specs/active/${SLUG}.md" ]] && SPEC_PATH=".agents/specs/active/${SLUG}.md"
+          if [[ -n "$SPEC_PATH" ]]; then
+            echo "spec_path=${SPEC_PATH}" >> "$GITHUB_OUTPUT"
             echo "spec_exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "spec_path=.agents/specs/active/${SLUG}.md" >> "$GITHUB_OUTPUT"
+            echo "spec_exists=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run changed files audit
