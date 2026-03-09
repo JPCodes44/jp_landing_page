@@ -1,0 +1,6 @@
+{
+  "buildCommand": "bun run --cwd packages/common build && bun run --cwd packages/frontend build",
+  "outputDirectory": "packages/frontend/dist",
+  "installCommand": "bun install",
+  "framework": null
+}
