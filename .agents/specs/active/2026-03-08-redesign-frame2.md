@@ -32,6 +32,7 @@ agent/redesign-frame2
 - jp_prompts/home_screen.md
 - packages/frontend/src/components/Frame1.tsx
 - scripts/prompt_worktree_hook.sh
+- scripts/run_quality_gates.sh
 
 ## Forbidden files
 - package-lock.json
