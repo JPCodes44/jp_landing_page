@@ -1,6 +1,6 @@
 # Review Report: redesign-frame2
 
-Generated: 2026-03-09T06:33:59Z
+Generated: 2026-03-09T08:53:39Z
 
 ---
 
@@ -36,17 +36,16 @@ Summary: Quality gates passed on agent/redesign-frame2
 - **Result: [FAIL]**
 ```
 out-of-scope file changes detected:
-  - .agents/logs/redesign-frame2-failure.md
   - .agents/logs/reviews/redesign-frame2.md
+  - .agents/logs/runs/redesign-and-animate-frame3.start
   - .agents/logs/runs/redesign-frame2.json
-  - .agents/policies/03-reviewer-policy.md
-  - biome.json
-  - packages/frontend/styles/assets/2d/visuals/bell.png
-  - packages/frontend/styles/assets/2d/visuals/calendar.png
-  - packages/frontend/styles/assets/2d/visuals/slider.png
-  - packages/frontend/styles/assets/2d/visuals/tasks.png
-  - packages/frontend/styles/assets/2d/visuals/temperature.png
-  - packages/frontend/styles/assets/2d/visuals/workflow.png
+  - .agents/policies/04-reviewer-policy.md
+  - .agents/specs/active/2026-03-09-redesign-and-animate-frame3.md
+  - .claude/settings.json
+  - docs/engineering/ai-contribution-policy.md
+  - jp_prompts/home_screen.md
+  - packages/frontend/src/components/Frame1.tsx
+  - scripts/prompt_worktree_hook.sh
 ```
 
 ### 4. Secrets Scan
@@ -59,8 +58,7 @@ out-of-scope file changes detected:
 ### 5. Commit Messages
 
 - **Result: [PASS]**
-  - `84121c7`: OK — [spec:redesign-frame2] Refine Frame2 visual layout
-  - `42e58e1`: OK — [spec:redesign-frame2] Add Frame2 "What I do" section component
+  - `7f1c465`: OK — [spec:redesign-frame2] Implement Frame2 "What I do" section
 
 
 ### 6. Package Boundary
@@ -79,15 +77,18 @@ out-of-scope file changes detected:
 New functions/classes introduced:
 ```
 const App = () => {
-const App = () => {
 ```
 
 ### J2. Dead Code [REVIEW REQUIRED]
 
 Removed import/call sites (lines removed containing calls or imports):
 ```
-    expect(main.children).toHaveLength(1);
-export default function App() {
+(none detected)
+- Spec exists and all fields are filled (not template placeholders)
+## Review Steps (stop on first violation)
+| `APPROVED_FILES` | Yes | Exhaustive list of files the agent may touch (globs allowed) |
+4. `.agents/policies/04-reviewer-policy.md` (if reviewing)
+    4. Code the component using the design screenshot, applying the correct fonts (fanwood and satoshi) and styling.
 ```
 
 ### J3. Test Mocks & Stubs [REVIEW REQUIRED]
@@ -101,9 +102,8 @@ vi.mock / jest.mock / stub usage in diff:
 
 Config files changed:
 ```
-.agents/logs/reads/redesign-frame2.json
 .agents/logs/runs/redesign-frame2.json
-biome.json
+.claude/settings.json
 ```
 
 ### J5. Blast Radius — New Exports & Dependencies [REVIEW REQUIRED]
@@ -111,8 +111,6 @@ biome.json
 New exported symbols:
 ```
 export default function App() {
-export default App;
-export default Frame2;
 export default App;
 export default Frame2;
 ```
