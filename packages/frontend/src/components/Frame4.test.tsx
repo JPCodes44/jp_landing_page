@@ -38,17 +38,18 @@ describe("Frame4", () => {
     expect(screen.getByText("Comprehensive Solutions:")).toBeInTheDocument();
   });
 
-  it("renders all 3 accordion items", () => {
+  it("renders all 4 accordion items", () => {
     render(<Frame4 />);
     expect(screen.getByText("Continuous Lead gen")).toBeInTheDocument();
     expect(screen.getByText("Automated reporting")).toBeInTheDocument();
+    expect(screen.getByText("Manual reporting")).toBeInTheDocument();
     expect(screen.getByText("Agentic internal tools")).toBeInTheDocument();
   });
 
-  it("renders a '+' for each accordion item", () => {
+  it("renders an expand button for each accordion item", () => {
     render(<Frame4 />);
-    const plusButtons = screen.getAllByText("+");
-    expect(plusButtons).toHaveLength(3);
+    const expandButtons = screen.getAllByRole("button", { name: "expand" });
+    expect(expandButtons).toHaveLength(4);
   });
 
   describe("with prefers-reduced-motion", () => {
