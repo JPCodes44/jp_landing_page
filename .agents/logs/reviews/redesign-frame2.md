@@ -89,8 +89,12 @@ const App = () => {
 
 Removed import/call sites (lines removed containing calls or imports):
 ```
-    expect(main.children).toHaveLength(1);
-export default function App() {
+(none detected)
+- Spec exists and all fields are filled (not template placeholders)
+## Review Steps (stop on first violation)
+| `APPROVED_FILES` | Yes | Exhaustive list of files the agent may touch (globs allowed) |
+4. `.agents/policies/04-reviewer-policy.md` (if reviewing)
+    4. Code the component using the design screenshot, applying the correct fonts (fanwood and satoshi) and styling.
 ```
 
 ### J3. Test Mocks & Stubs [REVIEW REQUIRED]
