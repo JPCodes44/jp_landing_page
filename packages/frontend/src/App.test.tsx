@@ -1,6 +1,23 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import App from "./App";
+
+beforeEach(() => {
+  Object.defineProperty(window, "matchMedia", {
+    writable: true,
+    configurable: true,
+    value: vi.fn().mockImplementation((query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })),
+  });
+});
 
 describe("App", () => {
   it("renders the main heading", () => {
@@ -14,6 +31,6 @@ describe("App", () => {
     render(<App />);
     const main = screen.getByRole("main");
     expect(main).toBeInTheDocument();
-    expect(main.children).toHaveLength(3);
+    expect(main.children).toHaveLength(4);
   });
 });
