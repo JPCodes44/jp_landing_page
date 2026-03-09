@@ -1,74 +1,77 @@
-import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
 
-const INITIAL_VH = 48;
-const FINAL_VH = 78;
-
-// #dedad5 = rgb(222, 218, 213)
-// #c2f0c2 = rgb(194, 240, 194)
-const START_RGB: [number, number, number] = [222, 218, 213];
-const END_RGB: [number, number, number] = [194, 240, 194];
-
-const lerpColor = (
-  start: [number, number, number],
-  end: [number, number, number],
-  t: number,
-): string => {
-  const r = Math.round(start[0] + (end[0] - start[0]) * t);
-  const g = Math.round(start[1] + (end[1] - start[1]) * t);
-  const b = Math.round(start[2] + (end[2] - start[2]) * t);
-  return `rgb(${r}, ${g}, ${b})`;
-};
+gsap.registerPlugin(ScrollTrigger);
 
 const Frame3 = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState<number>(0);
+  const rectRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const wrapper = wrapperRef.current;
+    const rect = rectRef.current;
+    const label = labelRef.current;
+    if (!wrapper || !rect || !label) return;
+
     const prefersReducedMotion =
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     if (prefersReducedMotion) {
-      setProgress(1);
+      gsap.set(rect, { height: "96vh", left: "2%", right: "2%", backgroundColor: "#c2f0c2" });
+      gsap.set(label, { opacity: 1 });
       return;
     }
 
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    });
 
-    const handleScroll = () => {
-      const rect = wrapper.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const wrapperHeight = wrapper.offsetHeight;
-      const raw = -rect.top / (wrapperHeight - vh);
-      const clamped = Math.max(0, Math.min(1, raw));
-      setProgress(clamped);
+    tl.to(
+      rect,
+      {
+        height: "96vh",
+        left: "2%",
+        right: "2%",
+        backgroundColor: "#c2f0c2",
+        ease: "none",
+        duration: 1,
+      },
+      0,
+    ).fromTo(label, { opacity: 0 }, { opacity: 1, ease: "none", duration: 0.2 }, 0.8);
+
+    return () => {
+      tl.scrollTrigger?.kill();
+      tl.kill();
     };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const vh = typeof window !== "undefined" ? window.innerHeight : 800;
-  const containerHeight = ((INITIAL_VH + (FINAL_VH - INITIAL_VH) * progress) * vh) / 100;
-  const bgColor = lerpColor(START_RGB, END_RGB, progress);
-  const labelOpacity = Math.max(0, (progress - 0.8) / 0.2);
-
   return (
-    <section ref={wrapperRef} className="relative w-full" style={{ height: "300vh" }}>
+    <section ref={wrapperRef} className="relative w-full bg-bg-warm " style={{ height: "300vh" }}>
       <div className="sticky top-0 h-screen w-full">
         <div
-          className="absolute left-[10%] right-[10%] rounded-2xl border border-border-warm overflow-hidden"
+          ref={rectRef}
+          className="absolute rounded-2xl border border-border-warm overflow-hidden"
           style={{
-            bottom: "1.5rem",
-            height: `${containerHeight}px`,
-            backgroundColor: bgColor,
+            top: "50%",
+            transform: "translateY(-50%)",
+            left: "10%",
+            right: "10%",
+            height: "48vh",
+            backgroundColor: "#dedad5",
           }}
         >
           <div
+            ref={labelRef}
             className="flex items-center justify-center h-full font-fanwood text-[2rem] text-text-primary"
-            style={{ opacity: labelOpacity }}
+            style={{ opacity: 0 }}
           >
             SOME COOL VISUAL WOAW
           </div>

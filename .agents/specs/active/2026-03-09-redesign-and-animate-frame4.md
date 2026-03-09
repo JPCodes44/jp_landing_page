@@ -1,77 +1,91 @@
 # Spec: redesign-and-animate-frame4
 
+Copy this file to `.agents/specs/active/<YYYY-MM-DD>-<task-id>.md` and fill in every field before starting work. A spec with any blank required field is invalid. The agent must not start without a valid spec.
+
 ---
 
 ## Objective
-Create Frame4, a scroll-animated section with heading "Comprehensive Solutions:" that slides up from the viewport bottom and an accordion list that fades in once the heading reaches full opacity.
+
+<!-- One sentence. Exact outcome. No vague language. -->
 
 ## Why
-Frame4 is the next content section after Frame3 and is missing from the page; without it the landing page is incomplete.
+
+<!-- Why this change is needed. What breaks or is missing without it. -->
 
 ## Branch
+
+<!-- Must follow pattern: agent/<task-id> -->
+
 agent/redesign-and-animate-frame4
 
 ## Worktree
+
+<!-- Path to the worktree directory -->
+
 ../wt-redesign-and-animate-frame4
 
 ## Allowed files
-- packages/frontend/src/components/Frame4.tsx
-- packages/frontend/src/components/Frame4.test.tsx
-- packages/frontend/src/App.tsx
-- packages/frontend/src/App.test.tsx
-- .agents/specs/active/2026-03-09-redesign-and-animate-frame4.md
-- .agents/logs/runs/redesign-and-animate-frame4.json
+
+## <!-- Exhaustive list. Globs permitted. Any file touched outside this list is a gate violation. -->
 
 ## Forbidden files
+
+<!-- Files the agent must never touch regardless of what the task seems to require. -->
+
 - package-lock.json
-- .github/workflows/*
-- infra/*
+- .github/workflows/\*
+- infra/\*
 
 ## Constraints
+
+<!-- Non-negotiable rules for the implementation. -->
+
 - No new dependencies unless explicitly approved
 - Preserve all public APIs
 - Must not break existing tests
-- No inline styles; no hardcoded colors (use design tokens)
-- No px/pt units — use rem, vw, vh, % only
 
 ## Domain Policy
+
+<!-- Which domain policy applies. Remove inapplicable lines. -->
+
 - `.agents/policies/00-agent-contract.md` (always)
 - `.agents/policies/01-task-protocol.md` (always)
 - `.agents/policies/02-validation.md` (always)
 - `.agents/policies/03-frontend-policy.md` (if touching packages/frontend/)
 
 ## Read Before Starting
-- packages/frontend/src/components/Frame3.tsx
-- packages/frontend/src/components/Frame3.test.tsx
-- packages/frontend/src/index.css
-- packages/frontend/src/App.tsx
+
+## <!-- Files the agent must read before writing any code. -->
 
 ## Implementation Notes
-- Use same sticky-wrapper pattern as Frame3 (300vh outer section, sticky inner)
-- GSAP ScrollTrigger timeline: heading y 40vh→0 + opacity 0→1 over 0–0.7 progress, accordion opacity 0→1 over 0.7–1.0 progress
-- Respect prefers-reduced-motion: skip animation, show everything at full opacity
-- Ship colocated Frame4.test.tsx following Frame3.test.tsx patterns
+
+## <!-- Specific guidance on how to approach the task. Not a place to restate the objective. -->
 
 ## Acceptance Criteria
-- [ ] Frame4 renders a `<section>` with heading "Comprehensive Solutions:"
-- [ ] Accordion contains exactly 3 items: "Continuous Lead gen", "Automated reporting", "Agentic internal tools"
-- [ ] Each accordion item has a horizontal separator (border-t) and a "+" on the right
-- [ ] GSAP timeline animates heading then accordion on scroll (300vh scroll distance)
-- [ ] prefers-reduced-motion: all elements visible immediately, no animation
-- [ ] Frame4 appears in App.tsx after Frame3
-- [ ] bun run lint passes
-- [ ] bun run typecheck passes
-- [ ] bun test passes (including Frame4.test.tsx)
+
+<!-- Each item must be independently verifiable. Reviewer will check every one. -->
+
+- [ ]
+- [ ]
 
 ## Required Checks
+
+<!-- Commands that must pass before the PR is opened. -->
+
 - bun run lint
 - bun run typecheck
 - bun test
 
 ## Rollback Plan
-Revert branch if regression appears in scroll animation or existing Frame1–3 rendering.
+
+<!-- What to do if this causes a regression after merge. -->
+
+Revert branch if regression appears in <describe affected area>.
 
 ## Reviewer Checklist
+
+<!-- The reviewer works through this list. All items must pass before approval. -->
+
 - [ ] All changed files are in Allowed Files
 - [ ] No files from Forbidden Files were touched
 - [ ] No new dependencies introduced

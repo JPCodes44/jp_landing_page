@@ -4,7 +4,7 @@ Before writing ANY code, you MUST complete these steps IN ORDER. Do not skip any
 
 ## SLUG: redesign-and-animate-frame3
 
-KEYWORD FOR ACTIVATING WORKTREE: /task-redesign-and-animate-frame3
+KEYWORD FOR ACTIVATING WORKTREE: /task-redesign-and-animate-frame4
 
 ### Step 0 — Read all policies
 
@@ -63,17 +63,18 @@ Now here is your actual task:
 <task>
 You are an expert at coding design implementations in /home/jp/JP_landing_page/packages/frontend.
 
-    I want you to redesign frame2 using the provided design screenshot. Fonts fanwood and satoshi are already installed.
+    I want you to redesign frame4 using the provided design screenshot. Fonts fanwood and satoshi are already installed.
 
     Note that background assets are NOT included in the repository and you will not need to implment them for now, just make sure the rest of the design is implemented correctly. You can use blank white background until the assets are available.
 
-    Here are the steps to redesign frame2:
+    Here are the steps to redesign frame4:
 
-    1. Review the design screenshot and layout requirements for frame2.
-    2. Obtain any visual assets needed for frame2 and save them to @jp_landing_page/packages/frontend/assets/visuals.
-    3. Create a new React component in @jp_landing_page/packages/frontend/src/components, for example, Frame2.tsx.
-    4. Code the component using the design screenshot, applying the correct fonts (fanwood and satoshi) and styling.
-    5. Test the component to ensure it matches the design and functions correctly.
+    1. Review the design screenshot and layout requirements for frame4.
+    2. plan out the animation going from image 1 (start state) to image 2 (end state). Please note the exact positions, where the start text from image one starts to appear and where the ending state position of the text ends in image 2.
+    3. Also the rectangular box in image 2 should appear once the text from image 1 starts to reach full opacity.
+    4. Create a new React component in @jp_landing_page/packages/frontend/src/components, for example, Frame4.tsx.
+    5. Code the component using the design screenshot, applying the correct font (should only be fanwood) and styling.
+    6. Test the component to ensure it matches the design and functions correctly.
 
     Strictly follow the design screenshot to ensure visual consistency. Pay close attention to spacing, colors, and typography.
 
