@@ -29,7 +29,7 @@ const ContactForm = ({ bp }: { bp: Breakpoint }) => {
   const [comments, setComments] = useState("");
 
   const isMobile = bp === "mobile";
-  const formPadding = isMobile ? "2rem" : FRAME6_FORM_INNER_PADDING;
+  const formPadding = isMobile ? "2rem" : bp === "tablet" ? "3rem" : FRAME6_FORM_INNER_PADDING;
   const firstNameFlex = isMobile ? "0 0 100%" : "0 0 46%";
   const lastNameFlex = isMobile ? "0 0 100%" : "0 0 38%";
   const emailWidth = isMobile ? "100%" : "55%";
@@ -176,7 +176,11 @@ const Frame6 = () => {
   const ctaFontSize = isMobile ? "3rem" : `clamp(3rem, 7.5vw, ${FONT_SIZE_CTA})`;
   const ctaMaxWidth = isMobile ? "90vw" : FONT_SIZE_CTA_MAX_WIDTH;
   const sectionPaddingX = isMobile ? "1.5rem" : SECTION_PADDING_X;
-  const formWidth = isMobile ? "100%" : `calc(100% - ${FRAME6_FORM_PADDING_X} * 2)`;
+  const formWidth = isMobile
+    ? "100%"
+    : bp === "tablet"
+      ? "calc(100% - 4rem * 2)"
+      : `calc(100% - ${FRAME6_FORM_PADDING_X} * 2)`;
   const sectionPaddingTop = isMobile ? "8rem" : "50rem";
 
   useEffect(() => {

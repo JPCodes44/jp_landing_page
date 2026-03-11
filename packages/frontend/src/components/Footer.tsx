@@ -19,9 +19,9 @@ const Footer = () => {
   const isMobile = bp === "mobile";
 
   const paddingX = isMobile ? "1.5rem" : FOOTER_CONTACT_PADDING_X;
-  const paddingTop = isMobile ? "5rem" : FOOTER_CONTACT_PADDING_TOP;
+  const paddingTop = isMobile ? "5rem" : bp === "tablet" ? "6rem" : FOOTER_CONTACT_PADDING_TOP;
   const paddingBottom = isMobile ? "4rem" : FOOTER_CONTACT_PADDING_BOTTOM;
-  const gap = isMobile ? "3rem" : "12rem";
+  const gap = isMobile ? "3rem" : bp === "tablet" ? "4rem" : "12rem";
   const nameSize = isMobile ? "12vw" : FOOTER_NAME_SIZE;
   const flexDirection = isMobile ? ("column" as const) : ("row" as const);
   const labelSize = isMobile ? "1.4rem" : FOOTER_CONTACT_LABEL_SIZE;
