@@ -173,7 +173,7 @@ const Frame6 = () => {
   const arrowRef = useRef<HTMLDivElement>(null);
 
   const isMobile = bp === "mobile";
-  const ctaFontSize = isMobile ? "3rem" : FONT_SIZE_CTA;
+  const ctaFontSize = isMobile ? "3rem" : `clamp(3rem, 7.5vw, ${FONT_SIZE_CTA})`;
   const ctaMaxWidth = isMobile ? "90vw" : FONT_SIZE_CTA_MAX_WIDTH;
   const sectionPaddingX = isMobile ? "1.5rem" : SECTION_PADDING_X;
   const formWidth = isMobile ? "100%" : `calc(100% - ${FRAME6_FORM_PADDING_X} * 2)`;

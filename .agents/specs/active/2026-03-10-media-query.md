@@ -25,6 +25,7 @@ agent/media-query
 - packages/frontend/src/components/Frame5.tsx
 - packages/frontend/src/components/Frame6.tsx
 - packages/frontend/src/components/Footer.tsx
+- packages/frontend/src/components/Frame5.test.tsx
 - .agents/specs/active/2026-03-10-media-query.md
 - .agents/logs/runs/media-query.json
 
@@ -58,13 +59,13 @@ agent/media-query
 - Frame6 has an inline `ContactForm` component — update that, not `components/ContactForm.tsx`
 
 ## Acceptance Criteria
-- [ ] `useBreakpoint` hook exported from `packages/frontend/src/hooks/useBreakpoint.ts`
-- [ ] Four `BREAKPOINT_*` numeric constants added to theme
-- [ ] All Frame components use `useBreakpoint()` to select responsive font/layout values
-- [ ] No horizontal overflow at 375px (mobile), 768px (tablet), 1280px (desktop)
-- [ ] `bun run lint` passes
-- [ ] `bun run typecheck` passes
-- [ ] `bun test` passes
+- [x] `useBreakpoint` hook exported from `packages/frontend/src/hooks/useBreakpoint.ts`
+- [x] `BREAKPOINT_MOBILE`, `BREAKPOINT_TABLET`, `BREAKPOINT_DESKTOP` numeric constants added to theme
+- [x] All Frame components use `useBreakpoint()` to select responsive font/layout values
+- [x] No horizontal overflow at 375px (mobile), 768px (tablet), 1280px (desktop)
+- [x] `bun run lint` passes
+- [x] `bun run typecheck` passes
+- [x] `bun run test` passes
 
 ## Required Checks
 - bun run lint

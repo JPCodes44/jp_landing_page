@@ -48,8 +48,10 @@ describe("Frame5", () => {
     it("heading is visible (opacity: 1, small size) when reduced motion is preferred", () => {
       render(<Frame5 />);
       const headings = screen.getAllByText("My Services In Action:");
-      // With reduced motion: large heading fades out (opacity 0), small heading visible (opacity 1)
-      const smallHeading = headings.find((h) => (h as HTMLElement).style.fontSize === "8rem");
+      // Small heading has whitespace-nowrap class (large heading does not)
+      const smallHeading = headings.find((h) =>
+        (h as HTMLElement).className.includes("whitespace-nowrap"),
+      );
       expect(smallHeading).toBeInTheDocument();
       expect(smallHeading?.tagName).toBe("H2");
     });

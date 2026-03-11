@@ -55,7 +55,7 @@ const AccordionItem = ({
   const verticalBarRef = useRef<HTMLSpanElement>(null);
 
   const isMobile = bp === "mobile";
-  const itemFontSize = isMobile ? "1.8rem" : bp === "tablet" ? "2.5rem" : FONT_SIZE_ACCORDION_ITEM;
+  const itemFontSize = isMobile ? "1.8rem" : `clamp(1.8rem, 4.375vw, ${FONT_SIZE_ACCORDION_ITEM})`;
   const paddingY = isMobile ? "1.2rem" : ACCORDION_PADDING_Y;
   const paddingLeft = isMobile ? "1rem" : ACCORDION_PADDING_LEFT;
   const paddingRight = isMobile ? "1rem" : ACCORDION_PADDING_RIGHT;
@@ -175,7 +175,7 @@ const Frame4 = () => {
 
   const isMobile = bp === "mobile";
   const sectionPaddingX = isMobile ? "1.5rem" : SECTION_PADDING_X;
-  const h2Size = isMobile ? "4rem" : FONT_SIZE_SECTION_H2_FRAME4;
+  const h2Size = isMobile ? "4rem" : `clamp(4rem, 10vw, ${FONT_SIZE_SECTION_H2_FRAME4})`;
   const accordionMarginTop = isMobile ? "4rem" : ACCORDION_MARGIN_TOP;
 
   useEffect(() => {

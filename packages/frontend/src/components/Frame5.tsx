@@ -28,8 +28,10 @@ const Frame5 = () => {
   const rectRef = useRef<HTMLDivElement>(null);
 
   const isMobile = bp === "mobile";
-  const headingInitialSize = isMobile ? "6rem" : FRAME5_HEADING_INITIAL_SIZE;
-  const headingFinalSize = isMobile ? "4rem" : FRAME5_HEADING_FINAL_SIZE;
+  const headingInitialSize = isMobile
+    ? "6rem"
+    : `clamp(6rem, 16.25vw, ${FRAME5_HEADING_INITIAL_SIZE})`;
+  const headingFinalSize = isMobile ? "4rem" : `clamp(4rem, 10vw, ${FRAME5_HEADING_FINAL_SIZE})`;
   const headingInitialTop = isMobile ? "30vh" : FRAME5_HEADING_INITIAL_TOP;
   const headingLeft = isMobile ? "1.5rem" : "3.75rem";
 
