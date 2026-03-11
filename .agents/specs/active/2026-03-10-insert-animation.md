@@ -23,6 +23,9 @@ agent/insert-animation
 - packages/frontend/src/components/Frame3.tsx
 - packages/frontend/src/components/Frame3.test.tsx
 - packages/frontend/src/vite-env.d.ts
+- packages/frontend/styles/assets/2d/videos/scrubDemo.mp4
+- .agents/specs/active/2026-03-10-insert-animation.md
+- .agents/logs/runs/insert-animation.json
 
 ## Forbidden files
 <!-- Files the agent must never touch regardless of what the task seems to require. -->
