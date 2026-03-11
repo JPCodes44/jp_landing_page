@@ -25,6 +25,8 @@ agent/media-query
 - packages/frontend/src/components/Frame5.tsx
 - packages/frontend/src/components/Frame6.tsx
 - packages/frontend/src/components/Footer.tsx
+- .agents/specs/active/2026-03-10-media-query.md
+- .agents/logs/runs/media-query.json
 
 ## Forbidden files
 - package-lock.json
