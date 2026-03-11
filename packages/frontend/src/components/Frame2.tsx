@@ -54,7 +54,11 @@ const Frame2 = () => {
   const isMobile = bp === "mobile";
   const sectionPaddingX = isMobile ? "1.5rem" : SECTION_PADDING_X;
   // clamp: scales proportionally with viewport; desktop size / 80rem * 100 = vw value
-  const h2Size = isMobile ? "6rem" : `clamp(6rem, 17.5vw, ${FONT_SIZE_SECTION_H2})`;
+  const h2Size = isMobile
+    ? "6rem"
+    : bp === "tablet"
+      ? "7rem"
+      : `clamp(6rem, 17.5vw, ${FONT_SIZE_SECTION_H2})`;
   const bodySize = `clamp(1.4rem, 2.375vw, ${FONT_SIZE_BODY})`;
   const iconSize = isMobile ? "7rem" : `clamp(7rem, 15.625vw, ${ICON_SIZE})`;
   const iconColumns = "repeat(2, auto)";
