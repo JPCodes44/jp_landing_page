@@ -28,6 +28,7 @@ agent/media-query
 - packages/frontend/src/components/Frame5.test.tsx
 - .agents/specs/active/2026-03-10-media-query.md
 - .agents/logs/runs/media-query.json
+- .agents/logs/media-query-failure.md
 
 ## Forbidden files
 - package-lock.json
