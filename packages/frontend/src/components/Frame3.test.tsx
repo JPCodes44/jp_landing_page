@@ -34,9 +34,9 @@ describe("Frame3", () => {
     expect(section).toBeInTheDocument();
   });
 
-  it("renders the label text", () => {
+  it("renders a video element", () => {
     render(<Frame3 />);
-    expect(screen.getByText("SOME COOL VISUAL WOAW")).toBeInTheDocument();
+    expect(document.querySelector("video")).toBeInTheDocument();
   });
 
   describe("with prefers-reduced-motion", () => {
@@ -46,10 +46,9 @@ describe("Frame3", () => {
 
     it("renders at full expansion when reduced motion is preferred", () => {
       render(<Frame3 />);
-      const label = screen.getByText("SOME COOL VISUAL WOAW");
-      expect(label).toBeInTheDocument();
       const section = document.querySelector("section");
       expect(section).toBeInTheDocument();
+      expect(document.querySelector("video")).toBeInTheDocument();
     });
   });
 });

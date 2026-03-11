@@ -1,10 +1,10 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import scrubDemoSrc from "../../styles/assets/2d/videos/scrubDemo.mp4";
 import {
   COLOR_FRAME3_GREEN,
   COLOR_FRAME3_TAN,
-  FONT_SIZE_LABEL,
   FRAME3_CONTAINER_HEIGHT,
   FRAME3_RECT_INITIAL_HEIGHT,
   FRAME3_RECT_INITIAL_INSET,
@@ -17,13 +17,13 @@ gsap.registerPlugin(ScrollTrigger);
 const Frame3 = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const rectRef = useRef<HTMLDivElement>(null);
-  const labelRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
     const rect = rectRef.current;
-    const label = labelRef.current;
-    if (!wrapper || !rect || !label) return;
+    const video = videoRef.current;
+    if (!wrapper || !rect || !video) return;
 
     const prefersReducedMotion =
       typeof window.matchMedia === "function" &&
@@ -36,7 +36,14 @@ const Frame3 = () => {
         right: FRAME3_RECT_TARGET_INSET,
         backgroundColor: COLOR_FRAME3_GREEN,
       });
-      gsap.set(label, { opacity: 1 });
+      const setLastFrame = () => {
+        video.currentTime = video.duration;
+      };
+      if (video.readyState >= 1) {
+        setLastFrame();
+      } else {
+        video.addEventListener("loadedmetadata", setLastFrame, { once: true });
+      }
       return;
     }
 
@@ -46,6 +53,9 @@ const Frame3 = () => {
         start: "top top",
         end: "bottom bottom",
         scrub: true,
+        onUpdate: (self) => {
+          if (video.duration) video.currentTime = self.progress * video.duration;
+        },
       },
     });
 
@@ -61,7 +71,6 @@ const Frame3 = () => {
       },
       0,
     )
-      .fromTo(label, { opacity: 0 }, { opacity: 1, ease: "none", duration: 0.2 }, 0.8)
       // Linger: hold final state while user continues scrolling
       .to({}, { duration: 2 });
 
@@ -90,13 +99,14 @@ const Frame3 = () => {
             backgroundColor: COLOR_FRAME3_TAN,
           }}
         >
-          <div
-            ref={labelRef}
-            className="flex items-center justify-center h-full font-fanwood text-text-primary"
-            style={{ opacity: 0, fontSize: FONT_SIZE_LABEL }}
-          >
-            SOME COOL VISUAL WOAW
-          </div>
+          <video
+            ref={videoRef}
+            src={scrubDemoSrc}
+            className="absolute inset-0 w-full h-full object-cover"
+            muted
+            playsInline
+            preload="auto"
+          />
         </div>
       </div>
     </section>
