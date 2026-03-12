@@ -14,7 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Pixels of scroll per frame during the linger phase.
 // Higher = smoother scrub but taller section.
-const PX_PER_FRAME = 3;
+const PX_PER_FRAME = 12;
 
 // Load all frame URLs in sorted order at build time
 const frameModules = import.meta.glob("../../styles/assets/2d/videos/frame3Animation/*.png", {
@@ -57,6 +57,14 @@ const Frame3 = () => {
     const initCanvas = (img: HTMLImageElement) => {
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;
+      // Size canvas CSS to cover the expanded rect, preserving aspect ratio.
+      // FRAME3_RECT_TARGET_INSET = "2%" → 2% each side → 96vw total width
+      // FRAME3_RECT_TARGET_HEIGHT = "96vh"
+      const targetW = window.innerWidth * (1 - (2 * parseFloat(FRAME3_RECT_TARGET_INSET)) / 100);
+      const targetH = window.innerHeight * (parseFloat(FRAME3_RECT_TARGET_HEIGHT) / 100);
+      const scale = Math.max(targetW / img.naturalWidth, targetH / img.naturalHeight);
+      canvas.style.width = `${img.naturalWidth * scale}px`;
+      canvas.style.height = `${img.naturalHeight * scale}px`;
     };
 
     const drawFrame = (index: number) => {
@@ -116,7 +124,7 @@ const Frame3 = () => {
           trigger: wrapper,
           start: "top top",
           end: "bottom bottom",
-          scrub: true,
+          scrub: 2,
           onUpdate: (self) => {
             drawFrame(Math.round(self.progress * (TOTAL_FRAMES - 1)));
           },
