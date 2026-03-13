@@ -5,16 +5,79 @@ import * as t from "../theme";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Pixels of scroll per frame during the linger phase.
+// Higher = smoother scrub but taller section.
+const PX_PER_FRAME = 12;
+
+// Load all frame URLs in sorted order at build time
+const frameModules = import.meta.glob("../../styles/assets/2d/videos/frame3Animation/*.png", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
+
+const FRAME_URLS: string[] = Object.keys(frameModules)
+  .sort()
+  .map((key) => frameModules[key]);
+
+const TOTAL_FRAMES = FRAME_URLS.length;
+
 const Frame3 = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const rectRef = useRef<HTMLDivElement>(null);
-  const labelRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
     const rect = rectRef.current;
-    const label = labelRef.current;
-    if (!wrapper || !rect || !label) return;
+    const canvas = canvasRef.current;
+    if (!wrapper || !rect || !canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Pre-load all images
+    const images: HTMLImageElement[] = FRAME_URLS.map((url) => {
+      const img = new Image();
+      img.src = url;
+      return img;
+    });
+
+    let currentFrameIndex = -1;
+
+    // Size the canvas to the image's natural resolution once, then just draw.
+    // The rect's overflow:hidden acts as the window into the image.
+    const initCanvas = (img: HTMLImageElement) => {
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      // Size canvas CSS to cover the expanded rect, preserving aspect ratio.
+      // FRAME3_RECT_TARGET_INSET = "2%" → 2% each side → 96vw total width
+      // FRAME3_RECT_TARGET_HEIGHT = "96vh"
+      const targetW =
+        window.innerWidth * (1 - (2 * Number.parseFloat(FRAME3_RECT_TARGET_INSET)) / 100);
+      const targetH = window.innerHeight * (Number.parseFloat(FRAME3_RECT_TARGET_HEIGHT) / 100);
+      const scale = Math.max(targetW / img.naturalWidth, targetH / img.naturalHeight);
+      canvas.style.width = `${img.naturalWidth * scale}px`;
+      canvas.style.height = `${img.naturalHeight * scale}px`;
+    };
+
+    const drawFrame = (index: number) => {
+      const clampedIndex = Math.max(0, Math.min(TOTAL_FRAMES - 1, index));
+      if (clampedIndex === currentFrameIndex) return;
+      currentFrameIndex = clampedIndex;
+
+      const img = images[clampedIndex];
+      const draw = () => {
+        if (canvas.width !== img.naturalWidth) initCanvas(img);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+      };
+      if (img.complete && img.naturalWidth > 0) {
+        draw();
+      } else {
+        img.onload = draw;
+      }
+    };
 
     const prefersReducedMotion =
       typeof window.matchMedia === "function" &&
@@ -27,18 +90,12 @@ const Frame3 = () => {
         right: t.FRAME3_RECT_TARGET_INSET,
         backgroundColor: t.COLOR_FRAME3_GREEN,
       });
-      gsap.set(label, { opacity: 1 });
+      drawFrame(TOTAL_FRAMES - 1);
       return;
     }
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: wrapper,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true,
-      },
-    });
+    // Draw first frame immediately
+    drawFrame(0);
 
     const cs = getComputedStyle(rect);
     tl.fromTo(
@@ -63,8 +120,8 @@ const Frame3 = () => {
       .to({}, { duration: 2 });
 
     return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
+      tl?.scrollTrigger?.kill();
+      tl?.kill();
     };
   }, []);
 
