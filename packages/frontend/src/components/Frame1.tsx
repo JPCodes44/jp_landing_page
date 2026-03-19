@@ -7,9 +7,9 @@ import {
   LINE_HEIGHT_BODY,
   LINE_HEIGHT_HEADING,
   MOBILE_FONT_SIZE_HERO_H1,
+  MOBILE_FRAME1_PADDING_X,
   MOBILE_HERO_WIDTH,
   MOBILE_PARA_MAX_WIDTH,
-  MOBILE_SECTION_PADDING_X,
   PARA_MARGIN_TOP,
 } from "../theme";
 
@@ -20,8 +20,8 @@ const Frame1 = () => {
     <section
       className="min-h-screen w-full bg-bg-warm flex items-center justify-center"
       style={{
-        paddingLeft: isMobile ? MOBILE_SECTION_PADDING_X : undefined,
-        paddingRight: isMobile ? MOBILE_SECTION_PADDING_X : undefined,
+        paddingLeft: isMobile ? MOBILE_FRAME1_PADDING_X : undefined,
+        paddingRight: isMobile ? MOBILE_FRAME1_PADDING_X : undefined,
       }}
     >
       <div

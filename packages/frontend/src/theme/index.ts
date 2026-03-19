@@ -131,5 +131,6 @@ export const MOBILE_FRAME6_FORM_INNER_PADDING = "2rem";
 export const MOBILE_FONT_SIZE_FORM_TITLE = "2rem";
 export const MOBILE_CTA_MAX_WIDTH = "88vw";
 export const MOBILE_NAVBAR_PADDING_X = "1.5rem";
+export const MOBILE_FRAME1_PADDING_X = "3rem";
 export const MOBILE_FRAME5_HEADING_INITIAL_SIZE = "4rem";
 export const MOBILE_FRAME5_HEADING_FINAL_SIZE = "3rem";
