@@ -30,6 +30,7 @@ agent/mobile-screen-redesign
 - packages/frontend/src/components/Frame4.test.tsx
 - packages/frontend/src/components/Frame5.test.tsx
 - .agents/specs/active/2026-03-19-mobile-screen-redesign.md
+- .agents/logs/runs/mobile-screen-redesign.json
 
 ## Forbidden files
 - package-lock.json
