@@ -18,19 +18,25 @@ const Frame1 = () => {
 
   return (
     <section
-      className="min-h-screen w-full bg-bg-warm flex items-center"
+      className="min-h-screen w-full bg-bg-warm flex items-center justify-center"
       style={{
-        justifyContent: isMobile ? "flex-start" : "center",
         paddingLeft: isMobile ? MOBILE_SECTION_PADDING_X : undefined,
         paddingRight: isMobile ? MOBILE_SECTION_PADDING_X : undefined,
       }}
     >
-      <div className="flex flex-col" style={{ width: isMobile ? MOBILE_HERO_WIDTH : HERO_WIDTH }}>
+      <div
+        className="flex flex-col"
+        style={{
+          width: isMobile ? MOBILE_HERO_WIDTH : HERO_WIDTH,
+          textAlign: isMobile ? "center" : undefined,
+          alignItems: isMobile ? "center" : undefined,
+        }}
+      >
         <h1
           className="font-fanwood font-normal text-text-primary m-0"
           style={{
             fontSize: isMobile ? MOBILE_FONT_SIZE_HERO_H1 : FONT_SIZE_HERO_H1,
-            lineHeight: LINE_HEIGHT_HEADING,
+            lineHeight: isMobile ? "1.6" : LINE_HEIGHT_HEADING,
           }}
         >
           I build systems that <span className="text-accent-green">scale your business</span> while
