@@ -7,6 +7,7 @@ import sliderImg from "../../styles/assets/2d/visuals/slider.png";
 import tasksImg from "../../styles/assets/2d/visuals/tasks.png";
 import temperatureImg from "../../styles/assets/2d/visuals/temperature.png";
 import workflowImg from "../../styles/assets/2d/visuals/workflow.png";
+import { useIsMobile } from "../hooks/useIsMobile";
 import {
   FONT_SIZE_BODY,
   FONT_SIZE_SECTION_H2,
@@ -20,6 +21,10 @@ import {
   ICON_SIZE,
   LINE_HEIGHT_BODY,
   LINE_HEIGHT_HEADING,
+  MOBILE_FONT_SIZE_SECTION_H2,
+  MOBILE_FRAME2_ICON_GAP,
+  MOBILE_ICON_SIZE,
+  MOBILE_SECTION_PADDING_X,
   PARA_MARGIN_TOP_SM,
   PARA_MAX_WIDTH,
   SECTION_PADDING_BOTTOM_LG,
@@ -44,6 +49,7 @@ const ICON_DURATION = 0.6;
 const ICON_EASE = "power3.out";
 
 const Frame2 = () => {
+  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
@@ -124,6 +130,73 @@ const Frame2 = () => {
     };
   }, []);
 
+  const paddingX = isMobile ? MOBILE_SECTION_PADDING_X : SECTION_PADDING_X;
+  const iconSize = isMobile ? MOBILE_ICON_SIZE : ICON_SIZE;
+
+  if (isMobile) {
+    return (
+      <section
+        ref={sectionRef}
+        className="min-h-screen w-full bg-bg-warm"
+        style={{
+          paddingTop: SECTION_PADDING_TOP_LG,
+          paddingBottom: SECTION_PADDING_BOTTOM_LG,
+          paddingLeft: paddingX,
+          paddingRight: paddingX,
+        }}
+      >
+        <h2
+          ref={headingRef}
+          className="font-fanwood font-normal text-text-primary m-0"
+          style={{
+            fontSize: MOBILE_FONT_SIZE_SECTION_H2,
+            lineHeight: LINE_HEIGHT_HEADING,
+            opacity: FRAME2_HEADING_INITIAL_OPACITY,
+          }}
+        >
+          What I do:
+        </h2>
+        <p
+          ref={paragraphRef}
+          className="font-fanwood font-normal text-text-primary mb-0"
+          style={{
+            fontSize: FONT_SIZE_BODY,
+            lineHeight: LINE_HEIGHT_BODY,
+            marginTop: PARA_MARGIN_TOP_SM,
+            opacity: 0,
+          }}
+        >
+          I specialize in creating &ldquo;
+          <span className="text-accent-green">agentic</span>&rdquo; workflows. That means your
+          business doesn&rsquo;t just have tools; it has autonomous systems that handle lead gen,
+          reporting, and customer care without you lifting a finger.
+        </p>
+        <div
+          className="flex flex-row overflow-x-auto"
+          style={{ gap: MOBILE_FRAME2_ICON_GAP, marginTop: PARA_MARGIN_TOP_SM }}
+        >
+          {icons.map((icon, i) => (
+            <img
+              key={icon.alt}
+              ref={(el) => {
+                iconRefs.current[i] = el;
+              }}
+              src={icon.src}
+              alt={icon.alt}
+              style={{
+                width: iconSize,
+                minWidth: iconSize,
+                height: iconSize,
+                opacity: 0,
+              }}
+              className="object-contain"
+            />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       ref={sectionRef}
@@ -131,8 +204,8 @@ const Frame2 = () => {
       style={{
         paddingTop: SECTION_PADDING_TOP_LG,
         paddingBottom: SECTION_PADDING_BOTTOM_LG,
-        paddingLeft: SECTION_PADDING_X,
-        paddingRight: SECTION_PADDING_X,
+        paddingLeft: paddingX,
+        paddingRight: paddingX,
       }}
     >
       <div className="flex items-center" style={{ gap: FRAME2_GAP }}>
@@ -185,7 +258,7 @@ const Frame2 = () => {
               }}
               src={icon.src}
               alt={icon.alt}
-              style={{ width: "100%", maxWidth: ICON_SIZE, height: ICON_SIZE, opacity: 0 }}
+              style={{ width: "100%", maxWidth: iconSize, height: iconSize, opacity: 0 }}
               className="object-contain"
             />
           ))}

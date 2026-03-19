@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
+import { useIsMobile } from "../hooks/useIsMobile";
 import {
   FONT_SIZE_CTA,
   FONT_SIZE_CTA_MAX_WIDTH,
@@ -15,13 +16,18 @@ import {
   FRAME6_FORM_PADDING_X,
   FRAME6_HEADING_INITIAL_OPACITY,
   LINE_HEIGHT_HEADING,
+  MOBILE_CTA_MAX_WIDTH,
+  MOBILE_FONT_SIZE_CTA,
+  MOBILE_FONT_SIZE_FORM_TITLE,
+  MOBILE_FRAME6_FORM_INNER_PADDING,
+  MOBILE_FRAME6_FORM_PADDING_X,
   SECTION_PADDING_BOTTOM_LG,
   SECTION_PADDING_X,
 } from "../theme";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ContactForm = () => {
+const ContactForm = ({ isMobile }: { isMobile: boolean }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,12 +41,15 @@ const ContactForm = () => {
   const labelStyle = { fontSize: FONT_SIZE_FORM_LABEL, fontFamily: "satoshi" };
   const gapStyle = { gap: "0.5rem" };
 
+  const formPadding = isMobile ? MOBILE_FRAME6_FORM_INNER_PADDING : FRAME6_FORM_INNER_PADDING;
+  const formTitleSize = isMobile ? MOBILE_FONT_SIZE_FORM_TITLE : FONT_SIZE_FORM_TITLE;
+
   return (
-    <div style={{ padding: FRAME6_FORM_INNER_PADDING }}>
+    <div style={{ padding: formPadding }}>
       <h3
         className="font-fanwood text-text-primary uppercase m-0"
         style={{
-          fontSize: FONT_SIZE_FORM_TITLE,
+          fontSize: formTitleSize,
           marginBottom: "2rem",
           letterSpacing: "0.05em",
           fontFamily: "satoshi",
@@ -49,8 +58,11 @@ const ContactForm = () => {
         Contact Me.
       </h3>
 
-      <div className="flex flex-col" style={{ gap: "1.25rem", paddingTop: "5rem" }}>
-        {/* First + Last Name */}
+      <div
+        className="flex flex-col"
+        style={{ gap: "1.25rem", paddingTop: isMobile ? "2rem" : "5rem" }}
+      >
+        {/* First + Last Name — side-by-side on both mobile and desktop (per screenshot) */}
         <div className="flex" style={{ gap: "1.5rem" }}>
           <div className="flex flex-col" style={{ ...gapStyle, flex: "0 0 46%" }}>
             <label htmlFor="firstName" className={labelClass} style={labelStyle}>
@@ -91,7 +103,7 @@ const ContactForm = () => {
         </div>
 
         {/* Email */}
-        <div className="flex flex-col" style={{ ...gapStyle, width: "55%" }}>
+        <div className="flex flex-col" style={{ ...gapStyle, width: isMobile ? "100%" : "55%" }}>
           <label htmlFor="email" className={labelClass} style={labelStyle}>
             Email
           </label>
@@ -112,7 +124,7 @@ const ContactForm = () => {
         </div>
 
         {/* Comments — slightly narrower than submit row */}
-        <div className="flex flex-col" style={{ ...gapStyle, width: "90%" }}>
+        <div className="flex flex-col" style={{ ...gapStyle, width: isMobile ? "100%" : "90%" }}>
           <label htmlFor="comments" className={labelClass} style={labelStyle}>
             Comments
           </label>
@@ -153,6 +165,7 @@ const ContactForm = () => {
 };
 
 const Frame6 = () => {
+  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const arrowRef = useRef<HTMLDivElement>(null);
@@ -205,15 +218,20 @@ const Frame6 = () => {
     };
   }, []);
 
+  const paddingX = isMobile ? MOBILE_FRAME6_FORM_PADDING_X : SECTION_PADDING_X;
+  const ctaFontSize = isMobile ? MOBILE_FONT_SIZE_CTA : FONT_SIZE_CTA;
+  const ctaMaxWidth = isMobile ? MOBILE_CTA_MAX_WIDTH : FONT_SIZE_CTA_MAX_WIDTH;
+  const formPaddingX = isMobile ? MOBILE_FRAME6_FORM_PADDING_X : FRAME6_FORM_PADDING_X;
+
   return (
     <section
       ref={sectionRef}
       className="min-h-screen w-full bg-bg-warm flex flex-col items-center"
       style={{
-        paddingTop: "50rem",
+        paddingTop: isMobile ? "10rem" : "50rem",
         paddingBottom: SECTION_PADDING_BOTTOM_LG,
-        paddingLeft: SECTION_PADDING_X,
-        paddingRight: SECTION_PADDING_X,
+        paddingLeft: paddingX,
+        paddingRight: paddingX,
       }}
     >
       {/* CTA heading */}
@@ -222,10 +240,10 @@ const Frame6 = () => {
           ref={headingRef}
           className="font-fanwood font-normal text-text-primary text-center m-0"
           style={{
-            fontSize: FONT_SIZE_CTA,
+            fontSize: ctaFontSize,
             lineHeight: LINE_HEIGHT_HEADING,
             opacity: FRAME6_HEADING_INITIAL_OPACITY,
-            maxWidth: FONT_SIZE_CTA_MAX_WIDTH,
+            maxWidth: ctaMaxWidth,
           }}
         >
           Ready to stop working for your business and let it work for you?
@@ -265,10 +283,7 @@ const Frame6 = () => {
       </div>
 
       {/* Form with dashed SVG border overlay */}
-      <div
-        className="relative bg-white"
-        style={{ width: `calc(100% - ${FRAME6_FORM_PADDING_X} * 2)` }}
-      >
+      <div className="relative bg-white" style={{ width: `calc(100% - ${formPaddingX} * 2)` }}>
         {/* Dashed border — sits on top, pointer-events off */}
         <svg
           className="absolute inset-0 text-text-primary pointer-events-none"
@@ -289,7 +304,7 @@ const Frame6 = () => {
           />
         </svg>
 
-        <ContactForm />
+        <ContactForm isMobile={isMobile} />
       </div>
     </section>
   );

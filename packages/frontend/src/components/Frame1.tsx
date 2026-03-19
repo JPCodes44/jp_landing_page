@@ -1,3 +1,4 @@
+import { useIsMobile } from "../hooks/useIsMobile";
 import {
   FONT_SIZE_BODY,
   FONT_SIZE_HERO_H1,
@@ -5,17 +6,30 @@ import {
   HERO_WIDTH,
   LINE_HEIGHT_BODY,
   LINE_HEIGHT_HEADING,
+  MOBILE_FONT_SIZE_HERO_H1,
+  MOBILE_HERO_WIDTH,
+  MOBILE_PARA_MAX_WIDTH,
+  MOBILE_SECTION_PADDING_X,
   PARA_MARGIN_TOP,
 } from "../theme";
 
 const Frame1 = () => {
+  const isMobile = useIsMobile();
+
   return (
-    <section className="min-h-screen w-full bg-bg-warm flex items-center justify-center">
-      <div className="flex flex-col" style={{ width: HERO_WIDTH }}>
+    <section
+      className="min-h-screen w-full bg-bg-warm flex items-center"
+      style={{
+        justifyContent: isMobile ? "flex-start" : "center",
+        paddingLeft: isMobile ? MOBILE_SECTION_PADDING_X : undefined,
+        paddingRight: isMobile ? MOBILE_SECTION_PADDING_X : undefined,
+      }}
+    >
+      <div className="flex flex-col" style={{ width: isMobile ? MOBILE_HERO_WIDTH : HERO_WIDTH }}>
         <h1
           className="font-fanwood font-normal text-text-primary m-0"
           style={{
-            fontSize: FONT_SIZE_HERO_H1,
+            fontSize: isMobile ? MOBILE_FONT_SIZE_HERO_H1 : FONT_SIZE_HERO_H1,
             lineHeight: LINE_HEIGHT_HEADING,
           }}
         >
@@ -28,7 +42,7 @@ const Frame1 = () => {
             fontSize: FONT_SIZE_BODY,
             lineHeight: LINE_HEIGHT_BODY,
             marginTop: PARA_MARGIN_TOP,
-            maxWidth: HERO_MAX_WIDTH,
+            maxWidth: isMobile ? MOBILE_PARA_MAX_WIDTH : HERO_MAX_WIDTH,
           }}
         >
           Hi, I'm Justin. I transform manual bottlenecks into automated growth engines. No robotic

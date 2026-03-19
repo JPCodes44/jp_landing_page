@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import { useIsMobile } from "../hooks/useIsMobile";
 import {
   FRAME5_CONTAINER_HEIGHT,
   FRAME5_FROST_BLUR_FINAL,
@@ -13,17 +14,28 @@ import {
   FRAME5_RECT_INITIAL_HEIGHT,
   FRAME5_RECT_INITIAL_INSET,
   FRAME5_RECT_INITIAL_TOP,
+  MOBILE_FRAME5_HEADING_FINAL_SIZE,
+  MOBILE_FRAME5_HEADING_INITIAL_SIZE,
+  MOBILE_SECTION_PADDING_X,
+  SECTION_PADDING_X,
 } from "../theme";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Frame5 = () => {
+  const isMobile = useIsMobile();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const headingLargeRef = useRef<HTMLHeadingElement>(null);
   const headingSmallRef = useRef<HTMLHeadingElement>(null);
   const frostRef = useRef<HTMLDivElement>(null);
   const rectRef = useRef<HTMLDivElement>(null);
+
+  const headingInitialSize = isMobile
+    ? MOBILE_FRAME5_HEADING_INITIAL_SIZE
+    : FRAME5_HEADING_INITIAL_SIZE;
+  const headingFinalSize = isMobile ? MOBILE_FRAME5_HEADING_FINAL_SIZE : FRAME5_HEADING_FINAL_SIZE;
+  const headingLeft = isMobile ? MOBILE_SECTION_PADDING_X : SECTION_PADDING_X;
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -127,10 +139,10 @@ const Frame5 = () => {
           ref={headingLargeRef}
           className="absolute font-fanwood text-text-primary"
           style={{
-            fontSize: FRAME5_HEADING_INITIAL_SIZE,
+            fontSize: headingInitialSize,
             opacity: FRAME5_HEADING_INITIAL_OPACITY,
             top: FRAME5_HEADING_INITIAL_TOP,
-            left: "3.75rem",
+            left: headingLeft,
             margin: 0,
             lineHeight: 1.1,
           }}
@@ -142,10 +154,10 @@ const Frame5 = () => {
           ref={headingSmallRef}
           className="absolute font-fanwood text-text-primary whitespace-nowrap"
           style={{
-            fontSize: FRAME5_HEADING_FINAL_SIZE,
+            fontSize: headingFinalSize,
             opacity: 0,
             top: FRAME5_HEADING_INITIAL_TOP,
-            left: "3.75rem",
+            left: headingLeft,
             margin: 0,
             lineHeight: 1.1,
           }}

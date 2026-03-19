@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
+import { useIsMobile } from "../hooks/useIsMobile";
 import {
   ACCORDION_CONTENT_PADDING_LEFT,
   ACCORDION_CONTENT_PADDING_X,
@@ -28,6 +29,9 @@ import {
   FRAME4_SECTION_PADDING_BOTTOM,
   FRAME4_SECTION_PADDING_TOP,
   LINE_THICKNESS,
+  MOBILE_FONT_SIZE_ACCORDION_ITEM,
+  MOBILE_FONT_SIZE_SECTION_H2_FRAME4,
+  MOBILE_SECTION_PADDING_X,
   SECTION_PADDING_X,
 } from "../theme";
 
@@ -42,10 +46,12 @@ const AccordionItem = ({
   item,
   isOpen,
   onToggle,
+  isMobile,
 }: {
   item: string;
   isOpen: boolean;
   onToggle: () => void;
+  isMobile: boolean;
 }) => {
   const btnRef = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -100,6 +106,11 @@ const AccordionItem = ({
     };
   }, []);
 
+  const itemFontSize = isMobile ? MOBILE_FONT_SIZE_ACCORDION_ITEM : FONT_SIZE_ACCORDION_ITEM;
+  const paddingLeft = isMobile ? "0" : ACCORDION_PADDING_LEFT;
+  const paddingRight = isMobile ? "0" : ACCORDION_PADDING_RIGHT;
+  const contentPaddingLeft = isMobile ? "0" : ACCORDION_CONTENT_PADDING_LEFT;
+
   return (
     <div>
       <div
@@ -107,14 +118,11 @@ const AccordionItem = ({
         style={{
           paddingTop: ACCORDION_PADDING_Y,
           paddingBottom: ACCORDION_PADDING_Y,
-          paddingLeft: ACCORDION_PADDING_LEFT,
-          paddingRight: ACCORDION_PADDING_RIGHT,
+          paddingLeft,
+          paddingRight,
         }}
       >
-        <span
-          className="font-fanwood text-text-primary"
-          style={{ fontSize: FONT_SIZE_ACCORDION_ITEM }}
-        >
+        <span className="font-fanwood text-text-primary" style={{ fontSize: itemFontSize }}>
           {item}
         </span>
         <button
@@ -140,14 +148,14 @@ const AccordionItem = ({
       <div
         ref={contentRef}
         className="overflow-hidden"
-        style={{ height: 0, opacity: 0, paddingLeft: ACCORDION_CONTENT_PADDING_LEFT }}
+        style={{ height: 0, opacity: 0, paddingLeft: contentPaddingLeft }}
       >
         <p
           className="font-fanwood text-text-primary leading-relaxed"
           style={{
             fontSize: FONT_SIZE_ACCORDION_CONTENT,
             paddingLeft: ACCORDION_CONTENT_PADDING_X,
-            paddingRight: ACCORDION_PADDING_RIGHT,
+            paddingRight: isMobile ? "0" : ACCORDION_PADDING_RIGHT,
             paddingTop: ACCORDION_CONTENT_PADDING_Y,
             paddingBottom: ACCORDION_CONTENT_PADDING_Y,
           }}
@@ -160,6 +168,7 @@ const AccordionItem = ({
 };
 
 const Frame4 = () => {
+  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const accordionRef = useRef<HTMLDivElement>(null);
@@ -213,13 +222,18 @@ const Frame4 = () => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
 
+  const paddingX = isMobile ? MOBILE_SECTION_PADDING_X : SECTION_PADDING_X;
+  const headingFontSize = isMobile
+    ? MOBILE_FONT_SIZE_SECTION_H2_FRAME4
+    : FONT_SIZE_SECTION_H2_FRAME4;
+
   return (
     <section
       ref={sectionRef}
       className="w-full bg-bg-warm"
       style={{
-        paddingLeft: SECTION_PADDING_X,
-        paddingRight: SECTION_PADDING_X,
+        paddingLeft: paddingX,
+        paddingRight: paddingX,
         paddingTop: FRAME4_SECTION_PADDING_TOP,
         paddingBottom: FRAME4_SECTION_PADDING_BOTTOM,
       }}
@@ -227,7 +241,7 @@ const Frame4 = () => {
       <h2
         ref={headingRef}
         className="font-fanwood leading-none text-text-primary"
-        style={{ opacity: 0, fontSize: FONT_SIZE_SECTION_H2_FRAME4 }}
+        style={{ opacity: 0, fontSize: headingFontSize }}
       >
         Comprehensive Solutions:
       </h2>
@@ -236,10 +250,10 @@ const Frame4 = () => {
         style={{
           opacity: 0,
           marginTop: ACCORDION_MARGIN_TOP,
-          marginLeft: ACCORDION_MARGIN_X,
-          marginRight: ACCORDION_MARGIN_X,
-          paddingLeft: ACCORDION_CONTENT_PADDING_X,
-          paddingRight: ACCORDION_CONTENT_PADDING_X,
+          marginLeft: isMobile ? "0" : ACCORDION_MARGIN_X,
+          marginRight: isMobile ? "0" : ACCORDION_MARGIN_X,
+          paddingLeft: isMobile ? "0" : ACCORDION_CONTENT_PADDING_X,
+          paddingRight: isMobile ? "0" : ACCORDION_CONTENT_PADDING_X,
         }}
       >
         {ITEMS.map((item, i) => (
@@ -248,6 +262,7 @@ const Frame4 = () => {
             item={item}
             isOpen={openIndex === i}
             onToggle={() => handleToggle(i)}
+            isMobile={isMobile}
           />
         ))}
       </div>

@@ -1,3 +1,4 @@
+import { useIsMobile } from "../hooks/useIsMobile";
 import {
   FOOTER_CONTACT_LABEL_SIZE,
   FOOTER_CONTACT_PADDING_BOTTOM,
@@ -5,6 +6,7 @@ import {
   FOOTER_CONTACT_PADDING_X,
   FOOTER_CONTACT_VALUE_SIZE,
   FOOTER_NAME_SIZE,
+  MOBILE_SECTION_PADDING_X,
 } from "../theme";
 
 const contacts = [
@@ -14,17 +16,24 @@ const contacts = [
 ];
 
 const Footer = () => {
+  const isMobile = useIsMobile();
+
+  const paddingX = isMobile ? MOBILE_SECTION_PADDING_X : FOOTER_CONTACT_PADDING_X;
+  const paddingTop = isMobile ? "4rem" : FOOTER_CONTACT_PADDING_TOP;
+  const paddingBottom = isMobile ? "4rem" : FOOTER_CONTACT_PADDING_BOTTOM;
+
   return (
     <footer className="relative w-full bg-bg-warm overflow-x-visible overflow-y-hidden">
       {/* Contact info row */}
       <div
-        className="flex justify-center"
+        className="flex flex-wrap"
         style={{
-          paddingLeft: FOOTER_CONTACT_PADDING_X,
-          paddingRight: FOOTER_CONTACT_PADDING_X,
-          paddingTop: FOOTER_CONTACT_PADDING_TOP,
-          paddingBottom: FOOTER_CONTACT_PADDING_BOTTOM,
-          gap: "12rem",
+          paddingLeft: paddingX,
+          paddingRight: paddingX,
+          paddingTop,
+          paddingBottom,
+          gap: isMobile ? "2rem" : "12rem",
+          justifyContent: isMobile ? "flex-start" : "center",
         }}
       >
         {contacts.map(({ label, value }) => (

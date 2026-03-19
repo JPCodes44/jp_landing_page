@@ -114,3 +114,22 @@ export const FOOTER_CONTACT_VALUE_SIZE = "1.8rem";
 export const FOOTER_CONTACT_PADDING_X = "3.75rem";
 export const FOOTER_CONTACT_PADDING_TOP = "14rem";
 export const FOOTER_CONTACT_PADDING_BOTTOM = "10rem";
+
+// Mobile overrides (< 768px)
+export const MOBILE_SECTION_PADDING_X = "1.5rem";
+export const MOBILE_FONT_SIZE_HERO_H1 = "2.8rem";
+export const MOBILE_FONT_SIZE_SECTION_H2 = "3.2rem";
+export const MOBILE_FONT_SIZE_SECTION_H2_FRAME4 = "3.2rem";
+export const MOBILE_FONT_SIZE_ACCORDION_ITEM = "1.8rem";
+export const MOBILE_FONT_SIZE_CTA = "2.8rem";
+export const MOBILE_HERO_WIDTH = "88vw";
+export const MOBILE_PARA_MAX_WIDTH = "88vw";
+export const MOBILE_ICON_SIZE = "6rem";
+export const MOBILE_FRAME2_ICON_GAP = "1.5rem";
+export const MOBILE_FRAME6_FORM_PADDING_X = "1.5rem";
+export const MOBILE_FRAME6_FORM_INNER_PADDING = "2rem";
+export const MOBILE_FONT_SIZE_FORM_TITLE = "2rem";
+export const MOBILE_CTA_MAX_WIDTH = "88vw";
+export const MOBILE_NAVBAR_PADDING_X = "1.5rem";
+export const MOBILE_FRAME5_HEADING_INITIAL_SIZE = "4rem";
+export const MOBILE_FRAME5_HEADING_FINAL_SIZE = "3rem";
