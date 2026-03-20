@@ -49,7 +49,9 @@ describe("Frame5", () => {
       render(<Frame5 />);
       const headings = screen.getAllByText("My Services In Action:");
       // With reduced motion: large heading fades out (opacity 0), small heading visible (opacity 1)
-      const smallHeading = headings.find((h) => (h as HTMLElement).style.fontSize === "8rem");
+      const smallHeading = headings.find(
+        (h) => (h as HTMLElement).style.fontSize === "var(--frame5-heading-final-size)",
+      );
       expect(smallHeading).toBeInTheDocument();
       expect(smallHeading?.tagName).toBe("H2");
     });

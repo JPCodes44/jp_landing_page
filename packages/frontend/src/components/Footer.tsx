@@ -1,68 +1,120 @@
-import {
-  FOOTER_CONTACT_LABEL_SIZE,
-  FOOTER_CONTACT_PADDING_BOTTOM,
-  FOOTER_CONTACT_PADDING_TOP,
-  FOOTER_CONTACT_PADDING_X,
-  FOOTER_CONTACT_VALUE_SIZE,
-  FOOTER_NAME_SIZE,
-} from "../theme";
+import { useBreakpoint } from "../hooks/useBreakpoint";
+import { FOOTER_NAME_SIZE } from "../theme";
 
-const contacts = [
-  { label: "Location:", value: "Burlington ON, Canada" },
-  { label: "Email:", value: "@jp.mak44@gmail.com" },
+const desktopAllContacts = [
+  { label: "Location:", value: "Akatos House @uwaterloo" },
+
+  { label: "", value: "" },
+  { label: "Email:", value: "@j29mak@uwaterloo.ca" },
   { label: "Phone Number:", value: "+1 (905) - 865 - 1230" },
 ];
 
+const mobileAllContacts = [
+  { label: "Email:", value: "@j29mak@uwaterloo.ca" },
+
+  { label: "", value: "" },
+  { label: "Location:", value: "Akatos House @uwaterloo" },
+
+  { label: "Phone Number:", value: "+1 (905) - 865 - 1230" },
+];
+
+const contactItemStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.75rem",
+};
+
+const labelStyle: React.CSSProperties = {
+  color: "#2d2d2d",
+  fontSize: "var(--footer-contact-font-size)",
+  fontFamily: "fanwood",
+  fontWeight: 400,
+};
+
+const valueStyle: React.CSSProperties = {
+  color: "#2d2d2d",
+  fontSize: "var(--footer-contact-font-size)",
+  fontFamily: "fanwood text",
+  fontWeight: 500,
+};
+
 const Footer = () => {
+  const bp = useBreakpoint();
+
   return (
-    <footer className="relative w-full bg-bg-warm overflow-x-visible overflow-y-hidden">
+    <footer
+      style={{
+        position: "relative",
+        width: "100%",
+        backgroundColor: "#fefefe",
+        overflowX: "visible",
+        overflowY: "hidden",
+      }}
+    >
       {/* Contact info row */}
       <div
-        className="flex justify-center"
         style={{
-          paddingLeft: FOOTER_CONTACT_PADDING_X,
-          paddingRight: FOOTER_CONTACT_PADDING_X,
-          paddingTop: FOOTER_CONTACT_PADDING_TOP,
-          paddingBottom: FOOTER_CONTACT_PADDING_BOTTOM,
-          gap: "12rem",
+          paddingLeft: "var(--footer-padding-x)",
+          paddingRight: "var(--footer-padding-x)",
+          paddingTop: "var(--footer-padding-top)",
+          paddingBottom: "var(--footer-padding-bottom)",
+          display: "flex",
+          justifyContent: "var(--footer-outer-justify)" as React.CSSProperties["justifyContent"],
         }}
       >
-        {contacts.map(({ label, value }) => (
-          <div key={label} className="flex flex-col" style={{ gap: "0.75rem" }}>
-            <span
-              className="text-text-primary"
-              style={{
-                fontSize: FOOTER_CONTACT_LABEL_SIZE,
-                fontFamily: "fanwood",
-                fontWeight: 400,
-              }}
-            >
-              {label}
-            </span>
-            <span
-              className="text-text-primary"
-              style={{
-                fontSize: FOOTER_CONTACT_VALUE_SIZE,
-                fontFamily: "fanwood",
-                fontWeight: 400,
-              }}
-            >
-              {value}
-            </span>
+        {bp === "desktop" ? (
+          /* Desktop: all three in a flat row */
+          <div
+            style={{
+              display: "flex",
+              gap: "var(--footer-contact-gap)",
+              justifyContent: "center",
+            }}
+          >
+            {desktopAllContacts
+              .filter(({ label }) => label !== "")
+              .map(({ label, value }) => (
+                <div key={label} style={contactItemStyle}>
+                  <span style={labelStyle}>{label}</span>
+                  <span style={valueStyle}>{value}</span>
+                </div>
+              ))}
           </div>
-        ))}
+        ) : (
+          <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "auto auto",
+                gap: "var(--footer-contact-gap)",
+                width: "fit-content",
+              }}
+            >
+              {mobileAllContacts.map(({ label, value }) => (
+                <div key={label} style={contactItemStyle}>
+                  <span style={labelStyle}>{label}</span>
+                  <span style={valueStyle}>{value}</span>
+                </div>
+              ))}
+            </div>{" "}
+          </div>
+        )}
       </div>
 
       {/* Large name — crops at bottom */}
       <div
-        className="w-full leading-none select-none text-center whitespace-nowrap"
         style={{
-          fontSize: FOOTER_NAME_SIZE,
-          fontFamily: "Helvetica, Arial, sans-serif",
-          fontWeight: 500,
-          color: "#1a1a1a",
+          width: "100%",
           lineHeight: 0.85,
-          marginBottom: "-0.25em",
+          userSelect: "none",
+          textAlign: "center",
+          whiteSpace: "nowrap",
+          fontSize: FOOTER_NAME_SIZE,
+          fontFamily: "Fanwood Text",
+          fontWeight: 500,
+          overflow: "hidden",
+          color: "#1a1a1a",
+          marginBottom: "var(--footer-name-margin-bottom)",
         }}
       >
         Justin Mak

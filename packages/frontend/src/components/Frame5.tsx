@@ -4,10 +4,8 @@ import { useEffect, useRef } from "react";
 import {
   FRAME5_CONTAINER_HEIGHT,
   FRAME5_FROST_BLUR_FINAL,
-  FRAME5_HEADING_FINAL_SIZE,
   FRAME5_HEADING_FINAL_TOP,
   FRAME5_HEADING_INITIAL_OPACITY,
-  FRAME5_HEADING_INITIAL_SIZE,
   FRAME5_HEADING_INITIAL_TOP,
   FRAME5_RECT_BG_COLOR,
   FRAME5_RECT_INITIAL_HEIGHT,
@@ -118,19 +116,31 @@ const Frame5 = () => {
   return (
     <section
       ref={wrapperRef}
-      className="relative w-full"
-      style={{ height: FRAME5_CONTAINER_HEIGHT }}
+      style={{ position: "relative", width: "100%", height: FRAME5_CONTAINER_HEIGHT }}
     >
-      <div ref={stickyRef} className="sticky top-0 h-screen w-full overflow-hidden bg-bg-warm">
+      <div
+        ref={stickyRef}
+        style={{
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          width: "100%",
+          overflow: "hidden",
+          backgroundColor: "#fefefe",
+        }}
+      >
         {/* Large heading — 2 lines, fades out */}
         <h2
           ref={headingLargeRef}
-          className="absolute font-fanwood text-text-primary"
+          className="frame5-heading"
           style={{
-            fontSize: FRAME5_HEADING_INITIAL_SIZE,
+            position: "absolute",
+            fontFamily: '"Fanwood Text", serif',
+            color: "#2d2d2d",
+            fontSize: "var(--frame5-heading-initial-size)",
             opacity: FRAME5_HEADING_INITIAL_OPACITY,
             top: FRAME5_HEADING_INITIAL_TOP,
-            left: "3.75rem",
+            left: "var(--frame5-heading-left)",
             margin: 0,
             lineHeight: 1.1,
           }}
@@ -140,12 +150,15 @@ const Frame5 = () => {
         {/* Small heading — 1 line, fades in and moves up */}
         <h2
           ref={headingSmallRef}
-          className="absolute font-fanwood text-text-primary whitespace-nowrap"
+          className="frame5-heading frame5-heading-small"
           style={{
-            fontSize: FRAME5_HEADING_FINAL_SIZE,
+            position: "absolute",
+            fontFamily: '"Fanwood Text", serif',
+            color: "#2d2d2d",
+            fontSize: "var(--frame5-heading-final-size)",
             opacity: 0,
             top: FRAME5_HEADING_INITIAL_TOP,
-            left: "3.75rem",
+            left: "var(--frame5-heading-left)",
             margin: 0,
             lineHeight: 1.1,
           }}
@@ -155,13 +168,20 @@ const Frame5 = () => {
         {/* Frost overlay — sits behind rect, blurs background content */}
         <div
           ref={frostRef}
-          className="absolute inset-0 pointer-events-none"
-          style={{ opacity: 0, backdropFilter: "blur(0px)" }}
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            opacity: 0,
+            backdropFilter: "blur(0px)",
+          }}
         />
         <div
           ref={rectRef}
-          className="absolute rounded-2xl overflow-hidden"
           style={{
+            position: "absolute",
+            borderRadius: "1rem",
+            overflow: "hidden",
             opacity: 0,
             top: FRAME5_RECT_INITIAL_TOP,
             left: FRAME5_RECT_INITIAL_INSET,
@@ -171,8 +191,19 @@ const Frame5 = () => {
             border: "1px solid currentColor",
           }}
         >
-          <div className="flex items-center justify-center h-full font-fanwood text-text-primary">
-            <span className="font-fanwood text-text-primary">some video</span>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100%",
+              fontFamily: '"Fanwood Text", serif',
+              color: "#2d2d2d",
+            }}
+          >
+            <span style={{ fontFamily: '"Fanwood Text", serif', color: "#2d2d2d" }}>
+              some video
+            </span>
           </div>
         </div>
       </div>

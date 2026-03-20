@@ -3,8 +3,349 @@
 @theme {
   --font-fanwood: "Fanwood Text", serif;
   --font-satoshi: "Satoshi", sans-serif;
-  --color-bg-warm: #f5f3ef;
+  --color-bg-warm: #fefefe;
   --color-text-primary: #2d2d2d;
   --color-accent-green: #7a8b5c;
   --color-border-warm: #d4d0c8;
+}
+
+/* ── Responsive design tokens ─────────────────────────────────────── */
+:root {
+  /* Nav */
+  --nav-padding-x: 3.75rem;
+
+  /* Frame1 */
+  --frame1-section-padding-x: 0px;
+  --frame1-content-width: 55vw;
+  --frame1-content-text-align: left;
+  --frame1-content-align-items: flex-start;
+  --frame1-h1-size: 5.375rem;
+  --frame1-h1-lh: 1.1;
+  --frame1-p-max-width: 40vw;
+  --frame1-body-size: 1.9rem;
+  --frame1-body-lh: 1.6;
+
+  /* Frame2 */
+  --frame2-section-padding-x: 3.75rem;
+  --frame2-h2-size: 14rem;
+  --frame2-desc-indent: 4.5rem;
+  --frame2-icon-size: 12.5rem;
+  --frame2-body-size: 1.9rem;
+  --frame2-body-lh: 1.6;
+  --frame2-marquee-icon-size: 6rem;
+  --frame2-marquee-icon-padding: 1.25rem;
+
+  /* Frame4 */
+  --frame4-section-padding-x: 3.75rem;
+  --frame4-heading-size: 8rem;
+  --accordion-item-size: 3.5rem;
+  --accordion-item-pl: 4rem;
+  --accordion-item-pr: 4.5rem;
+  --accordion-content-pl: 4.5rem;
+  --accordion-content-pr: 4.5rem;
+  --accordion-wrapper-mx: 2rem;
+  --accordion-wrapper-px: 1.5rem;
+  --accordion-button-size: 1.6rem;
+  --accordion-padding-y: 2.2rem;
+  --accordion-margin-top: 12rem;
+  --accordion-content-size: 1.9rem;
+  --accordion-content-px: 1.5rem;
+  --accordion-content-pt: 2rem;
+  --accordion-content-py: 2rem;
+
+  /* Frame5 */
+  --frame5-heading-initial-size: 13rem;
+  --frame5-heading-final-size: 8rem;
+  --frame5-heading-left: 3.75rem;
+
+  /* Frame6 */
+  --frame6-section-padding-x: 4rem;
+  --frame6-section-padding-top: 50rem;
+  --frame6-cta-size: 6rem;
+  --frame6-cta-padding-x: 20rem;
+  --frame6-cta-lh: 1.1;
+  --frame6-form-padding-x: 10rem;
+  --frame6-form-inner-padding: 6rem;
+  --frame6-form-title-size: 3rem;
+  --frame6-form-title-padding: 0px;
+  --frame6-form-fields-pt: 5rem;
+  --frame6-form-label-size: 1.5rem;
+  --frame6-form-input-size: 1.4rem;
+  --frame6-form-input-padding: 1rem 1.25rem;
+  --frame6-form-input-height: auto;
+  --frame6-form-textarea-height: 20rem;
+  --frame6-submit-padding-y: 1rem;
+  --frame6-submit-padding-x: 3rem;
+  --frame6-submit-font-size: 1.5rem;
+  --frame6-form-field-gap: 1.25rem;
+  --frame6-firstname-flex: 0 0 46%;
+  --frame6-lastname-flex: 0 0 38%;
+  --frame6-email-width: 55%;
+  --frame6-comments-width: 90%;
+
+  /* Footer */
+  --footer-padding-x: 1.5rem;
+  --footer-padding-top: 10rem;
+  --footer-padding-bottom: 8rem;
+  --footer-contact-gap: 15rem;
+  --footer-contact-justify: flex-start;
+  --footer-outer-justify: center;
+  --footer-contact-font-size: 1.8rem;
+  --footer-name-margin-bottom: -0.35em;
+  --footer-box-pt: 2rem;
+  --footer-box-pb: 2rem;
+  --footer-box-pl: 20rem;
+  --footer-box-pr: 40rem;
+  --footer-contact-item-2-flex: 0 0 100%;
+  --footer-contact-item-3-flex: 0 0 90%;
+  --footer-contacts-box-flex: 1 1 60%;
+  --footer-phone-flex: 1 1 40%;
+}
+
+@media (width <= 767px) {
+  :root {
+    --nav-padding-x: 1.5rem;
+    --frame1-section-padding-x: 7rem;
+    --frame1-content-width: 88vw;
+    --frame1-content-text-align: center;
+    --frame1-content-align-items: center;
+    --frame1-h1-size: 2.8rem;
+    --frame1-h1-lh: 1.6;
+    --frame1-p-max-width: 88vw;
+    --frame1-body-size: 1.5rem;
+    --frame1-body-lh: 2;
+    --frame2-section-padding-x: 1.5rem;
+    --frame2-h2-size: 7rem;
+    --frame2-desc-indent: 4.5rem;
+    --frame2-icon-size: 6rem;
+    --frame2-body-size: 1.5rem;
+    --frame2-padding-right: 4.5rem;
+    --frame2-marquee-icon-size: 6rem;
+    --frame2-marquee-icon-padding: 2rem;
+    --frame2-marquee-padding-top: 5rem;
+    --frame2-body-lh: 2.3;
+    --frame4-section-padding-x: 1.5rem;
+    --frame4-heading-size: 5.2rem;
+    --accordion-item-size: 1.8rem;
+    --accordion-item-pl: 1.5rem;
+    --accordion-item-pr: 1.5rem;
+    --accordion-content-pl: 1.5rem;
+    --accordion-content-pr: 1.5rem;
+    --accordion-wrapper-mx: 0px;
+    --accordion-wrapper-px: 0px;
+    --accordion-button-size: 1.2rem;
+    --accordion-padding-y: 1.4rem;
+    --accordion-margin-top: 4rem;
+    --accordion-content-size: 1.2rem;
+    --accordion-content-px: 0.75rem;
+    --accordion-content-pt: 2.2rem;
+    --accordion-content-py: 1.5rem;
+    --frame5-heading-initial-size: 7rem;
+    --frame5-heading-final-size: 5.2rem;
+    --frame5-heading-left: 1.5rem;
+    --frame6-section-padding-x: 1.5rem;
+    --frame6-section-padding-top: 28rem;
+    --frame6-cta-size: 2.8rem;
+    --frame6-cta-padding-x: 3rem;
+    --frame6-cta-lh: 1.5;
+    --frame6-form-padding-x: 1.3rem;
+    --frame6-form-inner-padding: 3rem;
+    --frame6-form-title-size: 2rem;
+    --frame6-form-title-padding: 1rem;
+    --frame6-form-fields-pt: 2rem;
+    --frame6-form-label-size: 1.2rem;
+    --frame6-form-input-size: 1rem;
+    --frame6-form-input-padding: 0.85rem 1rem;
+    --frame6-form-input-height: 3.5rem;
+    --frame6-form-textarea-height: 14rem;
+    --frame6-submit-padding-y: 0.6rem;
+    --frame6-submit-padding-x: 2rem;
+    --frame6-submit-font-size: 1rem;
+    --frame6-form-field-gap: 1.5rem;
+    --frame6-firstname-flex: 0 0 46%;
+    --frame6-lastname-flex: 0 0 42%;
+    --frame6-email-width: 100%;
+    --frame6-comments-width: 100%;
+    --footer-padding-x: 1.5rem;
+    --footer-padding-top: 4rem;
+    --footer-padding-bottom: 6rem;
+    --footer-contact-gap: 2rem;
+    --footer-contact-justify: flex-start;
+    --footer-outer-justify: flex-start;
+    --footer-contact-font-size: 1.3rem;
+    --footer-name-margin-bottom: -0.25em;
+  }
+}
+
+/* ── Frame1 subtext ──────────────────────────────────────────────── */
+.frame1-subtext {
+  padding: 0;
+}
+
+@media (width <= 767px) {
+  .frame1-subtext {
+    padding: 2rem;
+  }
+}
+
+/* ── Footer contact layout ───────────────────────────────────────── */
+@media (width <= 767px) {
+  .footer-contact-item {
+    padding-left: 4rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .footer-contact-item:first-child {
+    flex: 0 0 100%;
+  }
+
+  .footer-contact-item:nth-child(2) {
+    flex: var(--footer-contact-item-2-flex);
+  }
+
+  .footer-contact-item:nth-child(3) {
+    flex: var(--footer-contact-item-3-flex);
+  }
+}
+
+/* ── Frame5 headings ─────────────────────────────────────────────── */
+.frame5-heading {
+  width: calc(100vw - 2 * var(--frame5-heading-left));
+}
+
+.frame5-heading-small {
+  white-space: nowrap;
+}
+
+@media (width <= 767px) {
+  .frame5-heading-small {
+    white-space: normal;
+  }
+}
+
+/* ── Frame2 subtext ──────────────────────────────────────────────── */
+.frame2-subtext {
+  padding: 0;
+}
+
+@media (width <= 767px) {
+  .frame2-subtext {
+    padding: 0;
+  }
+}
+
+/* ── App nav: hamburger vs links ──────────────────────────────────── */
+.nav-hamburger {
+  display: none;
+}
+
+.nav-links {
+  display: flex;
+}
+
+.nav-mobile-overlay {
+  display: none;
+}
+
+@media (width <= 767px) {
+  .nav-hamburger {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-mobile-overlay {
+    display: flex;
+  }
+}
+
+/* ── Frame2 marquee ───────────────────────────────────────────────── */
+.frame2-marquee-outer {
+  display: none;
+  overflow: hidden;
+  border: 1px solid #d4d0c8;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+}
+
+.frame2-marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+.frame2-icon-container img {
+  width: 100%;
+  max-width: var(--frame2-icon-size);
+  height: var(--frame2-icon-size);
+  object-fit: contain;
+}
+
+.frame2-marquee-track img {
+  width: var(--frame2-marquee-icon-size);
+  min-width: var(--frame2-marquee-icon-size);
+  height: var(--frame2-marquee-icon-size);
+  padding: var(--frame2-marquee-icon-padding);
+  box-sizing: content-box;
+  object-fit: contain;
+  border-right: 1px solid #d4d0c8;
+}
+
+.frame2-marquee-track img:last-child {
+  border-right: none;
+}
+
+/* ── Frame2 responsive layout ─────────────────────────────────────── */
+
+.frame2-layout {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.frame2-left {
+  flex: 55%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.frame2-icon-container {
+  flex: 45%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 2.5rem 7rem;
+  justify-items: center;
+  justify-content: center;
+}
+
+@media (width <= 767px) {
+  .frame2-layout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .frame2-left {
+    flex: unset;
+    width: 100%;
+  }
+
+  .frame2-icon-container {
+    display: none;
+  }
+
+  .frame2-marquee-outer {
+    display: block;
+    margin-left: calc(-1 * var(--frame2-section-padding-x));
+    margin-right: calc(-1 * var(--frame2-section-padding-x));
+    margin-top: var(--frame2-marquee-padding-top);
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
 }
