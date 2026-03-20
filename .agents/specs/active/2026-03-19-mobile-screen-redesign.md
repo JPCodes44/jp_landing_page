@@ -28,6 +28,7 @@ agent/mobile-screen-redesign
 - packages/frontend/src/hooks/useBreakpoint.ts
 - packages/frontend/src/index.css
 - packages/frontend/styles/assets/2d/videos/frame3Animation/*.png
+- packages/frontend/styles/assets/2d/backgrounds/image.png
 - packages/frontend/src/App.test.tsx
 - packages/frontend/src/components/Frame2.test.tsx
 - packages/frontend/src/components/Frame3.test.tsx
