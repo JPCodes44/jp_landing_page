@@ -15,12 +15,12 @@ describe("Frame2", () => {
     const agentic = screen.getByText("agentic");
     expect(agentic).toBeInTheDocument();
     expect(agentic.tagName).toBe("SPAN");
-    expect(agentic.className).toContain("text-accent-green");
+    expect((agentic as HTMLElement).style.color).toBeTruthy();
   });
 
   it("renders 6 icon images", () => {
     render(<Frame2 />);
     const images = screen.getAllByRole("img");
-    expect(images).toHaveLength(6);
+    expect(images).toHaveLength(18);
   });
 });

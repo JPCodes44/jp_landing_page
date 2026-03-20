@@ -1,55 +1,55 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
-import { useIsMobile } from "../hooks/useIsMobile";
 import {
-  FONT_SIZE_CTA,
-  FONT_SIZE_CTA_MAX_WIDTH,
-  FONT_SIZE_FORM_INPUT,
-  FONT_SIZE_FORM_LABEL,
-  FONT_SIZE_FORM_SUBMIT,
-  FONT_SIZE_FORM_TITLE,
   FRAME6_ARROW_BOB_DURATION,
   FRAME6_ARROW_BOB_Y,
   FRAME6_ARROW_SIZE,
-  FRAME6_FORM_INNER_PADDING,
-  FRAME6_FORM_PADDING_X,
   FRAME6_HEADING_INITIAL_OPACITY,
-  LINE_HEIGHT_HEADING,
-  MOBILE_CTA_MAX_WIDTH,
-  MOBILE_FONT_SIZE_CTA,
-  MOBILE_FONT_SIZE_FORM_TITLE,
-  MOBILE_FRAME6_FORM_INNER_PADDING,
-  MOBILE_FRAME6_FORM_PADDING_X,
   SECTION_PADDING_BOTTOM_LG,
-  SECTION_PADDING_X,
 } from "../theme";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ContactForm = ({ isMobile }: { isMobile: boolean }) => {
+const ContactForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [comments, setComments] = useState("");
 
-  const inputClass =
-    "font-fanwood text-text-primary bg-bg-warm border border-border-warm w-full outline-none";
-  const labelClass = "font-fanwood text-text-primary";
-  const shadowStyle = { boxShadow: "4px 4px 0px rgba(0,0,0,0.15)" };
-  const fieldStyle = { fontSize: FONT_SIZE_FORM_INPUT, padding: "0.6rem 0.75rem", ...shadowStyle };
-  const labelStyle = { fontSize: FONT_SIZE_FORM_LABEL, fontFamily: "satoshi" };
+  const inputBaseStyle: React.CSSProperties = {
+    fontFamily: '"Fanwood Text", serif',
+    color: "#2d2d2d",
+    backgroundColor: "#fefefe",
+    border: "1px solid #2d2d2d",
+    width: "100%",
+    outline: "none",
+  };
+  const shadowStyle = { boxShadow: "0px 3px 3px rgba(0,0,0,0.15)" };
+  const fieldStyle: React.CSSProperties = {
+    fontSize: "var(--frame6-form-input-size)",
+    padding: "var(--frame6-form-input-padding)",
+    height: "var(--frame6-form-input-height)",
+    fontStyle: "italic",
+    backgroundColor: "#ffffff",
+    ...shadowStyle,
+  };
+  const labelStyle: React.CSSProperties = {
+    fontSize: "var(--frame6-form-label-size)",
+    fontFamily: "satoshi",
+    color: "#2d2d2d",
+  };
   const gapStyle = { gap: "0.5rem" };
 
-  const formPadding = isMobile ? MOBILE_FRAME6_FORM_INNER_PADDING : FRAME6_FORM_INNER_PADDING;
-  const formTitleSize = isMobile ? MOBILE_FONT_SIZE_FORM_TITLE : FONT_SIZE_FORM_TITLE;
-
   return (
-    <div style={{ padding: formPadding }}>
+    <div style={{ padding: "var(--frame6-form-inner-padding)" }}>
       <h3
-        className="font-fanwood text-text-primary uppercase m-0"
         style={{
-          fontSize: formTitleSize,
+          color: "#2d2d2d",
+          textTransform: "uppercase",
+          margin: 0,
+          fontSize: "var(--frame6-form-title-size)",
+          padding: "var(--frame6-form-title-padding)",
           marginBottom: "2rem",
           letterSpacing: "0.05em",
           fontFamily: "satoshi",
@@ -59,42 +59,48 @@ const ContactForm = ({ isMobile }: { isMobile: boolean }) => {
       </h3>
 
       <div
-        className="flex flex-col"
-        style={{ gap: "1.25rem", paddingTop: isMobile ? "2rem" : "5rem" }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--frame6-form-field-gap)",
+          paddingTop: "var(--frame6-form-fields-pt)",
+        }}
       >
-        {/* First + Last Name — side-by-side on both mobile and desktop (per screenshot) */}
-        <div className="flex" style={{ gap: "1.5rem" }}>
-          <div className="flex flex-col" style={{ ...gapStyle, flex: "0 0 46%" }}>
-            <label htmlFor="firstName" className={labelClass} style={labelStyle}>
+        {/* First + Last Name */}
+        <div style={{ display: "flex", gap: "1.5rem" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              ...gapStyle,
+              flex: "var(--frame6-firstname-flex)",
+            }}
+          >
+            <label htmlFor="firstName" style={labelStyle}>
               First Name
             </label>
             <input
               id="firstName"
-              className={inputClass}
-              style={{
-                ...fieldStyle,
-                backgroundColor: "#ffffff",
-                padding: "1rem 1.25rem",
-                fontSize: "1.4rem",
-              }}
+              style={{ ...inputBaseStyle, ...fieldStyle }}
               placeholder="Your first name here.."
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
-          <div className="flex flex-col" style={{ ...gapStyle, flex: "0 0 38%" }}>
-            <label htmlFor="lastName" className={labelClass} style={labelStyle}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              ...gapStyle,
+              flex: "var(--frame6-lastname-flex)",
+            }}
+          >
+            <label htmlFor="lastName" style={labelStyle}>
               Last Name
             </label>
             <input
               id="lastName"
-              className={inputClass}
-              style={{
-                ...fieldStyle,
-                backgroundColor: "#ffffff",
-                padding: "1rem 1.25rem",
-                fontSize: "1.4rem",
-              }}
+              style={{ ...inputBaseStyle, ...fieldStyle }}
               placeholder="Your last name here.."
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -103,40 +109,46 @@ const ContactForm = ({ isMobile }: { isMobile: boolean }) => {
         </div>
 
         {/* Email */}
-        <div className="flex flex-col" style={{ ...gapStyle, width: isMobile ? "100%" : "55%" }}>
-          <label htmlFor="email" className={labelClass} style={labelStyle}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            ...gapStyle,
+            width: "var(--frame6-email-width)",
+          }}
+        >
+          <label htmlFor="email" style={labelStyle}>
             Email
           </label>
           <input
             id="email"
             type="email"
-            className={inputClass}
-            style={{
-              ...fieldStyle,
-              backgroundColor: "#ffffff",
-              padding: "1rem 1.25rem",
-              fontSize: "1.4rem",
-            }}
+            style={{ ...inputBaseStyle, ...fieldStyle }}
             placeholder="Your email here.."
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
-        {/* Comments — slightly narrower than submit row */}
-        <div className="flex flex-col" style={{ ...gapStyle, width: isMobile ? "100%" : "90%" }}>
-          <label htmlFor="comments" className={labelClass} style={labelStyle}>
+        {/* Comments */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            ...gapStyle,
+            width: "var(--frame6-comments-width)",
+          }}
+        >
+          <label htmlFor="comments" style={labelStyle}>
             Comments
           </label>
           <textarea
             id="comments"
-            className={`${inputClass} resize-none`}
             style={{
+              ...inputBaseStyle,
               ...fieldStyle,
-              backgroundColor: "#ffffff",
-              padding: "1rem 1.25rem",
-              fontSize: "1.4rem",
-              height: "20rem",
+              height: "var(--frame6-form-textarea-height)",
+              resize: "none",
             }}
             placeholder="Your comments here.."
             value={comments}
@@ -145,15 +157,18 @@ const ContactForm = ({ isMobile }: { isMobile: boolean }) => {
         </div>
 
         {/* Submit */}
-        <div className="flex justify-end" style={{ paddingTop: "3rem" }}>
+        <div style={{ display: "flex", justifyContent: "flex-end", paddingTop: "3rem" }}>
           <button
             type="button"
-            className="font-fanwood text-text-primary border border-text-primary bg-transparent cursor-pointer"
             style={{
-              fontSize: "1.6rem",
-              padding: "0.75rem 3rem",
+              color: "#2d2d2d",
+              border: "1px solid #2d2d2d",
+              background: "transparent",
+              cursor: "pointer",
+              fontSize: "var(--frame6-submit-font-size)",
+              padding: "var(--frame6-submit-padding-y) var(--frame6-submit-padding-x)",
               fontFamily: "satoshi",
-              boxShadow: "4px 4px 0px rgba(0,0,0,0.15)",
+              boxShadow: shadowStyle.boxShadow,
             }}
           >
             Submit
@@ -165,7 +180,6 @@ const ContactForm = ({ isMobile }: { isMobile: boolean }) => {
 };
 
 const Frame6 = () => {
-  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const arrowRef = useRef<HTMLDivElement>(null);
@@ -218,32 +232,46 @@ const Frame6 = () => {
     };
   }, []);
 
-  const paddingX = isMobile ? MOBILE_FRAME6_FORM_PADDING_X : SECTION_PADDING_X;
-  const ctaFontSize = isMobile ? MOBILE_FONT_SIZE_CTA : FONT_SIZE_CTA;
-  const ctaMaxWidth = isMobile ? MOBILE_CTA_MAX_WIDTH : FONT_SIZE_CTA_MAX_WIDTH;
-  const formPaddingX = isMobile ? MOBILE_FRAME6_FORM_PADDING_X : FRAME6_FORM_PADDING_X;
-
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen w-full bg-bg-warm flex flex-col items-center"
       style={{
-        paddingTop: isMobile ? "10rem" : "50rem",
+        minHeight: "100vh",
+        width: "100%",
+        backgroundColor: "#fefefe",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        paddingTop: "var(--frame6-section-padding-top)",
         paddingBottom: SECTION_PADDING_BOTTOM_LG,
-        paddingLeft: paddingX,
-        paddingRight: paddingX,
+        paddingLeft: "var(--frame6-section-padding-x)",
+        paddingRight: "var(--frame6-section-padding-x)",
       }}
     >
       {/* CTA heading */}
-      <div className="flex flex-col items-center flex-1 justify-center w-full">
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          flex: 1,
+          justifyContent: "center",
+          width: "100%",
+          paddingLeft: "var(--frame6-cta-padding-x)",
+          paddingRight: "var(--frame6-cta-padding-x)",
+        }}
+      >
         <h2
           ref={headingRef}
-          className="font-fanwood font-normal text-text-primary text-center m-0"
           style={{
-            fontSize: ctaFontSize,
-            lineHeight: LINE_HEIGHT_HEADING,
+            fontFamily: '"Fanwood Text", serif',
+            fontWeight: 400,
+            color: "#2d2d2d",
+            textAlign: "center",
+            margin: 0,
+            fontSize: "var(--frame6-cta-size)",
+            lineHeight: "var(--frame6-cta-lh)",
             opacity: FRAME6_HEADING_INITIAL_OPACITY,
-            maxWidth: ctaMaxWidth,
           }}
         >
           Ready to stop working for your business and let it work for you?
@@ -252,13 +280,25 @@ const Frame6 = () => {
 
       {/* Arrow centered on the top border of the form rect */}
       <div
-        className="relative w-full flex justify-center"
-        style={{ marginBottom: `calc(-${FRAME6_ARROW_SIZE} / 2)`, zIndex: 1, paddingTop: "10rem" }}
+        style={{
+          position: "relative",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: `calc(-${FRAME6_ARROW_SIZE} / 2)`,
+          zIndex: 1,
+          paddingTop: "10rem",
+        }}
       >
         <div
           ref={arrowRef}
-          className="flex items-center justify-center rounded-full border border-text-primary bg-bg-warm"
           style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "50%",
+            border: "1px solid #2d2d2d",
+            backgroundColor: "#fefefe",
             width: FRAME6_ARROW_SIZE,
             height: FRAME6_ARROW_SIZE,
             opacity: FRAME6_HEADING_INITIAL_OPACITY,
@@ -273,7 +313,7 @@ const Frame6 = () => {
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="text-text-primary"
+            style={{ color: "#2d2d2d" }}
           >
             <title>Scroll down arrow</title>
             <line x1="12" y1="5" x2="12" y2="19" />
@@ -283,11 +323,26 @@ const Frame6 = () => {
       </div>
 
       {/* Form with dashed SVG border overlay */}
-      <div className="relative bg-white" style={{ width: `calc(100% - ${formPaddingX} * 2)` }}>
+      <div
+        style={{
+          position: "relative",
+          backgroundColor: "#ffffff",
+          width: "calc(100% - var(--frame6-form-padding-x) * 2)",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
+        }}
+      >
         {/* Dashed border — sits on top, pointer-events off */}
         <svg
-          className="absolute inset-0 text-text-primary pointer-events-none"
-          style={{ width: "100%", height: "100%", display: "block", overflow: "visible" }}
+          style={{
+            position: "absolute",
+            inset: 0,
+            color: "#2d2d2d",
+            pointerEvents: "none",
+            width: "100%",
+            height: "100%",
+            display: "block",
+            overflow: "visible",
+          }}
         >
           <title>Form border</title>
           <rect
@@ -297,14 +352,14 @@ const Frame6 = () => {
             height="100%"
             fill="none"
             stroke="currentColor"
-            strokeWidth="3"
-            pathLength="400"
-            strokeDasharray="3 1"
-            strokeDashoffset="1.5"
+            strokeWidth="2"
+            pathLength="500"
+            strokeDasharray="3 2"
+            strokeDashoffset="1.7"
           />
         </svg>
 
-        <ContactForm isMobile={isMobile} />
+        <ContactForm />
       </div>
     </section>
   );

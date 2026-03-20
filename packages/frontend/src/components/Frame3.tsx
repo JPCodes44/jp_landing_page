@@ -75,7 +75,7 @@ const Frame3 = () => {
 
       const img = images[clampedIndex];
       const draw = () => {
-        if (canvas.width !== img.naturalWidth) initCanvas(img);
+        initCanvas(img);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
       };
@@ -150,7 +150,16 @@ const Frame3 = () => {
 
     buildAnimation();
 
+    const handleResize = () => {
+      const img = images[Math.max(0, currentFrameIndex)];
+      if (img?.complete && img.naturalWidth > 0) initCanvas(img);
+      buildAnimation();
+    };
+
+    window.addEventListener("resize", handleResize);
+
     return () => {
+      window.removeEventListener("resize", handleResize);
       tl?.scrollTrigger?.kill();
       tl?.kill();
     };
@@ -159,16 +168,23 @@ const Frame3 = () => {
   return (
     <section
       ref={wrapperRef}
-      className="relative w-full bg-bg-warm"
-      // Height is set dynamically in the effect once frame count is known.
-      // 300vh is a reasonable fallback until then.
-      style={{ height: "300vh" }}
+      style={{
+        position: "relative",
+        width: "100%",
+        backgroundColor: "#fefefe",
+        // Height is set dynamically in the effect once frame count is known.
+        // 300vh is a reasonable fallback until then.
+        height: "300vh",
+      }}
     >
-      <div className="sticky top-0 h-screen w-full">
+      <div style={{ position: "sticky", top: 0, height: "100vh", width: "100%" }}>
         <div
           ref={rectRef}
-          className="absolute rounded-2xl border border-border-warm overflow-hidden"
           style={{
+            position: "absolute",
+            borderRadius: "1rem",
+            border: "1px solid #d4d0c8",
+            overflow: "hidden",
             top: "50%",
             transform: "translateY(-50%)",
             left: FRAME3_RECT_INITIAL_INSET,
@@ -179,8 +195,12 @@ const Frame3 = () => {
         >
           <canvas
             ref={canvasRef}
-            className="absolute"
-            style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
           />
         </div>
       </div>

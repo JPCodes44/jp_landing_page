@@ -108,12 +108,12 @@ export const FONT_SIZE_FORM_INPUT = "1.1rem";
 export const FONT_SIZE_FORM_SUBMIT = "1.1rem";
 
 // Footer
-export const FOOTER_NAME_SIZE = "20vw";
+export const FOOTER_NAME_SIZE = "23.5vw";
 export const FOOTER_CONTACT_LABEL_SIZE = "1.8rem";
 export const FOOTER_CONTACT_VALUE_SIZE = "1.8rem";
 export const FOOTER_CONTACT_PADDING_X = "3.75rem";
-export const FOOTER_CONTACT_PADDING_TOP = "14rem";
-export const FOOTER_CONTACT_PADDING_BOTTOM = "10rem";
+export const FOOTER_CONTACT_PADDING_TOP = "10rem";
+export const FOOTER_CONTACT_PADDING_BOTTOM = "2rem";
 
 // Mobile overrides (< 768px)
 export const MOBILE_SECTION_PADDING_X = "1.5rem";

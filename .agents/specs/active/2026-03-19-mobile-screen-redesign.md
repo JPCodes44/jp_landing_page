@@ -25,6 +25,9 @@ agent/mobile-screen-redesign
 - packages/frontend/src/components/Footer.tsx
 - packages/frontend/src/theme/index.ts
 - packages/frontend/src/hooks/useIsMobile.ts
+- packages/frontend/src/hooks/useBreakpoint.ts
+- packages/frontend/src/index.css
+- packages/frontend/styles/assets/2d/videos/frame3Animation/*.png
 - packages/frontend/src/components/Frame2.test.tsx
 - packages/frontend/src/components/Frame3.test.tsx
 - packages/frontend/src/components/Frame4.test.tsx

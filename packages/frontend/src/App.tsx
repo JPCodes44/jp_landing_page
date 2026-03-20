@@ -1,4 +1,5 @@
-import { useState } from "react";
+import gsap from "gsap";
+import { useEffect, useRef, useState } from "react";
 import Footer from "./components/Footer";
 import Frame1 from "./components/Frame1";
 import Frame2 from "./components/Frame2";
@@ -6,17 +7,14 @@ import Frame3 from "./components/Frame3";
 import Frame4 from "./components/Frame4";
 import Frame5 from "./components/Frame5";
 import Frame6 from "./components/Frame6";
-import { useIsMobile } from "./hooks/useIsMobile";
 import {
   FONT_SIZE_LOGO,
   FONT_SIZE_NAV_LINK,
-  MOBILE_NAVBAR_PADDING_X,
   NAVBAR_BACKDROP_BLUR,
   NAVBAR_BACKDROP_SATURATE,
   NAVBAR_BORDER,
   NAVBAR_BOX_SHADOW,
   NAVBAR_HEIGHT,
-  NAVBAR_PADDING_X,
 } from "./theme";
 
 const NAV_LINKS = [
@@ -26,22 +24,102 @@ const NAV_LINKS = [
   { href: "#about", label: "about" },
 ];
 
-const App = () => {
-  const isMobile = useIsMobile();
-  const [menuOpen, setMenuOpen] = useState(false);
+// Bar dimensions — tweak here to adjust icon appearance
+const BAR_WIDTH = "1.8rem";
+const BAR_HEIGHT = "2px";
+const BAR_GAP = "8px";
+// Distance (px) from bar1/bar3 center to the container's center line
+// = bar height (2px) + gap (8px) = 10px
+const BAR_Y_OFFSET = 10;
 
-  const closeMenu = () => setMenuOpen(false);
+const App = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hoveredHref, setHoveredHref] = useState<string | null>(null);
+  const bar1Ref = useRef<HTMLSpanElement>(null);
+  const bar2Ref = useRef<HTMLSpanElement>(null);
+  const bar3Ref = useRef<HTMLSpanElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (overlayRef.current) {
+      gsap.set(overlayRef.current, {
+        scaleY: 0,
+        opacity: 0,
+        pointerEvents: "none",
+        transformOrigin: "top",
+      });
+    }
+  }, []);
+
+  const toggleMenu = () => {
+    const b1 = bar1Ref.current;
+    const b2 = bar2Ref.current;
+    const b3 = bar3Ref.current;
+    if (!b1 || !b2 || !b3) return;
+
+    const opening = !menuOpen;
+
+    const overlay = overlayRef.current;
+
+    if (opening) {
+      gsap.to(b1, { rotation: 45, y: BAR_Y_OFFSET, duration: 0.35, ease: "power2.inOut" });
+      gsap.to(b2, { scaleX: 0, opacity: 0, duration: 0.2, ease: "power2.in" });
+      gsap.to(b3, { rotation: -45, y: -BAR_Y_OFFSET, duration: 0.35, ease: "power2.inOut" });
+      if (overlay) {
+        gsap.set(overlay, { pointerEvents: "auto" });
+        gsap.to(overlay, {
+          scaleY: 1,
+          opacity: 1,
+          duration: 0.45,
+          ease: "power3.out",
+          transformOrigin: "top",
+        });
+      }
+    } else {
+      gsap.to(b1, { rotation: 0, y: 0, duration: 0.35, ease: "power2.inOut" });
+      gsap.to(b2, { scaleX: 1, opacity: 1, duration: 0.2, delay: 0.15, ease: "power2.out" });
+      gsap.to(b3, { rotation: 0, y: 0, duration: 0.35, ease: "power2.inOut" });
+      if (overlay) {
+        gsap.to(overlay, {
+          scaleY: 0,
+          opacity: 0,
+          duration: 0.35,
+          ease: "power3.in",
+          transformOrigin: "top",
+          onComplete: () => {
+            gsap.set(overlay, { pointerEvents: "none" });
+          },
+        });
+      }
+    }
+
+    setMenuOpen(opening);
+  };
+
+  const barStyle: React.CSSProperties = {
+    display: "block",
+    width: BAR_WIDTH,
+    height: BAR_HEIGHT,
+    backgroundColor: "#1a1a1a",
+    transformOrigin: "center",
+  };
 
   return (
-    <div className="bg-bg-warm">
+    <div style={{ backgroundColor: "#fefefe" }}>
       <main>
         <nav
           id="main-nav"
-          className="sticky top-0 z-50 flex items-center justify-between"
           style={{
+            position: "sticky",
+            top: 0,
+            // Always above the overlay so the hamburger button remains clickable
+            zIndex: 70,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
             height: NAVBAR_HEIGHT,
-            paddingLeft: isMobile ? MOBILE_NAVBAR_PADDING_X : NAVBAR_PADDING_X,
-            paddingRight: isMobile ? MOBILE_NAVBAR_PADDING_X : NAVBAR_PADDING_X,
+            paddingLeft: "var(--nav-padding-x)",
+            paddingRight: "var(--nav-padding-x)",
             backdropFilter: `${NAVBAR_BACKDROP_BLUR} ${NAVBAR_BACKDROP_SATURATE}`,
             WebkitBackdropFilter: `${NAVBAR_BACKDROP_BLUR} ${NAVBAR_BACKDROP_SATURATE}`,
             background: "transparent",
@@ -49,87 +127,119 @@ const App = () => {
             borderBottom: NAVBAR_BORDER,
           }}
         >
-          <span className="font-fanwood text-text-primary" style={{ fontSize: FONT_SIZE_LOGO }}>
+          <span
+            style={{
+              fontFamily: '"Fanwood Text", serif',
+              color: "#2d2d2d",
+              fontSize: FONT_SIZE_LOGO,
+            }}
+          >
             Justin Mak.
           </span>
 
-          {isMobile ? (
-            <button
-              type="button"
-              onClick={() => setMenuOpen(true)}
-              className="bg-transparent border-none cursor-pointer text-text-primary p-0"
-              aria-label="Open menu"
-              style={{ fontSize: "1.8rem", lineHeight: 1 }}
-            >
-              ≡
-            </button>
-          ) : (
-            <ul className="flex gap-10 list-none m-0 p-0">
-              {NAV_LINKS.map(({ href, label }) => (
-                <li key={href}>
-                  <a
-                    href={href}
-                    className="font-fanwood font-normal text-text-primary no-underline hover:opacity-70"
-                    style={{ fontSize: FONT_SIZE_NAV_LINK }}
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
+          {/* Hamburger / X — visible on mobile only, stays above overlay */}
+          <button
+            type="button"
+            onClick={toggleMenu}
+            className="nav-hamburger"
+            style={{
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              gap: BAR_GAP,
+              justifyContent: "center",
+            }}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+          >
+            <span ref={bar1Ref} style={barStyle} />
+            <span ref={bar2Ref} style={barStyle} />
+            <span ref={bar3Ref} style={barStyle} />
+          </button>
+
+          {/* Nav links — visible on desktop only */}
+          <ul
+            className="nav-links"
+            style={{
+              gap: "2.5rem",
+              listStyle: "none",
+              margin: 0,
+              padding: 0,
+            }}
+          >
+            {NAV_LINKS.map(({ href, label }) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  onMouseEnter={() => setHoveredHref(href)}
+                  onMouseLeave={() => setHoveredHref(null)}
+                  style={{
+                    fontFamily: '"Fanwood Text", serif',
+                    fontWeight: 400,
+                    color: "#2d2d2d",
+                    textDecoration: "none",
+                    fontSize: FONT_SIZE_NAV_LINK,
+                    opacity: hoveredHref === href ? 0.7 : 1,
+                  }}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
 
         {/* Mobile full-screen nav overlay */}
-        {isMobile && menuOpen && (
-          <div className="fixed inset-0 bg-bg-warm flex flex-col" style={{ zIndex: 60 }}>
-            {/* Top row: logo + close button */}
-            <div
-              className="flex items-center justify-between"
-              style={{
-                height: NAVBAR_HEIGHT,
-                paddingLeft: MOBILE_NAVBAR_PADDING_X,
-                paddingRight: MOBILE_NAVBAR_PADDING_X,
-                borderBottom: NAVBAR_BORDER,
-              }}
-            >
-              <span className="font-fanwood text-text-primary" style={{ fontSize: FONT_SIZE_LOGO }}>
-                Justin Mak.
-              </span>
-              <button
-                type="button"
-                onClick={closeMenu}
-                className="bg-transparent border-none cursor-pointer text-text-primary p-0"
-                aria-label="Close menu"
-                style={{ fontSize: "1.8rem", lineHeight: 1 }}
-              >
-                ×
-              </button>
-            </div>
-
-            {/* Stacked nav links */}
-            <ul className="list-none m-0 p-0 flex flex-col">
-              {NAV_LINKS.map(({ href, label }) => (
-                <li key={href} style={{ borderBottom: NAVBAR_BORDER }}>
-                  <a
-                    href={href}
-                    onClick={closeMenu}
-                    className="font-fanwood font-normal text-text-primary no-underline flex items-center"
-                    style={{
-                      fontSize: FONT_SIZE_NAV_LINK,
-                      paddingLeft: MOBILE_NAVBAR_PADDING_X,
-                      paddingRight: MOBILE_NAVBAR_PADDING_X,
-                      paddingTop: "1.25rem",
-                      paddingBottom: "1.25rem",
-                    }}
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <div
+          ref={overlayRef}
+          className="nav-mobile-overlay"
+          style={{
+            position: "fixed",
+            top: NAVBAR_HEIGHT,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "#fefefe",
+            flexDirection: "column",
+            zIndex: 60,
+          }}
+        >
+          {/* Stacked nav links */}
+          <ul
+            style={{
+              listStyle: "none",
+              margin: 0,
+              padding: 0,
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {NAV_LINKS.map(({ href, label }) => (
+              <li key={href} style={{ borderBottom: NAVBAR_BORDER }}>
+                <a
+                  href={href}
+                  onClick={toggleMenu}
+                  style={{
+                    fontFamily: '"Fanwood Text", serif',
+                    fontWeight: 400,
+                    color: "#2d2d2d",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: FONT_SIZE_NAV_LINK,
+                    paddingLeft: "var(--nav-padding-x)",
+                    paddingRight: "var(--nav-padding-x)",
+                    paddingTop: "1.25rem",
+                    paddingBottom: "1.25rem",
+                  }}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <Frame1 />
         <Frame2 />

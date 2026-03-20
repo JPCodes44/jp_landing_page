@@ -1,16 +1,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
-import { useIsMobile } from "../hooks/useIsMobile";
 import {
-  ACCORDION_CONTENT_PADDING_LEFT,
-  ACCORDION_CONTENT_PADDING_X,
-  ACCORDION_CONTENT_PADDING_Y,
-  ACCORDION_MARGIN_TOP,
-  ACCORDION_MARGIN_X,
-  ACCORDION_PADDING_LEFT,
-  ACCORDION_PADDING_RIGHT,
-  ACCORDION_PADDING_Y,
   ANIM_BUTTON_SCALE_HOVER,
   ANIM_DURATION_ACCORDION_CLOSE,
   ANIM_DURATION_ACCORDION_IN,
@@ -22,17 +13,9 @@ import {
   ANIM_SCROLL_START,
   ANIM_Y_ACCORDION,
   ANIM_Y_HEADING,
-  BUTTON_SIZE,
-  FONT_SIZE_ACCORDION_CONTENT,
-  FONT_SIZE_ACCORDION_ITEM,
-  FONT_SIZE_SECTION_H2_FRAME4,
   FRAME4_SECTION_PADDING_BOTTOM,
   FRAME4_SECTION_PADDING_TOP,
   LINE_THICKNESS,
-  MOBILE_FONT_SIZE_ACCORDION_ITEM,
-  MOBILE_FONT_SIZE_SECTION_H2_FRAME4,
-  MOBILE_SECTION_PADDING_X,
-  SECTION_PADDING_X,
 } from "../theme";
 
 const ITEMS = [
@@ -46,12 +29,10 @@ const AccordionItem = ({
   item,
   isOpen,
   onToggle,
-  isMobile,
 }: {
   item: string;
   isOpen: boolean;
   onToggle: () => void;
-  isMobile: boolean;
 }) => {
   const btnRef = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -76,7 +57,6 @@ const AccordionItem = ({
     }
   }, [isOpen]);
 
-  // Animate vertical bar: scaleY 1 → 0 on open (+ becomes −)
   useEffect(() => {
     const bar = verticalBarRef.current;
     if (!bar) return;
@@ -106,58 +86,86 @@ const AccordionItem = ({
     };
   }, []);
 
-  const itemFontSize = isMobile ? MOBILE_FONT_SIZE_ACCORDION_ITEM : FONT_SIZE_ACCORDION_ITEM;
-  const paddingLeft = isMobile ? "0" : ACCORDION_PADDING_LEFT;
-  const paddingRight = isMobile ? "0" : ACCORDION_PADDING_RIGHT;
-  const contentPaddingLeft = isMobile ? "0" : ACCORDION_CONTENT_PADDING_LEFT;
-
   return (
     <div>
       <div
-        className="flex items-center justify-between border-b-2 border-border-warm"
         style={{
-          paddingTop: ACCORDION_PADDING_Y,
-          paddingBottom: ACCORDION_PADDING_Y,
-          paddingLeft,
-          paddingRight,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          borderBottom: "2px solid #d4d0c8",
+          paddingTop: "var(--accordion-padding-y)",
+          paddingBottom: "var(--accordion-padding-y)",
+          paddingLeft: "var(--accordion-item-pl)",
+          paddingRight: "var(--accordion-item-pr)",
         }}
       >
-        <span className="font-fanwood text-text-primary" style={{ fontSize: itemFontSize }}>
+        <span
+          style={{
+            fontFamily: '"Fanwood Text", serif',
+            color: "#2d2d2d",
+            fontSize: "var(--accordion-item-size)",
+          }}
+        >
           {item}
         </span>
         <button
           ref={btnRef}
           type="button"
           onClick={onToggle}
-          className="relative flex items-center justify-center cursor-pointer bg-transparent border-none p-0"
-          style={{ width: BUTTON_SIZE, height: BUTTON_SIZE }}
+          style={{
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            background: "transparent",
+            border: "none",
+            padding: 0,
+            width: "var(--accordion-button-size)",
+            height: "var(--accordion-button-size)",
+          }}
           aria-expanded={isOpen}
           aria-label={isOpen ? "collapse" : "expand"}
         >
           <span
-            className="absolute bg-text-primary"
-            style={{ width: "100%", height: LINE_THICKNESS }}
+            style={{
+              position: "absolute",
+              backgroundColor: "#2d2d2d",
+              width: "100%",
+              height: LINE_THICKNESS,
+            }}
           />
           <span
             ref={verticalBarRef}
-            className="absolute bg-text-primary"
-            style={{ width: LINE_THICKNESS, height: "100%" }}
+            style={{
+              position: "absolute",
+              backgroundColor: "#2d2d2d",
+              width: LINE_THICKNESS,
+              height: "100%",
+            }}
           />
         </button>
       </div>
       <div
         ref={contentRef}
-        className="overflow-hidden"
-        style={{ height: 0, opacity: 0, paddingLeft: contentPaddingLeft }}
+        style={{
+          overflow: "hidden",
+          height: 0,
+          opacity: 0,
+          paddingLeft: "var(--accordion-content-pl)",
+        }}
       >
         <p
-          className="font-fanwood text-text-primary leading-relaxed"
           style={{
-            fontSize: FONT_SIZE_ACCORDION_CONTENT,
-            paddingLeft: ACCORDION_CONTENT_PADDING_X,
-            paddingRight: isMobile ? "0" : ACCORDION_PADDING_RIGHT,
-            paddingTop: ACCORDION_CONTENT_PADDING_Y,
-            paddingBottom: ACCORDION_CONTENT_PADDING_Y,
+            fontFamily: '"Fanwood Text", serif',
+            color: "#2d2d2d",
+            lineHeight: 1.625,
+            fontSize: "var(--accordion-content-size)",
+            paddingLeft: "var(--accordion-content-px)",
+            paddingRight: "var(--accordion-content-pr)",
+            paddingTop: "var(--accordion-content-pt)",
+            paddingBottom: "var(--accordion-content-py)",
           }}
         >
           More details about {item.toLowerCase()} coming soon.
@@ -168,7 +176,6 @@ const AccordionItem = ({
 };
 
 const Frame4 = () => {
-  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const accordionRef = useRef<HTMLDivElement>(null);
@@ -222,26 +229,27 @@ const Frame4 = () => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
 
-  const paddingX = isMobile ? MOBILE_SECTION_PADDING_X : SECTION_PADDING_X;
-  const headingFontSize = isMobile
-    ? MOBILE_FONT_SIZE_SECTION_H2_FRAME4
-    : FONT_SIZE_SECTION_H2_FRAME4;
-
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-bg-warm"
       style={{
-        paddingLeft: paddingX,
-        paddingRight: paddingX,
+        width: "100%",
+        backgroundColor: "#fefefe",
+        paddingLeft: "var(--frame4-section-padding-x)",
+        paddingRight: "var(--frame4-section-padding-x)",
         paddingTop: FRAME4_SECTION_PADDING_TOP,
         paddingBottom: FRAME4_SECTION_PADDING_BOTTOM,
       }}
     >
       <h2
         ref={headingRef}
-        className="font-fanwood leading-none text-text-primary"
-        style={{ opacity: 0, fontSize: headingFontSize }}
+        style={{
+          fontFamily: '"Fanwood Text", serif',
+          lineHeight: 1,
+          color: "#2d2d2d",
+          opacity: 0,
+          fontSize: "var(--frame4-heading-size)",
+        }}
       >
         Comprehensive Solutions:
       </h2>
@@ -249,11 +257,11 @@ const Frame4 = () => {
         ref={accordionRef}
         style={{
           opacity: 0,
-          marginTop: ACCORDION_MARGIN_TOP,
-          marginLeft: isMobile ? "0" : ACCORDION_MARGIN_X,
-          marginRight: isMobile ? "0" : ACCORDION_MARGIN_X,
-          paddingLeft: isMobile ? "0" : ACCORDION_CONTENT_PADDING_X,
-          paddingRight: isMobile ? "0" : ACCORDION_CONTENT_PADDING_X,
+          marginTop: "var(--accordion-margin-top)",
+          marginLeft: "var(--accordion-wrapper-mx)",
+          marginRight: "var(--accordion-wrapper-mx)",
+          paddingLeft: "var(--accordion-wrapper-px)",
+          paddingRight: "var(--accordion-wrapper-px)",
         }}
       >
         {ITEMS.map((item, i) => (
@@ -262,7 +270,6 @@ const Frame4 = () => {
             item={item}
             isOpen={openIndex === i}
             onToggle={() => handleToggle(i)}
-            isMobile={isMobile}
           />
         ))}
       </div>
