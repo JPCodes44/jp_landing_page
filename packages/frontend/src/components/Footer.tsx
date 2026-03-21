@@ -7,7 +7,7 @@ import { FOOTER_NAME_SIZE } from "../theme";
 gsap.registerPlugin(ScrollTrigger);
 
 const desktopAllContacts = [
-  { label: "Location:", value: "Akatos House @uwaterloo" },
+  { label: "Location:", value: "@uwaterloo" },
 
   { label: "", value: "" },
   { label: "Email:", value: "@j29mak@uwaterloo.ca" },
@@ -18,7 +18,7 @@ const mobileAllContacts = [
   { label: "Email:", value: "@j29mak@uwaterloo.ca" },
 
   { label: "", value: "" },
-  { label: "Location:", value: "Akatos House @uwaterloo" },
+  { label: "Location:", value: "@uwaterloo" },
 
   { label: "Phone Number:", value: "+1 (905) - 865 - 1230" },
 ];
