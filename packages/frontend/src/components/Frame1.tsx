@@ -24,7 +24,7 @@ const Frame1 = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.6,
+          opacity: 0.3,
           zIndex: -1,
           pointerEvents: "none",
         }}

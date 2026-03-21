@@ -91,9 +91,13 @@ const AccordionItem = ({
     const label = labelRef.current;
     if (!label) return;
     const onEnter = () =>
-      gsap.to(label, { scale: 1.04, duration: 0.25, ease: "power2.out", transformOrigin: "left center" });
-    const onLeave = () =>
-      gsap.to(label, { scale: 1, duration: 0.25, ease: "power2.out" });
+      gsap.to(label, {
+        scale: 1.04,
+        duration: 0.25,
+        ease: "power2.out",
+        transformOrigin: "left center",
+      });
+    const onLeave = () => gsap.to(label, { scale: 1, duration: 0.25, ease: "power2.out" });
     label.addEventListener("mouseenter", onEnter);
     label.addEventListener("mouseleave", onLeave);
     return () => {
@@ -288,7 +292,7 @@ const Frame4 = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.6,
+          opacity: 0.3,
           zIndex: -1,
           pointerEvents: "none",
         }}

@@ -71,7 +71,13 @@ const Footer = () => {
     const contactItems = Array.from(el.querySelectorAll<HTMLElement>("[data-contact-item]"));
     const contactHandlers: { el: HTMLElement; enter: () => void; leave: () => void }[] = [];
     for (const item of contactItems) {
-      const enter = () => gsap.to(item, { scale: 1.04, duration: 0.25, ease: "power2.out", transformOrigin: "left center" });
+      const enter = () =>
+        gsap.to(item, {
+          scale: 1.04,
+          duration: 0.25,
+          ease: "power2.out",
+          transformOrigin: "left center",
+        });
       const leave = () => gsap.to(item, { scale: 1, duration: 0.25, ease: "power2.out" });
       item.addEventListener("mouseenter", enter);
       item.addEventListener("mouseleave", leave);
@@ -80,7 +86,13 @@ const Footer = () => {
 
     // Justin Mak hover
     const name = nameRef.current;
-    const nameEnter = () => gsap.to(name, { scale: 1.02, duration: 0.4, ease: "power2.out", transformOrigin: "center bottom" });
+    const nameEnter = () =>
+      gsap.to(name, {
+        scale: 1.02,
+        duration: 0.4,
+        ease: "power2.out",
+        transformOrigin: "center bottom",
+      });
     const nameLeave = () => gsap.to(name, { scale: 1, duration: 0.4, ease: "power2.out" });
     name?.addEventListener("mouseenter", nameEnter);
     name?.addEventListener("mouseleave", nameLeave);
@@ -131,7 +143,7 @@ const Footer = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.6,
+          opacity: 0.3,
           zIndex: -1,
           pointerEvents: "none",
         }}
