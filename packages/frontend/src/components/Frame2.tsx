@@ -211,8 +211,8 @@ const Frame2 = () => {
           height: bp === "mobile" ? "calc(100% + 100vh)" : "calc(100% + 100vh)",
           backgroundImage:
             bp === "mobile"
-              ? "url('../../public/styles/assets/2d/backgrounds/image_frame2.png')"
-              : "url('../../public/styles/assets/2d/backgrounds/grid.png')",
+              ? "url('/styles/assets/2d/backgrounds/image_frame2.png')"
+              : "url('/styles/assets/2d/backgrounds/grid.png')",
           backgroundSize: bp === "mobile" ? "150% auto" : "100% auto",
           backgroundPosition: "center 200%",
           backgroundRepeat: "no-repeat",
