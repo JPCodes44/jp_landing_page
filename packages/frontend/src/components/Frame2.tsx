@@ -205,18 +205,18 @@ const Frame2 = () => {
       <div
         style={{
           position: "absolute",
-          top: bp === "mobile" ? "-170vh" : "-6vh",
+          top: bp === "mobile" ? "-90vh" : "-70vh",
           left: 0,
           right: 0,
           height: bp === "mobile" ? "calc(100% + 100vh)" : "calc(100% + 100vh)",
           backgroundImage:
             bp === "mobile"
-              ? "url('/styles/assets/2d/backgrounds/image_frame2.png')"
+              ? "url('/styles/assets/2d/backgrounds/grid.png')"
               : "url('/styles/assets/2d/backgrounds/grid.png')",
-          backgroundSize: bp === "mobile" ? "150% auto" : "100% auto",
-          backgroundPosition: "center 200%",
+          backgroundSize: bp === "mobile" ? "260% auto" : "110% auto",
+          backgroundPosition: bp === "mobile" ? "center center" : "center center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.1,
+          opacity: 0.2,
           pointerEvents: "none",
         }}
       />

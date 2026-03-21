@@ -18,7 +18,7 @@ const mobileAllContacts = [
   { label: "Email:", value: "@j29mak@uwaterloo.ca" },
 
   { label: "", value: "" },
-  { label: "Location:", value: "@uwaterloo" },
+  { label: "Location:", value: "376 Vogel Place @uwaterloo" },
 
   { label: "Phone Number:", value: "+1 (905) - 865 - 1230" },
 ];
@@ -46,6 +46,7 @@ const valueStyle: React.CSSProperties = {
 const Footer = () => {
   const bp = useBreakpoint();
   const contactRowRef = useRef<HTMLDivElement>(null);
+  const nameRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = contactRowRef.current;
@@ -66,9 +67,33 @@ const Footer = () => {
       },
     );
 
+    // Contact item hover (label + value pairs)
+    const contactItems = Array.from(el.querySelectorAll<HTMLElement>("[data-contact-item]"));
+    const contactHandlers: { el: HTMLElement; enter: () => void; leave: () => void }[] = [];
+    for (const item of contactItems) {
+      const enter = () => gsap.to(item, { scale: 1.04, duration: 0.25, ease: "power2.out", transformOrigin: "left center" });
+      const leave = () => gsap.to(item, { scale: 1, duration: 0.25, ease: "power2.out" });
+      item.addEventListener("mouseenter", enter);
+      item.addEventListener("mouseleave", leave);
+      contactHandlers.push({ el: item, enter, leave });
+    }
+
+    // Justin Mak hover
+    const name = nameRef.current;
+    const nameEnter = () => gsap.to(name, { scale: 1.02, duration: 0.4, ease: "power2.out", transformOrigin: "center bottom" });
+    const nameLeave = () => gsap.to(name, { scale: 1, duration: 0.4, ease: "power2.out" });
+    name?.addEventListener("mouseenter", nameEnter);
+    name?.addEventListener("mouseleave", nameLeave);
+
     return () => {
       if (st.scrollTrigger) st.scrollTrigger.kill();
       st.kill();
+      for (const { el: item, enter, leave } of contactHandlers) {
+        item.removeEventListener("mouseenter", enter);
+        item.removeEventListener("mouseleave", leave);
+      }
+      name?.removeEventListener("mouseenter", nameEnter);
+      name?.removeEventListener("mouseleave", nameLeave);
     };
   }, []);
 
@@ -124,7 +149,7 @@ const Footer = () => {
         }}
       >
         {bp === "desktop" ? (
-          /* Desktop: all three in a flat row */
+          /* Desktop: all three in a flat row, with dashed border box */
           <div
             style={{
               display: "flex",
@@ -135,7 +160,7 @@ const Footer = () => {
             {desktopAllContacts
               .filter(({ label }) => label !== "")
               .map(({ label, value }) => (
-                <div key={label} style={contactItemStyle}>
+                <div key={label} data-contact-item style={contactItemStyle}>
                   <span style={labelStyle}>{label}</span>
                   <span style={valueStyle}>{value}</span>
                 </div>
@@ -147,12 +172,13 @@ const Footer = () => {
               style={{
                 display: "grid",
                 gridTemplateColumns: "auto auto",
-                gap: "var(--footer-contact-gap)",
+                columnGap: "var(--footer-contact-row-gap)",
+                rowGap: "var(--footer-contact-gap)",
                 width: "fit-content",
               }}
             >
               {mobileAllContacts.map(({ label, value }) => (
-                <div key={label} style={contactItemStyle}>
+                <div key={label} data-contact-item style={contactItemStyle}>
                   <span style={labelStyle}>{label}</span>
                   <span style={valueStyle}>{value}</span>
                 </div>
@@ -164,6 +190,7 @@ const Footer = () => {
 
       {/* Large name — crops at bottom */}
       <div
+        ref={nameRef}
         style={{
           width: "100%",
           lineHeight: 0.85,

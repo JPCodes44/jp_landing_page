@@ -90,6 +90,7 @@
   --footer-padding-top: 10rem;
   --footer-padding-bottom: 8rem;
   --footer-contact-gap: 15rem;
+  --footer-contact-row-gap: 15rem;
   --footer-contact-justify: flex-start;
   --footer-outer-justify: center;
   --footer-contact-font-size: 1.8rem;
@@ -174,6 +175,7 @@
     --footer-padding-top: 4rem;
     --footer-padding-bottom: 6rem;
     --footer-contact-gap: 2rem;
+    --footer-contact-row-gap: 7rem;
     --footer-contact-justify: flex-start;
     --footer-outer-justify: flex-start;
     --footer-contact-font-size: 1.3rem;

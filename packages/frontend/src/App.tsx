@@ -199,7 +199,6 @@ const App = () => {
             top: NAVBAR_HEIGHT,
             left: 0,
             right: 0,
-            bottom: 0,
             backgroundColor: "#fefefe",
             flexDirection: "column",
             zIndex: 60,

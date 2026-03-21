@@ -6,7 +6,6 @@ import {
   FRAME6_ARROW_BOB_DURATION,
   FRAME6_ARROW_BOB_Y,
   FRAME6_ARROW_SIZE,
-  FRAME6_HEADING_INITIAL_OPACITY,
   SECTION_PADDING_BOTTOM_LG,
 } from "../theme";
 
@@ -22,6 +21,7 @@ const ContactForm = () => {
   const submitTextRef = useRef<HTMLSpanElement>(null);
   const submitCheckRef = useRef<HTMLSpanElement>(null);
   const clickTlRef = useRef<gsap.core.Timeline | null>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     const container = formInnerRef.current;
@@ -119,6 +119,25 @@ const ContactForm = () => {
       clickTlRef.current = tl;
     };
 
+    // Title hover
+    const title = titleRef.current;
+    const titleEnter = () =>
+      gsap.to(title, {
+        y: -3,
+        textShadow: "0px 6px 12px rgba(0,0,0,0.12)",
+        duration: 0.25,
+        ease: "power2.out",
+      });
+    const titleLeave = () =>
+      gsap.to(title, {
+        y: 0,
+        textShadow: "0px 0px 0px rgba(0,0,0,0)",
+        duration: 0.25,
+        ease: "power2.out",
+      });
+    title?.addEventListener("mouseenter", titleEnter);
+    title?.addEventListener("mouseleave", titleLeave);
+
     submit.addEventListener("mouseenter", submitEnter);
     submit.addEventListener("mouseleave", submitLeave);
     submit.addEventListener("click", submitClick);
@@ -128,6 +147,8 @@ const ContactForm = () => {
         el.removeEventListener("mouseenter", enter);
         el.removeEventListener("mouseleave", leave);
       }
+      title?.removeEventListener("mouseenter", titleEnter);
+      title?.removeEventListener("mouseleave", titleLeave);
       submit.removeEventListener("mouseenter", submitEnter);
       submit.removeEventListener("mouseleave", submitLeave);
       submit.removeEventListener("click", submitClick);
@@ -161,6 +182,7 @@ const ContactForm = () => {
   return (
     <div ref={formInnerRef} style={{ padding: "var(--frame6-form-inner-padding)" }}>
       <h3
+        ref={titleRef}
         style={{
           color: "#2d2d2d",
           textTransform: "uppercase",
@@ -170,6 +192,7 @@ const ContactForm = () => {
           marginBottom: "2rem",
           letterSpacing: "0.05em",
           fontFamily: "satoshi",
+          cursor: "default",
         }}
       >
         Contact Me.
@@ -338,13 +361,16 @@ const Frame6 = () => {
     // Initial states
     gsap.set(formEl, { opacity: 0.1 });
     gsap.set(spacer, { height: 0 });
+    gsap.set([heading, arrow], { opacity: 0.1, y: 40 });
 
+    // Bob tween starts paused — plays after entrance completes
     const bobTween = gsap.to(arrow, {
       y: FRAME6_ARROW_BOB_Y,
       duration: FRAME6_ARROW_BOB_DURATION,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
+      paused: true,
     });
 
     const prefersReducedMotion =
@@ -352,29 +378,35 @@ const Frame6 = () => {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (prefersReducedMotion) {
-      gsap.set([heading, arrow], { opacity: 1 });
+      gsap.set([heading, arrow], { opacity: 1, y: 0 });
       gsap.set(formEl, { opacity: 1 });
+      bobTween.play();
       return () => {
         bobTween.kill();
       };
     }
 
-    // Existing scroll-in animation (heading + arrow fade in)
+    // Entrance animation — fires once when section is ~33% into viewport
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: "top bottom",
-        end: "top -33%",
-        scrub: 1,
+        start: "top 5%",
+        end: "top -20%",
+        scrub: 3,
+        onLeave: () => {
+          bobTween.play();
+        },
+        onEnterBack: () => {
+          bobTween.pause();
+        },
+        onLeaveBack: () => {
+          bobTween.pause();
+        },
       },
     });
 
-    tl.fromTo(
-      [heading, arrow],
-      { opacity: FRAME6_HEADING_INITIAL_OPACITY },
-      { opacity: 1, ease: "power2.out", duration: 1 },
-      0,
-    );
+    tl.to(heading, { opacity: 1, y: 0, duration: 1, ease: "none" }, 0);
+    tl.to(arrow, { opacity: 1, y: 0, duration: 1, ease: "none" }, 0.15);
 
     // Extended state: arrow center reaches 33% from top
     let hasScrolledToForm = false;
@@ -384,8 +416,13 @@ const Frame6 = () => {
       scrollTrigger: {
         trigger: arrow,
         start: "center 66%",
-        end: "+=300",
+        end: "+=500",
         scrub: 1,
+        onUpdate: (self) => {
+          // Arrow opacity tracks scroll position directly (no scrub lag)
+          const t = self.progress;
+          gsap.set(arrow, { opacity: 1 - t * 0.6 }); // 1 → 0.4
+        },
         onEnter: () => {
           if (!hasScrolledToForm) {
             hasScrolledToForm = true;
@@ -410,10 +447,39 @@ const Frame6 = () => {
       },
     });
 
-    extendTl.to(ctaGroup, { y: "-4rem", ease: "power2.inOut" }, 0);
-    extendTl.to(spacer, { height: "20vh", ease: "power2.inOut" }, 0);
-    extendTl.to(arrow, { opacity: 0.4, ease: "power2.inOut" }, 0);
-    extendTl.to(formEl, { opacity: 1, ease: "power2.inOut" }, 0);
+    extendTl.to(ctaGroup, { y: "-4rem", ease: "power2.inOut", duration: 1 }, 0);
+    extendTl.to(spacer, { height: "20vh", ease: "power2.inOut", duration: 1 }, 0);
+    extendTl.to(arrow, { rotation: 180, ease: "power2.inOut", duration: 1 }, 0);
+    extendTl.to(formEl, { opacity: 1, ease: "power2.inOut", duration: 1 }, 0);
+    // Linger: hold expanded state briefly so the animation registers
+    extendTl.to({}, { duration: 0.6 });
+
+    // Arrow hover — scale up
+    const arrowEnter = () => gsap.to(arrow, { scale: 1.04, duration: 0.25, ease: "power2.out" });
+    const arrowLeave = () => gsap.to(arrow, { scale: 1, duration: 0.35, ease: "power2.out" });
+    arrow.addEventListener("mouseenter", arrowEnter);
+    arrow.addEventListener("mouseleave", arrowLeave);
+
+    // Arrow click — scroll to expand or collapse
+    let clickTween: gsap.core.Tween | null = null;
+    const arrowClick = () => {
+      const st = extendTl.scrollTrigger;
+      if (!st) return;
+      clickTween?.kill();
+      const progress = st.progress;
+      const targetScroll =
+        progress < 0.5
+          ? st.start + (st.end - st.start) // expand: scroll to end of trigger
+          : st.start - 10; // collapse: scroll just before trigger
+      const proxy = { scrollY: window.scrollY };
+      clickTween = gsap.to(proxy, {
+        scrollY: targetScroll,
+        duration: 0.7,
+        ease: "power2.inOut",
+        onUpdate: () => window.scrollTo(0, proxy.scrollY),
+      });
+    };
+    arrow.addEventListener("click", arrowClick);
 
     // Independent subtle vertical parallax on the contact form (y only, no conflict)
     const formParallax = gsap.fromTo(
@@ -440,6 +506,10 @@ const Frame6 = () => {
       scrollTween?.kill();
       formParallax.scrollTrigger?.kill();
       formParallax.kill();
+      arrow.removeEventListener("mouseenter", arrowEnter);
+      arrow.removeEventListener("mouseleave", arrowLeave);
+      arrow.removeEventListener("click", arrowClick);
+      clickTween?.kill();
     };
   }, []);
 
@@ -517,7 +587,7 @@ const Frame6 = () => {
               margin: 0,
               fontSize: "var(--frame6-cta-size)",
               lineHeight: "var(--frame6-cta-lh)",
-              opacity: FRAME6_HEADING_INITIAL_OPACITY,
+              opacity: 0.1,
             }}
           >
             Ready to stop working for your business and let it work for you?
@@ -547,7 +617,8 @@ const Frame6 = () => {
               backgroundColor: "#fefefe",
               width: FRAME6_ARROW_SIZE,
               height: FRAME6_ARROW_SIZE,
-              opacity: FRAME6_HEADING_INITIAL_OPACITY,
+              opacity: 0.1,
+              cursor: "pointer",
             }}
           >
             <svg
@@ -562,7 +633,7 @@ const Frame6 = () => {
               style={{ color: "#2d2d2d" }}
             >
               <title>Scroll down arrow</title>
-              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="12" y1="2" x2="12" y2="19" />
               <polyline points="19 12 12 19 5 12" />
             </svg>
           </div>

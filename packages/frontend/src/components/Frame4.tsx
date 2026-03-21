@@ -37,6 +37,7 @@ const AccordionItem = ({
   const btnRef = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const verticalBarRef = useRef<HTMLSpanElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const content = contentRef.current;
@@ -86,6 +87,21 @@ const AccordionItem = ({
     };
   }, []);
 
+  useEffect(() => {
+    const label = labelRef.current;
+    if (!label) return;
+    const onEnter = () =>
+      gsap.to(label, { scale: 1.04, duration: 0.25, ease: "power2.out", transformOrigin: "left center" });
+    const onLeave = () =>
+      gsap.to(label, { scale: 1, duration: 0.25, ease: "power2.out" });
+    label.addEventListener("mouseenter", onEnter);
+    label.addEventListener("mouseleave", onLeave);
+    return () => {
+      label.removeEventListener("mouseenter", onEnter);
+      label.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+
   return (
     <div>
       <div
@@ -101,10 +117,12 @@ const AccordionItem = ({
         }}
       >
         <span
+          ref={labelRef}
           style={{
             fontFamily: '"Fanwood Text", serif',
             color: "#2d2d2d",
             fontSize: "var(--accordion-item-size)",
+            cursor: "default",
           }}
         >
           {item}
@@ -219,9 +237,28 @@ const Frame4 = () => {
       "-=0.4",
     );
 
+    // Parallax — independent y scroll, same as contact form
+    const headingParallax = gsap.fromTo(
+      heading,
+      { y: 25 },
+      {
+        y: -25,
+        ease: "none",
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: heading,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5,
+        },
+      },
+    );
+
     return () => {
       tl.scrollTrigger?.kill();
       tl.kill();
+      headingParallax.scrollTrigger?.kill();
+      headingParallax.kill();
     };
   }, []);
 
