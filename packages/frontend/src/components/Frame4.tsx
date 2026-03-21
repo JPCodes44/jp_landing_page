@@ -232,15 +232,30 @@ const Frame4 = () => {
   return (
     <section
       ref={sectionRef}
+      className="frame-bg"
       style={{
         width: "100%",
-        backgroundColor: "#fefefe",
+        position: "relative",
+        isolation: "isolate",
         paddingLeft: "var(--frame4-section-padding-x)",
         paddingRight: "var(--frame4-section-padding-x)",
         paddingTop: FRAME4_SECTION_PADDING_TOP,
         paddingBottom: FRAME4_SECTION_PADDING_BOTTOM,
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url('./styles/assets/2d/backgrounds/image.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.6,
+          zIndex: -1,
+          pointerEvents: "none",
+        }}
+      />
       <h2
         ref={headingRef}
         style={{

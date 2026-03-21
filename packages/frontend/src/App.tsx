@@ -105,7 +105,7 @@ const App = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#fefefe" }}>
+    <div>
       <main>
         <nav
           id="main-nav"

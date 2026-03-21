@@ -141,6 +141,7 @@ const Frame3 = () => {
           backgroundColor: COLOR_FRAME3_GREEN,
           ease: "none",
           duration: 1,
+          immediateRender: false,
         },
         0,
       )
@@ -150,10 +151,14 @@ const Frame3 = () => {
 
     buildAnimation();
 
+    let resizeTimer: ReturnType<typeof setTimeout>;
     const handleResize = () => {
-      const img = images[Math.max(0, currentFrameIndex)];
-      if (img?.complete && img.naturalWidth > 0) initCanvas(img);
-      buildAnimation();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const img = images[Math.max(0, currentFrameIndex)];
+        if (img?.complete && img.naturalWidth > 0) initCanvas(img);
+        buildAnimation();
+      }, 50);
     };
 
     window.addEventListener("resize", handleResize);
@@ -168,15 +173,29 @@ const Frame3 = () => {
   return (
     <section
       ref={wrapperRef}
+      className="frame-bg"
       style={{
         position: "relative",
+        isolation: "isolate",
         width: "100%",
-        backgroundColor: "#fefefe",
         // Height is set dynamically in the effect once frame count is known.
         // 300vh is a reasonable fallback until then.
         height: "300vh",
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url('./styles/assets/2d/backgrounds/image.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.6,
+          zIndex: -1,
+          pointerEvents: "none",
+        }}
+      />
       <div style={{ position: "sticky", top: 0, height: "100vh", width: "100%" }}>
         <div
           ref={rectRef}

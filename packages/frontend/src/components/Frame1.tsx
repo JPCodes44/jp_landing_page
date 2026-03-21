@@ -3,10 +3,12 @@ import { PARA_MARGIN_TOP } from "../theme";
 const Frame1 = () => {
   return (
     <section
+      className="frame-bg"
       style={{
         minHeight: "100vh",
         width: "100%",
-        backgroundColor: "#FEFEFE",
+        position: "relative",
+        isolation: "isolate",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -14,6 +16,19 @@ const Frame1 = () => {
         paddingRight: "var(--frame1-section-padding-x)",
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url('./styles/assets/2d/backgrounds/image.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.6,
+          zIndex: -1,
+          pointerEvents: "none",
+        }}
+      />
       <div
         style={{
           display: "flex",

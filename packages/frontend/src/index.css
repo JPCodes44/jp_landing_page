@@ -27,6 +27,8 @@
 
   /* Frame2 */
   --frame2-section-padding-x: 3.75rem;
+  --frame2-section-padding-top: 8rem;
+  --frame2-section-padding-bottom: 6rem;
   --frame2-h2-size: 14rem;
   --frame2-desc-indent: 4.5rem;
   --frame2-icon-size: 12.5rem;
@@ -115,6 +117,8 @@
     --frame1-body-size: 1.5rem;
     --frame1-body-lh: 2;
     --frame2-section-padding-x: 1.5rem;
+    --frame2-section-padding-top: 9rem;
+    --frame2-section-padding-bottom: 20rem;
     --frame2-h2-size: 7rem;
     --frame2-desc-indent: 4.5rem;
     --frame2-icon-size: 6rem;
@@ -301,6 +305,8 @@
 /* ── Frame2 responsive layout ─────────────────────────────────────── */
 
 .frame2-layout {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 4rem;

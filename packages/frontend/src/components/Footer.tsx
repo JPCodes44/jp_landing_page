@@ -1,5 +1,10 @@
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import { FOOTER_NAME_SIZE } from "../theme";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const desktopAllContacts = [
   { label: "Location:", value: "Akatos House @uwaterloo" },
@@ -40,19 +45,75 @@ const valueStyle: React.CSSProperties = {
 
 const Footer = () => {
   const bp = useBreakpoint();
+  const contactRowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = contactRowRef.current;
+    if (!el) return;
+
+    const st = gsap.fromTo(
+      el,
+      { y: 40 },
+      {
+        y: -40,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 3,
+        },
+      },
+    );
+
+    return () => {
+      if (st.scrollTrigger) st.scrollTrigger.kill();
+      st.kill();
+    };
+  }, []);
 
   return (
     <footer
       style={{
         position: "relative",
+        isolation: "isolate",
         width: "100%",
-        backgroundColor: "#fefefe",
         overflowX: "visible",
         overflowY: "hidden",
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage:
+            bp === "mobile"
+              ? "url('./styles/assets/2d/backgrounds/image_frame2.png')"
+              : "url('./styles/assets/2d/backgrounds/grid.png')",
+          backgroundSize: "110% auto",
+          backgroundPosition: "center -20%",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.2,
+          zIndex: -2,
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url('./styles/assets/2d/backgrounds/image.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.6,
+          zIndex: -1,
+          pointerEvents: "none",
+        }}
+      />
       {/* Contact info row */}
       <div
+        ref={contactRowRef}
         style={{
           paddingLeft: "var(--footer-padding-x)",
           paddingRight: "var(--footer-padding-x)",

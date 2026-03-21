@@ -116,17 +116,35 @@ const Frame5 = () => {
   return (
     <section
       ref={wrapperRef}
-      style={{ position: "relative", width: "100%", height: FRAME5_CONTAINER_HEIGHT }}
+      style={{
+        position: "relative",
+        isolation: "isolate",
+        width: "100%",
+        height: FRAME5_CONTAINER_HEIGHT,
+      }}
     >
       <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url('./styles/assets/2d/backgrounds/image.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.6,
+          zIndex: -1,
+          pointerEvents: "none",
+        }}
+      />
+      <div
         ref={stickyRef}
+        className="frame-bg"
         style={{
           position: "sticky",
           top: 0,
           height: "100vh",
           width: "100%",
           overflow: "hidden",
-          backgroundColor: "#fefefe",
         }}
       >
         {/* Large heading — 2 lines, fades out */}
