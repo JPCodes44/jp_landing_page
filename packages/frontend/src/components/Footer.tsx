@@ -88,8 +88,8 @@ const Footer = () => {
           inset: 0,
           backgroundImage:
             bp === "mobile"
-              ? "url('./styles/assets/2d/backgrounds/image_frame2.png')"
-              : "url('./styles/assets/2d/backgrounds/grid.png')",
+              ? "url('/styles/assets/2d/backgrounds/image_frame2.png')"
+              : "url('/styles/assets/2d/backgrounds/grid.png')",
           backgroundSize: "110% auto",
           backgroundPosition: "center -20%",
           backgroundRepeat: "no-repeat",
@@ -102,7 +102,7 @@ const Footer = () => {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "url('./styles/assets/2d/backgrounds/image.png')",
+          backgroundImage: "url('/styles/assets/2d/backgrounds/image.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

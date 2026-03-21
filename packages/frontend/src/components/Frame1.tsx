@@ -20,7 +20,7 @@ const Frame1 = () => {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "url('./styles/assets/2d/backgrounds/image.png')",
+          backgroundImage: "url('/styles/assets/2d/backgrounds/image.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

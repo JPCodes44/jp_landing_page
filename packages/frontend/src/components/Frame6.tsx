@@ -464,7 +464,7 @@ const Frame6 = () => {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "url('./styles/assets/2d/backgrounds/grid.png')",
+          backgroundImage: "url('/styles/assets/2d/backgrounds/grid.png')",
           backgroundSize: bp === "mobile" ? "250% auto" : "100% auto",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -477,7 +477,7 @@ const Frame6 = () => {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "url('./styles/assets/2d/backgrounds/image.png')",
+          backgroundImage: "url('/styles/assets/2d/backgrounds/image.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
