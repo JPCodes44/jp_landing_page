@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
@@ -21,16 +22,25 @@ import {
 const ITEMS = [
   "Continuous Lead gen",
   "Automated reporting",
-  "Manual reporting",
+  "System Integrations",
   "Agentic internal tools",
+];
+
+const SUBITEMS = [
+  "We connect your website forms, CRM, inbox, and outreach workflows so new leads are captured, enriched, routed, and followed up with automatically. Instead of opportunities getting lost between email, spreadsheets, and manual handoffs, the system keeps your pipeline moving from first touch to booked call.",
+  "We pull data directly from the tools your team already uses — CRMs, spreadsheets, internal trackers, form submissions, and communication platforms like Teams — and turn it into structured reports automatically. That means fewer manual updates, less copy-paste, and less misalignment between what leadership sees and what teams are actually working on.",
+  "We connect the platforms your team already uses, including CRMs, spreadsheets, forms, shared inboxes, and tools like Teams, so data and tasks move cleanly between systems. Instead of relying on manual handoffs and copy-paste coordination, your operations become more consistent, trackable, and aligned.",
+  "We build internal AI tools that connect to your CRM, knowledge base, spreadsheets, shared documents, and communication tools so your team can retrieve information, draft updates, complete repetitive actions, and stay aligned from one place. Instead of bouncing between systems and relying on tribal knowledge, your team gets operational tools that actually fit how work moves through the business.",
 ];
 
 const AccordionItem = ({
   item,
+  subItem,
   isOpen,
   onToggle,
 }: {
   item: string;
+  subItem: string;
   isOpen: boolean;
   onToggle: () => void;
 }) => {
@@ -182,7 +192,7 @@ const AccordionItem = ({
           style={{
             fontFamily: '"Fanwood Text", serif',
             color: "#2d2d2d",
-            lineHeight: 1.625,
+            lineHeight: "var(--accordion-content-lh)",
             fontSize: "var(--accordion-content-size)",
             paddingLeft: "var(--accordion-content-px)",
             paddingRight: "var(--accordion-content-pr)",
@@ -190,7 +200,7 @@ const AccordionItem = ({
             paddingBottom: "var(--accordion-content-py)",
           }}
         >
-          More details about {item.toLowerCase()} coming soon.
+          {subItem}
         </p>
       </div>
     </div>
@@ -324,6 +334,7 @@ const Frame4 = () => {
           <AccordionItem
             key={item}
             item={item}
+            subItem={SUBITEMS[i]}
             isOpen={openIndex === i}
             onToggle={() => handleToggle(i)}
           />

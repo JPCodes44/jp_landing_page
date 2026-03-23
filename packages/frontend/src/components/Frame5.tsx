@@ -193,7 +193,7 @@ const Frame5 = () => {
             lineHeight: 1.1,
           }}
         >
-          My Services In Action:
+          You need human expertise:
         </h2>
         {/* Small heading — 1 line, fades in and moves up */}
         <h2
@@ -211,7 +211,7 @@ const Frame5 = () => {
             lineHeight: 1.1,
           }}
         >
-          My Services In Action:
+          AI is a tool, not the automation.
         </h2>
         {/* Frost overlay — sits behind rect, blurs background content */}
         <div
