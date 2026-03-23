@@ -185,6 +185,85 @@
   }
 }
 
+/* ── Laptop media query (768px – 1440px) ─────────────────────────── */
+@media (768px <= width <= 1440px) {
+  :root {
+    /* Nav */
+    --nav-padding-x: 2.5rem;
+
+    /* Frame1 */
+    --frame1-h1-size: 3.8rem;
+    --frame1-body-size: 1.4rem;
+    --frame1-content-width: 65vw;
+    --frame1-p-max-width: 52vw;
+
+    /* Frame2 */
+    --frame2-section-padding-x: 2.5rem;
+    --frame2-section-padding-top: 6rem;
+    --frame2-section-padding-bottom: 4.5rem;
+    --frame2-h2-size: 9.5rem;
+    --frame2-icon-size: 8.5rem;
+    --frame2-body-size: 1.4rem;
+    --frame2-desc-indent: 3rem;
+
+    /* Frame4 */
+    --frame4-section-padding-x: 2.5rem;
+    --frame4-heading-size: 5.5rem;
+    --accordion-item-size: 2.4rem;
+    --accordion-item-pl: 2.8rem;
+    --accordion-item-pr: 3rem;
+    --accordion-content-pl: 3rem;
+    --accordion-content-pr: 3rem;
+    --accordion-wrapper-mx: 1.25rem;
+    --accordion-wrapper-px: 1rem;
+    --accordion-button-size: 1.2rem;
+    --accordion-padding-y: 1.6rem;
+    --accordion-margin-top: 8rem;
+    --accordion-content-size: 1.4rem;
+    --accordion-content-px: 1rem;
+    --accordion-content-pt: 1.5rem;
+    --accordion-content-py: 1.5rem;
+
+    /* Frame5 */
+    --frame5-heading-initial-size: 9rem;
+    --frame5-heading-final-size: 5.5rem;
+    --frame5-heading-left: 2.5rem;
+
+    /* Frame6 */
+    --frame6-section-padding-x: 2.5rem;
+    --frame6-section-padding-top: 35rem;
+    --frame6-cta-size: 4rem;
+    --frame6-cta-padding-x: 12rem;
+    --frame6-form-padding-x: 6rem;
+    --frame6-form-inner-padding: 4rem;
+    --frame6-form-title-size: 2.2rem;
+    --frame6-form-label-size: 1.2rem;
+    --frame6-form-input-size: 1.1rem;
+    --frame6-form-textarea-height: 16rem;
+    --frame6-submit-font-size: 1.2rem;
+    --frame6-email-width: 55%;
+    --frame6-comments-width: 90%;
+
+    /* Footer */
+    --footer-padding-top: 7rem;
+    --footer-padding-bottom: 5.5rem;
+    --footer-contact-gap: 8rem;
+    --footer-contact-row-gap: 8rem;
+    --footer-contact-font-size: 1.4rem;
+    --footer-box-pt: 1.5rem;
+    --footer-box-pb: 1.5rem;
+    --footer-box-pl: 12rem;
+    --footer-box-pr: 24rem;
+  }
+}
+
+/* ── Frame2 icon grid gap on laptop ──────────────────────────────── */
+@media (768px <= width <= 1440px) {
+  .frame2-icon-container {
+    gap: 1.5rem 4rem;
+  }
+}
+
 /* ── Frame1 subtext ──────────────────────────────────────────────── */
 .frame1-subtext {
   padding: 0;
