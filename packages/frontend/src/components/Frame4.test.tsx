@@ -42,7 +42,7 @@ describe("Frame4", () => {
     render(<Frame4 />);
     expect(screen.getByText("Continuous Lead gen")).toBeInTheDocument();
     expect(screen.getByText("Automated reporting")).toBeInTheDocument();
-    expect(screen.getByText("Manual reporting")).toBeInTheDocument();
+    expect(screen.getByText("System Integrations")).toBeInTheDocument();
     expect(screen.getByText("Agentic internal tools")).toBeInTheDocument();
   });
 

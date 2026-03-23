@@ -28,11 +28,10 @@ describe("Frame5", () => {
     vi.restoreAllMocks();
   });
 
-  it("renders heading text 'My Services In Action:'", () => {
+  it("renders heading text 'You need human expertise:'", () => {
     render(<Frame5 />);
-    const headings = screen.getAllByText("My Services In Action:");
-    expect(headings).toHaveLength(2);
-    for (const h of headings) expect(h).toBeInTheDocument();
+    const heading = screen.getByText("You need human expertise:");
+    expect(heading).toBeInTheDocument();
   });
 
   it("renders video element", () => {
@@ -49,13 +48,9 @@ describe("Frame5", () => {
 
     it("heading is visible (opacity: 1, small size) when reduced motion is preferred", () => {
       render(<Frame5 />);
-      const headings = screen.getAllByText("My Services In Action:");
-      // With reduced motion: large heading fades out (opacity 0), small heading visible (opacity 1)
-      const smallHeading = headings.find(
-        (h) => (h as HTMLElement).style.fontSize === "var(--frame5-heading-final-size)",
-      );
+      const smallHeading = screen.getByText("AI is a tool, not the automation.");
       expect(smallHeading).toBeInTheDocument();
-      expect(smallHeading?.tagName).toBe("H2");
+      expect(smallHeading.tagName).toBe("H2");
     });
   });
 });

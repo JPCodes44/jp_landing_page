@@ -341,6 +341,7 @@ const ContactForm = () => {
 
 const Frame6 = () => {
   const bp = useBreakpoint();
+  const arrowSize = bp === "laptop" ? "5rem" : bp === "desktop" ? "6rem" : FRAME6_ARROW_SIZE;
 
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -635,7 +636,7 @@ const Frame6 = () => {
             width: "100%",
             display: "flex",
             justifyContent: "center",
-            marginBottom: `calc(-${FRAME6_ARROW_SIZE} / 2)`,
+            marginBottom: `calc(-${arrowSize} / 2)`,
             zIndex: 2,
             paddingTop: "10rem",
           }}
@@ -649,15 +650,15 @@ const Frame6 = () => {
               borderRadius: "50%",
               border: "1px solid #2d2d2d",
               backgroundColor: "#fefefe",
-              width: FRAME6_ARROW_SIZE,
-              height: FRAME6_ARROW_SIZE,
+              width: arrowSize,
+              height: arrowSize,
               opacity: 0.1,
               cursor: "pointer",
             }}
           >
             <svg
-              width="1.2rem"
-              height="1.2rem"
+              width={bp === "desktop" ? "1.8rem" : bp === "laptop" ? "1.5rem" : "1.2rem"}
+              height={bp === "desktop" ? "1.8rem" : bp === "laptop" ? "1.5rem" : "1.2rem"}
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
