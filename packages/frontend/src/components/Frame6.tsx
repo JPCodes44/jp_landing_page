@@ -454,30 +454,65 @@ const Frame6 = () => {
     // Linger: hold expanded state briefly so the animation registers
     extendTl.to({}, { duration: 0.6 });
 
-    // Arrow hover — scale up
-    const arrowEnter = () => gsap.to(arrow, { scale: 1.04, duration: 0.25, ease: "power2.out" });
-    const arrowLeave = () => gsap.to(arrow, { scale: 1, duration: 0.35, ease: "power2.out" });
+    // Arrow hover — scale up + submit-button gradient + drop-shadow
+    // Shadow Y flips with rotation so it always points downward on screen
+    let arrowHovered = false;
+    const getShadowY = () => {
+      const rot = gsap.getProperty(arrow, "rotation") as number;
+      const rad = (rot * Math.PI) / 180;
+      return Math.round(6 * Math.cos(rad));
+    };
+    const arrowEnter = () => {
+      arrowHovered = true;
+      const y = getShadowY();
+      gsap.to(arrow, {
+        scale: 1.04,
+        backgroundImage: "linear-gradient(135deg, rgba(122,139,92,0.11), rgba(122,139,92,0.04))",
+        filter: `drop-shadow(0px ${y}px 7px rgba(0,0,0,0.15))`,
+        duration: 0.4,
+        ease: "power3.out",
+      });
+    };
+    const arrowLeave = () => {
+      arrowHovered = false;
+      const y = getShadowY();
+      gsap.to(arrow, {
+        scale: 1,
+        backgroundImage: "linear-gradient(135deg, rgba(122,139,92,0), rgba(122,139,92,0))",
+        filter: `drop-shadow(0px ${y}px 7px rgba(0,0,0,0))`,
+        duration: 0.4,
+        ease: "power3.out",
+      });
+    };
+    // Keep shadow pointing down during rotation if hovered
+    extendTl.eventCallback("onUpdate", () => {
+      if (arrowHovered) {
+        const y = getShadowY();
+        gsap.set(arrow, { filter: `drop-shadow(0px ${y}px 7px rgba(0,0,0,0.15))` });
+      }
+    });
     arrow.addEventListener("mouseenter", arrowEnter);
     arrow.addEventListener("mouseleave", arrowLeave);
 
-    // Arrow click — scroll to expand or collapse
-    let clickTween: gsap.core.Tween | null = null;
+    // Arrow click — scroll to expand or collapse via Lenis
     const arrowClick = () => {
       const st = extendTl.scrollTrigger;
       if (!st) return;
-      clickTween?.kill();
       const progress = st.progress;
       const targetScroll =
         progress < 0.5
-          ? st.start + (st.end - st.start) // expand: scroll to end of trigger
+          ? st.end // expand: scroll to end of trigger
           : st.start - 10; // collapse: scroll just before trigger
-      const proxy = { scrollY: window.scrollY };
-      clickTween = gsap.to(proxy, {
-        scrollY: targetScroll,
-        duration: 0.7,
-        ease: "power2.inOut",
-        onUpdate: () => window.scrollTo(0, proxy.scrollY),
-      });
+      const distance = Math.abs(targetScroll - window.scrollY);
+      // ~1s per 500px of scroll, clamped between 0.8s and 2.2s
+      const duration = Math.min(2.2, Math.max(0.8, distance / 500));
+      const lenis = window.__lenis;
+      const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
+      if (lenis) {
+        lenis.scrollTo(targetScroll, { duration, easing: easeInOut });
+      } else {
+        window.scrollTo({ top: targetScroll, behavior: "smooth" });
+      }
     };
     arrow.addEventListener("click", arrowClick);
 
@@ -509,7 +544,6 @@ const Frame6 = () => {
       arrow.removeEventListener("mouseenter", arrowEnter);
       arrow.removeEventListener("mouseleave", arrowLeave);
       arrow.removeEventListener("click", arrowClick);
-      clickTween?.kill();
     };
   }, []);
 
@@ -602,7 +636,7 @@ const Frame6 = () => {
             display: "flex",
             justifyContent: "center",
             marginBottom: `calc(-${FRAME6_ARROW_SIZE} / 2)`,
-            zIndex: 1,
+            zIndex: 2,
             paddingTop: "10rem",
           }}
         >
@@ -648,6 +682,7 @@ const Frame6 = () => {
         ref={formRef}
         style={{
           position: "relative",
+          zIndex: 1,
           backgroundColor: "#ffffff",
           width: "calc(100% - var(--frame6-form-padding-x) * 2)",
           boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",

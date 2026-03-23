@@ -35,9 +35,11 @@ describe("Frame5", () => {
     for (const h of headings) expect(h).toBeInTheDocument();
   });
 
-  it("renders 'some video' placeholder", () => {
+  it("renders video element", () => {
     render(<Frame5 />);
-    expect(screen.getByText("some video")).toBeInTheDocument();
+    const video = document.querySelector("video");
+    expect(video).toBeInTheDocument();
+    expect(video?.getAttribute("src")).toContain("vid.mp4");
   });
 
   describe("with prefers-reduced-motion", () => {

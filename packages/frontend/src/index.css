@@ -112,10 +112,10 @@
     --frame1-content-width: 88vw;
     --frame1-content-text-align: center;
     --frame1-content-align-items: center;
-    --frame1-h1-size: 2.8rem;
+    --frame1-h1-size: 2.4rem;
     --frame1-h1-lh: 1.6;
     --frame1-p-max-width: 88vw;
-    --frame1-body-size: 1.5rem;
+    --frame1-body-size: 1.3rem;
     --frame1-body-lh: 2;
     --frame2-section-padding-x: 1.5rem;
     --frame2-section-padding-top: 9rem;
@@ -123,7 +123,7 @@
     --frame2-h2-size: 7rem;
     --frame2-desc-indent: 4.5rem;
     --frame2-icon-size: 6rem;
-    --frame2-body-size: 1.5rem;
+    --frame2-body-size: 1.3rem;
     --frame2-padding-right: 4.5rem;
     --frame2-marquee-icon-size: 6rem;
     --frame2-marquee-icon-padding: 2rem;

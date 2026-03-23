@@ -22,6 +22,7 @@ const Frame5 = () => {
   const headingSmallRef = useRef<HTMLHeadingElement>(null);
   const frostRef = useRef<HTMLDivElement>(null);
   const rectRef = useRef<HTMLDivElement>(null);
+  const videoFrostRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -31,7 +32,9 @@ const Frame5 = () => {
     const frost = frostRef.current;
     const rect = rectRef.current;
     const nav = document.getElementById("main-nav");
-    if (!wrapper || !sticky || !headingLarge || !headingSmall || !frost || !rect) return;
+    const videoFrost = videoFrostRef.current;
+    if (!wrapper || !sticky || !headingLarge || !headingSmall || !frost || !rect || !videoFrost)
+      return;
 
     const prefersReducedMotion =
       typeof window.matchMedia === "function" &&
@@ -93,8 +96,33 @@ const Frame5 = () => {
       1.2,
     );
 
-    // Linger: hold final frosted fullscreen state while user continues scrolling
+    // Video frost: starts blurred when rect appears, clears as rect expands to fullscreen
+    tl.fromTo(
+      videoFrost,
+      { backdropFilter: "blur(12px) saturate(1.2)", opacity: 1 },
+      { backdropFilter: "blur(0px) saturate(1)", opacity: 0, ease: "power2.out", duration: 0.8 },
+      1.2,
+    );
+
+    // Linger: hold final clear state through the rest of the pinned scroll
     tl.to({}, { duration: 2 });
+
+    // Video frost returns AFTER pin ends — fully frosted when half the section has scrolled off
+    const exitFrost = gsap.fromTo(
+      videoFrost,
+      { backdropFilter: "blur(0px) saturate(1)", opacity: 0 },
+      {
+        backdropFilter: "blur(12px) saturate(1.2)",
+        opacity: 1,
+        ease: "power1.in",
+        scrollTrigger: {
+          trigger: wrapper,
+          start: "bottom bottom",
+          end: "bottom center",
+          scrub: true,
+        },
+      },
+    );
 
     // Restore nav when viewport leaves Frame5, hide again if scrolling back in
     const navTrigger = nav
@@ -109,6 +137,8 @@ const Frame5 = () => {
     return () => {
       tl.scrollTrigger?.kill();
       tl.kill();
+      exitFrost.scrollTrigger?.kill();
+      exitFrost.kill();
       navTrigger?.kill();
     };
   }, []);
@@ -209,20 +239,30 @@ const Frame5 = () => {
             border: "1px solid currentColor",
           }}
         >
-          <div
+          <video
+            preload="auto"
+            autoPlay
+            loop
+            muted
+            playsInline
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              width: "100%",
               height: "100%",
-              fontFamily: '"Fanwood Text", serif',
-              color: "#2d2d2d",
+              objectFit: "cover",
             }}
-          >
-            <span style={{ fontFamily: '"Fanwood Text", serif', color: "#2d2d2d" }}>
-              some video
-            </span>
-          </div>
+            src="/styles/assets/2d/videos/frame5video/vid.mp4"
+          />
+          {/* Frost overlay on video — blurred initially, clears on expand */}
+          <div
+            ref={videoFrostRef}
+            style={{
+              position: "absolute",
+              inset: 0,
+              backdropFilter: "blur(12px) saturate(1.2)",
+              backgroundColor: "rgba(208, 204, 200, 0.25)",
+              pointerEvents: "none",
+            }}
+          />
         </div>
       </div>
     </section>

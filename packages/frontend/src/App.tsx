@@ -1,4 +1,7 @@
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 import { useEffect, useRef, useState } from "react";
 import Footer from "./components/Footer";
 import Frame1 from "./components/Frame1";
@@ -49,6 +52,29 @@ const App = () => {
         transformOrigin: "top",
       });
     }
+  }, []);
+
+  // Smooth scroll with Lenis — lerps scroll position for fluid motion
+  useEffect(() => {
+    const lenis = new Lenis({
+      lerp: 0.08,
+      smoothWheel: true,
+    });
+
+    // Expose for programmatic scrolling in other components
+    window.__lenis = lenis;
+
+    // Sync Lenis with GSAP ScrollTrigger
+    lenis.on("scroll", ScrollTrigger.update);
+    const raf = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(raf);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove(raf);
+      window.__lenis = undefined;
+      lenis.destroy();
+    };
   }, []);
 
   const toggleMenu = () => {
@@ -125,6 +151,7 @@ const App = () => {
             background: "transparent",
             boxShadow: NAVBAR_BOX_SHADOW,
             borderBottom: NAVBAR_BORDER,
+            pointerEvents: "none",
           }}
         >
           <span
@@ -132,6 +159,7 @@ const App = () => {
               fontFamily: '"Fanwood Text", serif',
               color: "#2d2d2d",
               fontSize: FONT_SIZE_LOGO,
+              pointerEvents: "auto",
             }}
           >
             Justin Mak.
@@ -149,6 +177,7 @@ const App = () => {
               padding: 0,
               gap: BAR_GAP,
               justifyContent: "center",
+              pointerEvents: "auto",
             }}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
@@ -166,6 +195,7 @@ const App = () => {
               listStyle: "none",
               margin: 0,
               padding: 0,
+              pointerEvents: "auto",
             }}
           >
             {NAV_LINKS.map(({ href, label }) => (
