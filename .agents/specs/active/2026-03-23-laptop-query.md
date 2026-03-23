@@ -24,6 +24,13 @@ agent/laptop-query
 - packages/frontend/src/hooks/useBreakpoint.ts
 - packages/frontend/src/components/Frame4.test.tsx
 - packages/frontend/src/components/Frame5.test.tsx
+- .agents/specs/active/2026-03-23-laptop-query.md
+- packages/frontend/src/components/Footer.tsx
+- packages/frontend/src/components/Frame4.tsx
+- packages/frontend/src/components/Frame6.tsx
+- packages/frontend/src/hooks/useBreakpoint.ts
+- packages/frontend/src/components/Frame4.test.tsx
+- packages/frontend/src/components/Frame5.test.tsx
 
 ## Forbidden files
 - package-lock.json
