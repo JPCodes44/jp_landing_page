@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import {
   ANIM_BUTTON_SCALE_HOVER,

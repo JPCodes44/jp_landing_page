@@ -160,13 +160,15 @@ const Footer = () => {
           justifyContent: "var(--footer-outer-justify)" as React.CSSProperties["justifyContent"],
         }}
       >
-        {bp === "desktop" ? (
+        {bp === "desktop" || bp === "laptop" ? (
           /* Desktop: all three in a flat row, with dashed border box */
           <div
             style={{
               display: "flex",
-              gap: "var(--footer-contact-gap)",
-              justifyContent: "center",
+              justifyContent: "space-between",
+              width: "100%",
+              paddingLeft: "var(--footer-label-px)",
+              paddingRight: "var(--footer-label-px)",
             }}
           >
             {desktopAllContacts
