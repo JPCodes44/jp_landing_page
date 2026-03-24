@@ -341,7 +341,12 @@ const ContactForm = () => {
 
 const Frame6 = () => {
   const bp = useBreakpoint();
-  const arrowSize = bp === "laptop" ? "5rem" : bp === "desktop" ? "6rem" : FRAME6_ARROW_SIZE;
+  const arrowSize =
+    bp === "laptop" || bp === "laptop-sm"
+      ? "5rem"
+      : bp === "desktop" || bp === "desktop-sm"
+        ? "6rem"
+        : FRAME6_ARROW_SIZE;
 
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -570,7 +575,7 @@ const Frame6 = () => {
           position: "absolute",
           inset: 0,
           backgroundImage: "url('/styles/assets/2d/backgrounds/grid.png')",
-          backgroundSize: bp === "mobile" ? "250% auto" : "100% auto",
+          backgroundSize: "var(--frame6-bg-size)",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           opacity: 0.1,
@@ -657,8 +662,20 @@ const Frame6 = () => {
             }}
           >
             <svg
-              width={bp === "desktop" ? "1.8rem" : bp === "laptop" ? "1.5rem" : "1.2rem"}
-              height={bp === "desktop" ? "1.8rem" : bp === "laptop" ? "1.5rem" : "1.2rem"}
+              width={
+                bp === "desktop" || bp === "desktop-sm"
+                  ? "1.8rem"
+                  : bp === "laptop" || bp === "laptop-sm"
+                    ? "1.5rem"
+                    : "1.2rem"
+              }
+              height={
+                bp === "desktop" || bp === "desktop-sm"
+                  ? "1.8rem"
+                  : bp === "laptop" || bp === "laptop-sm"
+                    ? "1.5rem"
+                    : "1.2rem"
+              }
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"

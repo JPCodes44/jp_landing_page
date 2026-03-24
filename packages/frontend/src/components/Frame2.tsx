@@ -49,7 +49,7 @@ const Frame2 = () => {
     if (!section || !heading || !paragraph) return;
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const mql = window.matchMedia("(max-width: 767px)");
+    const mql = window.matchMedia("(max-width: 1000px)");
 
     let marqueeTween: gsap.core.Tween | null = null;
     let desktopTl: gsap.core.Timeline | null = null;
@@ -205,16 +205,13 @@ const Frame2 = () => {
       <div
         style={{
           position: "absolute",
-          top: bp === "mobile" ? "-90vh" : "-70vh",
+          top: "var(--frame2-bg-top)",
           left: 0,
           right: 0,
-          height: bp === "mobile" ? "calc(100% + 100vh)" : "calc(100% + 100vh)",
-          backgroundImage:
-            bp === "mobile"
-              ? "url('/styles/assets/2d/backgrounds/grid.png')"
-              : "url('/styles/assets/2d/backgrounds/grid.png')",
-          backgroundSize: bp === "mobile" ? "260% auto" : "110% auto",
-          backgroundPosition: bp === "mobile" ? "center center" : "center center",
+          height: "var(--frame2-bg-height)",
+          backgroundImage: "url('/styles/assets/2d/backgrounds/grid.png')",
+          backgroundSize: "var(--frame2-bg-size)",
+          backgroundPosition: "var(--frame2-bg-position)",
           backgroundRepeat: "no-repeat",
           opacity: 0.2,
           pointerEvents: "none",

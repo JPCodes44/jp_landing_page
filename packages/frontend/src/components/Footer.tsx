@@ -124,7 +124,7 @@ const Footer = () => {
           position: "absolute",
           inset: 0,
           backgroundImage:
-            bp === "mobile"
+            bp === "mobile" || bp === "phone"
               ? "url('/styles/assets/2d/backgrounds/image_frame2.png')"
               : "url('/styles/assets/2d/backgrounds/grid.png')",
           backgroundSize: "110% auto",
@@ -160,7 +160,11 @@ const Footer = () => {
           justifyContent: "var(--footer-outer-justify)" as React.CSSProperties["justifyContent"],
         }}
       >
-        {bp === "desktop" || bp === "laptop" ? (
+        {bp === "desktop" ||
+        bp === "desktop-sm" ||
+        bp === "laptop" ||
+        bp === "laptop-sm" ||
+        bp === "large-desktop" ? (
           /* Desktop: all three in a flat row, with dashed border box */
           <div
             style={{
@@ -174,7 +178,20 @@ const Footer = () => {
             {desktopAllContacts
               .filter(({ label }) => label !== "")
               .map(({ label, value }) => (
-                <div key={label} data-contact-item style={contactItemStyle}>
+                <div
+                  key={label}
+                  data-contact-item
+                  style={
+                    bp === "desktop" || bp === "desktop-sm" || bp === "large-desktop"
+                      ? {
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "space-between",
+                          padding: "var(--footer-contact-padding)",
+                        }
+                      : contactItemStyle
+                  }
+                >
                   <span style={labelStyle}>{label}</span>
                   <span style={valueStyle}>{value}</span>
                 </div>

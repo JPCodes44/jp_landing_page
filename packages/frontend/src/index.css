@@ -10,105 +10,324 @@
 }
 
 /* ── Responsive design tokens ─────────────────────────────────────── */
-:root {
-  /* Nav */
-  --nav-padding-x: 3.75rem;
 
-  /* Frame1 */
-  --frame1-section-padding-x: 0px;
-  --frame1-content-width: 55vw;
-  --frame1-content-text-align: left;
-  --frame1-content-align-items: flex-start;
-  --frame1-h1-size: 5.375rem;
-  --frame1-h1-lh: 1.1;
-  --frame1-p-max-width: 40vw;
-  --frame1-body-size: 1.9rem;
-  --frame1-body-lh: 1.6;
+/* ── Large desktop media query (>1700px) ─────────────────────────── */
+@media (width > 1700px) {
+  :root {
+    /* Nav */
+    --nav-padding-x: 3.75rem;
 
-  /* Frame2 */
-  --frame2-section-padding-x: 3.75rem;
-  --frame2-section-padding-top: 8rem;
-  --frame2-section-padding-bottom: 6rem;
-  --frame2-h2-size: 14rem;
-  --frame2-desc-indent: 4.5rem;
-  --frame2-icon-size: 12.5rem;
-  --frame2-body-size: 1.9rem;
-  --frame2-body-lh: 1.6;
-  --frame2-marquee-icon-size: 6rem;
-  --frame2-marquee-icon-padding: 1.25rem;
+    /* Frame1 */
+    --frame1-section-padding-x: 0px;
+    --frame1-content-width: 55vw;
+    --frame1-content-text-align: left;
+    --frame1-content-align-items: flex-start;
+    --frame1-h1-size: 5.375rem;
+    --frame1-h1-lh: 1.1;
+    --frame1-p-max-width: 40vw;
+    --frame1-body-size: 1.9rem;
+    --frame1-body-lh: 1.6;
 
-  /* Frame4 */
-  --frame4-section-padding-x: 3.75rem;
-  --frame4-heading-size: 8rem;
-  --accordion-item-size: 3.5rem;
-  --accordion-item-pl: 4rem;
-  --accordion-item-pr: 4.5rem;
-  --accordion-content-pl: 4.5rem;
-  --accordion-content-pr: 4.5rem;
-  --accordion-wrapper-mx: 2rem;
-  --accordion-wrapper-px: 1.5rem;
-  --accordion-button-size: 1.6rem;
-  --accordion-padding-y: 2.2rem;
-  --accordion-margin-top: 12rem;
-  --accordion-content-size: 1.9rem;
-  --accordion-content-px: 1.5rem;
-  --accordion-content-pt: 2rem;
-  --accordion-content-py: 2rem;
-  --accordion-content-lh: 1.625;
+    /* Frame2 */
+    --frame2-section-padding-x: 3.75rem;
+    --frame2-section-padding-top: 8rem;
+    --frame2-section-padding-bottom: 6rem;
+    --frame2-h2-size: 13rem;
+    --frame2-desc-indent: 4.5rem;
+    --frame2-icon-size: 12.5rem;
+    --frame2-body-size: 1.9rem;
+    --frame2-body-lh: 1.6;
+    --frame2-marquee-icon-size: 6rem;
+    --frame2-marquee-icon-padding: 1.25rem;
+    --frame2-bg-top: -70vh;
+    --frame2-bg-height: calc(100% + 100vh);
+    --frame2-bg-size: 110% auto;
+    --frame2-bg-position: center center;
 
-  /* Frame5 */
-  --frame5-heading-initial-size: 13rem;
-  --frame5-heading-final-size: 8rem;
-  --frame5-heading-left: 3.75rem;
+    /* Frame4 */
+    --frame4-section-padding-x: 3.75rem;
+    --frame4-heading-size: 8rem;
+    --accordion-item-size: 3.5rem;
+    --accordion-item-pl: 4rem;
+    --accordion-item-pr: 4.5rem;
+    --accordion-content-pl: 4.5rem;
+    --accordion-content-pr: 4.5rem;
+    --accordion-wrapper-mx: 2rem;
+    --accordion-wrapper-px: 1.5rem;
+    --accordion-button-size: 1.6rem;
+    --accordion-padding-y: 2.2rem;
+    --accordion-margin-top: 12rem;
+    --accordion-content-size: 1.9rem;
+    --accordion-content-px: 1.5rem;
+    --accordion-content-pt: 2rem;
+    --accordion-content-py: 2rem;
+    --accordion-content-lh: 1.625;
 
-  /* Frame6 */
-  --frame6-section-padding-x: 4rem;
-  --frame6-section-padding-top: 50rem;
-  --frame6-cta-size: 6rem;
-  --frame6-cta-padding-x: 20rem;
-  --frame6-cta-lh: 1.1;
-  --frame6-form-padding-x: 10rem;
-  --frame6-form-inner-padding: 6rem;
-  --frame6-form-title-size: 3rem;
-  --frame6-form-title-padding: 0px;
-  --frame6-form-fields-pt: 5rem;
-  --frame6-form-label-size: 1.5rem;
-  --frame6-form-input-size: 1.4rem;
-  --frame6-form-input-padding: 1rem 1.25rem;
-  --frame6-form-input-height: auto;
-  --frame6-form-textarea-height: 20rem;
-  --frame6-submit-padding-y: 1rem;
-  --frame6-submit-padding-x: 3rem;
-  --frame6-submit-font-size: 1.5rem;
-  --frame6-form-field-gap: 1.25rem;
-  --frame6-firstname-flex: 0 0 46%;
-  --frame6-lastname-flex: 0 0 38%;
-  --frame6-email-width: 55%;
-  --frame6-comments-width: 90%;
+    /* Frame5 */
+    --frame5-heading-initial-size: 13rem;
+    --frame5-heading-final-size: 8rem;
+    --frame5-heading-left: 3.75rem;
 
-  /* Footer */
-  --footer-padding-x: 1.5rem;
-  --footer-padding-top: 10rem;
-  --footer-padding-bottom: 8rem;
-  --footer-contact-gap: 15rem;
-  --footer-contact-row-gap: 15rem;
-  --footer-contact-justify: flex-start;
-  --footer-outer-justify: center;
-  --footer-contact-font-size: 1.8rem;
-  --footer-name-margin-bottom: -0.35em;
-  --footer-box-pt: 2rem;
-  --footer-box-pb: 2rem;
-  --footer-box-pl: 20rem;
-  --footer-box-pr: 40rem;
-  --footer-contact-item-2-flex: 0 0 100%;
-  --footer-contact-item-3-flex: 0 0 90%;
-  --footer-contacts-box-flex: 1 1 60%;
-  --footer-phone-flex: 1 1 40%;
-  --footer-label-px: 0.75rem;
+    /* Frame6 */
+    --frame6-section-padding-x: 4rem;
+    --frame6-section-padding-top: 50rem;
+    --frame6-cta-size: 6rem;
+    --frame6-cta-padding-x: 20rem;
+    --frame6-cta-lh: 1.1;
+    --frame6-form-padding-x: 10rem;
+    --frame6-form-inner-padding: 6rem;
+    --frame6-form-title-size: 3rem;
+    --frame6-form-title-padding: 0px;
+    --frame6-form-fields-pt: 5rem;
+    --frame6-form-label-size: 1.5rem;
+    --frame6-form-input-size: 1.4rem;
+    --frame6-form-input-padding: 1rem 1.25rem;
+    --frame6-form-input-height: auto;
+    --frame6-form-textarea-height: 20rem;
+    --frame6-submit-padding-y: 1rem;
+    --frame6-submit-padding-x: 3rem;
+    --frame6-submit-font-size: 1.5rem;
+    --frame6-form-field-gap: 1.25rem;
+    --frame6-firstname-flex: 0 0 46%;
+    --frame6-lastname-flex: 0 0 38%;
+    --frame6-email-width: 55%;
+    --frame6-comments-width: 90%;
+    --frame6-bg-size: 100% auto;
+
+    /* Footer */
+    --footer-padding-x: 1.5rem;
+    --footer-padding-top: 10rem;
+    --footer-padding-bottom: 8rem;
+    --footer-contact-gap: 15rem;
+    --footer-contact-row-gap: 15rem;
+    --footer-contact-justify: flex-start;
+    --footer-outer-justify: center;
+    --footer-contact-font-size: 1.8rem;
+    --footer-name-margin-bottom: -0.35em;
+    --footer-box-pt: 2rem;
+    --footer-box-pb: 2rem;
+    --footer-box-pl: 20rem;
+    --footer-box-pr: 40rem;
+    --footer-contact-item-2-flex: 0 0 100%;
+    --footer-contact-item-3-flex: 0 0 90%;
+    --footer-contacts-box-flex: 1 1 60%;
+    --footer-phone-flex: 1 1 40%;
+    --footer-label-px: 14.75rem;
+  }
 }
 
-/* ── Laptop media query (768px – 1440px) ─────────────────────────── */
-@media (1000px <= width <= 1440px) {
+/* ── Desktop media query (1550px – 1700px) ───────────────────────── */
+@media (1550px < width <= 1700px) {
+  :root {
+    /* Nav */
+    --nav-padding-x: 3.75rem;
+
+    /* Frame1 */
+    --frame1-section-padding-x: 0px;
+    --frame1-content-width: 55vw;
+    --frame1-content-text-align: left;
+    --frame1-content-align-items: flex-start;
+    --frame1-h1-size: 5.375rem;
+    --frame1-h1-lh: 1.1;
+    --frame1-p-max-width: 40vw;
+    --frame1-body-size: 1.9rem;
+    --frame1-body-lh: 1.6;
+
+    /* Frame2 */
+    --frame2-section-padding-x: 3.75rem;
+    --frame2-section-padding-top: 8rem;
+    --frame2-section-padding-bottom: 6rem;
+    --frame2-h2-size: 10.5rem;
+    --frame2-desc-indent: 4.5rem;
+    --frame2-icon-size: 10rem;
+    --frame2-body-size: 1.9rem;
+    --frame2-body-lh: 1.6;
+    --frame2-marquee-icon-size: 6rem;
+    --frame2-marquee-icon-padding: 1.25rem;
+    --frame2-bg-top: -70vh;
+    --frame2-bg-height: calc(100% + 100vh);
+    --frame2-bg-size: 110% auto;
+    --frame2-bg-position: center center;
+
+    /* Frame4 */
+    --frame4-section-padding-x: 3.75rem;
+    --frame4-heading-size: 8rem;
+    --accordion-item-size: 3.5rem;
+    --accordion-item-pl: 4rem;
+    --accordion-item-pr: 4.5rem;
+    --accordion-content-pl: 4.5rem;
+    --accordion-content-pr: 4.5rem;
+    --accordion-wrapper-mx: 2rem;
+    --accordion-wrapper-px: 1.5rem;
+    --accordion-button-size: 1.6rem;
+    --accordion-padding-y: 2.2rem;
+    --accordion-margin-top: 12rem;
+    --accordion-content-size: 1.9rem;
+    --accordion-content-px: 1.5rem;
+    --accordion-content-pt: 2rem;
+    --accordion-content-py: 2rem;
+    --accordion-content-lh: 1.625;
+
+    /* Frame5 */
+    --frame5-heading-initial-size: 13rem;
+    --frame5-heading-final-size: 8rem;
+    --frame5-heading-left: 3.75rem;
+
+    /* Frame6 */
+    --frame6-section-padding-x: 4rem;
+    --frame6-section-padding-top: 50rem;
+    --frame6-cta-size: 6rem;
+    --frame6-cta-padding-x: 20rem;
+    --frame6-cta-lh: 1.1;
+    --frame6-form-padding-x: 10rem;
+    --frame6-form-inner-padding: 6rem;
+    --frame6-form-title-size: 3rem;
+    --frame6-form-title-padding: 0px;
+    --frame6-form-fields-pt: 5rem;
+    --frame6-form-label-size: 1.5rem;
+    --frame6-form-input-size: 1.4rem;
+    --frame6-form-input-padding: 1rem 1.25rem;
+    --frame6-form-input-height: auto;
+    --frame6-form-textarea-height: 20rem;
+    --frame6-submit-padding-y: 1rem;
+    --frame6-submit-padding-x: 3rem;
+    --frame6-submit-font-size: 1.5rem;
+    --frame6-form-field-gap: 1.25rem;
+    --frame6-firstname-flex: 0 0 46%;
+    --frame6-lastname-flex: 0 0 38%;
+    --frame6-email-width: 55%;
+    --frame6-comments-width: 90%;
+    --frame6-bg-size: 100% auto;
+
+    /* Footer */
+    --footer-padding-x: 1.5rem;
+    --footer-padding-top: 10rem;
+    --footer-padding-bottom: 8rem;
+    --footer-contact-gap: 15rem;
+    --footer-contact-row-gap: 15rem;
+    --footer-contact-justify: flex-start;
+    --footer-outer-justify: center;
+    --footer-contact-font-size: 1.8rem;
+    --footer-name-margin-bottom: -0.35em;
+    --footer-box-pt: 2rem;
+    --footer-box-pb: 2rem;
+    --footer-box-pl: 20rem;
+    --footer-box-pr: 40rem;
+    --footer-contact-item-2-flex: 0 0 100%;
+    --footer-contact-item-3-flex: 0 0 90%;
+    --footer-contacts-box-flex: 1 1 60%;
+    --footer-phone-flex: 1 1 40%;
+    --footer-label-px: 1.75rem;
+  }
+}
+
+/* ── Desktop-sm media query (1440px – 1550px) ────────────────────── */
+@media (1440px < width <= 1550px) {
+  :root {
+    /* Nav */
+    --nav-padding-x: 3.75rem;
+
+    /* Frame1 */
+    --frame1-section-padding-x: 0px;
+    --frame1-content-width: 55vw;
+    --frame1-content-text-align: left;
+    --frame1-content-align-items: flex-start;
+    --frame1-h1-size: 5.375rem;
+    --frame1-h1-lh: 1.1;
+    --frame1-p-max-width: 40vw;
+    --frame1-body-size: 1.9rem;
+    --frame1-body-lh: 1.6;
+
+    /* Frame2 */
+    --frame2-section-padding-x: 3.75rem;
+    --frame2-section-padding-top: 8rem;
+    --frame2-section-padding-bottom: 6rem;
+    --frame2-h2-size: 10.5rem;
+    --frame2-desc-indent: 4.5rem;
+    --frame2-icon-size: 10rem;
+    --frame2-body-size: 1.9rem;
+    --frame2-body-lh: 1.6;
+    --frame2-marquee-icon-size: 6rem;
+    --frame2-marquee-icon-padding: 1.25rem;
+    --frame2-bg-top: -70vh;
+    --frame2-bg-height: calc(100% + 100vh);
+    --frame2-bg-size: 110% auto;
+    --frame2-bg-position: center center;
+
+    /* Frame4 */
+    --frame4-section-padding-x: 3.75rem;
+    --frame4-heading-size: 8rem;
+    --accordion-item-size: 3.5rem;
+    --accordion-item-pl: 4rem;
+    --accordion-item-pr: 4.5rem;
+    --accordion-content-pl: 4.5rem;
+    --accordion-content-pr: 4.5rem;
+    --accordion-wrapper-mx: 2rem;
+    --accordion-wrapper-px: 1.5rem;
+    --accordion-button-size: 1.6rem;
+    --accordion-padding-y: 2.2rem;
+    --accordion-margin-top: 12rem;
+    --accordion-content-size: 1.9rem;
+    --accordion-content-px: 1.5rem;
+    --accordion-content-pt: 2rem;
+    --accordion-content-py: 2rem;
+    --accordion-content-lh: 1.625;
+
+    /* Frame5 */
+    --frame5-heading-initial-size: 13rem;
+    --frame5-heading-final-size: 8rem;
+    --frame5-heading-left: 3.75rem;
+
+    /* Frame6 */
+    --frame6-section-padding-x: 4rem;
+    --frame6-section-padding-top: 50rem;
+    --frame6-cta-size: 6rem;
+    --frame6-cta-padding-x: 20rem;
+    --frame6-cta-lh: 1.1;
+    --frame6-form-padding-x: 10rem;
+    --frame6-form-inner-padding: 6rem;
+    --frame6-form-title-size: 3rem;
+    --frame6-form-title-padding: 0px;
+    --frame6-form-fields-pt: 5rem;
+    --frame6-form-label-size: 1.5rem;
+    --frame6-form-input-size: 1.4rem;
+    --frame6-form-input-padding: 1rem 1.25rem;
+    --frame6-form-input-height: auto;
+    --frame6-form-textarea-height: 20rem;
+    --frame6-submit-padding-y: 1rem;
+    --frame6-submit-padding-x: 3rem;
+    --frame6-submit-font-size: 1.5rem;
+    --frame6-form-field-gap: 1.25rem;
+    --frame6-firstname-flex: 0 0 46%;
+    --frame6-lastname-flex: 0 0 38%;
+    --frame6-email-width: 55%;
+    --frame6-comments-width: 90%;
+    --frame6-bg-size: 100% auto;
+
+    /* Footer */
+    --footer-padding-x: 1.5rem;
+    --footer-padding-top: 10rem;
+    --footer-padding-bottom: 8rem;
+    --footer-contact-gap: 15rem;
+    --footer-contact-row-gap: 15rem;
+    --footer-contact-justify: flex-start;
+    --footer-outer-justify: center;
+    --footer-contact-font-size: 1.8rem;
+    --footer-name-margin-bottom: -0.35em;
+    --footer-box-pt: 2rem;
+    --footer-box-pb: 2rem;
+    --footer-box-pl: 20rem;
+    --footer-box-pr: 40rem;
+    --footer-contact-item-2-flex: 0 0 100%;
+    --footer-contact-item-3-flex: 0 0 90%;
+    --footer-contacts-box-flex: 1 1 60%;
+    --footer-phone-flex: 1 1 40%;
+    --footer-label-px: 1.75rem;
+  }
+}
+
+/* ── Laptop media query (1220px – 1440px) ────────────────────────── */
+@media (1220px < width <= 1440px) {
   :root {
     /* Nav */
     --nav-padding-x: 2.5rem;
@@ -120,16 +339,22 @@
     --frame1-content-width: 65vw;
     --frame1-p-max-width: 52vw;
     --frame1-body-lh: 2.3;
+    --frame1-content-text-align: center;
+    --frame1-content-align-items: center;
 
     /* Frame2 */
     --frame2-section-padding-x: 2.5rem;
     --frame2-section-padding-top: 6rem;
     --frame2-section-padding-bottom: 4.5rem;
-    --frame2-h2-size: 9.5rem;
+    --frame2-h2-size: 9rem;
     --frame2-body-lh: 2.3;
-    --frame2-icon-size: 8.5rem;
+    --frame2-icon-size: 8rem;
     --frame2-body-size: 1.4rem;
     --frame2-desc-indent: 3rem;
+    --frame2-bg-top: -70vh;
+    --frame2-bg-height: calc(100% + 100vh);
+    --frame2-bg-size: 180% auto;
+    --frame2-bg-position: center center;
 
     /* Frame4 */
     --frame4-section-padding-x: 2.5rem;
@@ -159,13 +384,13 @@
     --frame6-section-padding-x: 2.5rem;
     --frame6-section-padding-top: 35rem;
     --frame6-cta-size: 5rem;
-    --frame6-cta-padding-x: 15rem;
+    --frame6-cta-padding-x: 10rem;
     --frame6-cta-lh: 1.1;
-    --frame6-form-padding-x: 6rem;
-    --frame6-form-inner-padding: 6rem;
-    --frame6-form-title-size: 3rem;
-    --frame6-form-title-padding: 0px;
-    --frame6-form-fields-pt: 5rem;
+    --frame6-form-padding-x: 2rem;
+    --frame6-form-inner-padding: 5rem;
+    --frame6-form-title-size: 2.5rem;
+    --frame6-form-title-padding: 0rem;
+    --frame6-form-fields-pt: 3rem;
     --frame6-form-label-size: 1.5rem;
     --frame6-form-input-size: 1.4rem;
     --frame6-form-input-padding: 1rem 1.25rem;
@@ -174,10 +399,12 @@
     --frame6-submit-padding-y: 1rem;
     --frame6-submit-padding-x: 3rem;
     --frame6-submit-font-size: 1.5rem;
+    --frame6-form-field-gap: 1.25rem;
     --frame6-firstname-flex: 0 0 46%;
     --frame6-lastname-flex: 0 0 43%;
     --frame6-email-width: 55%;
     --frame6-comments-width: 96%;
+    --frame6-bg-size: 190% auto;
 
     /* Footer */
     --footer-padding-top: 5rem;
@@ -189,10 +416,106 @@
     --footer-box-pl: 12rem;
     --footer-box-pr: 24rem;
     --footer-label-px: 8.5rem;
+    --footer-name-margin-bottom: -0.35em;
   }
 }
 
-@media (width <= 1000px) {
+/* ── Laptop-sm media query (1000px – 1220px) ─────────────────────── */
+@media (1000px <= width <= 1220px) {
+  :root {
+    /* Nav */
+    --nav-padding-x: 2.5rem;
+
+    /* Frame1 */
+    --frame1-h1-size: 3.8rem;
+    --frame1-h1-lh: 1.3;
+    --frame1-body-size: 1.4rem;
+    --frame1-content-width: 65vw;
+    --frame1-p-max-width: 52vw;
+    --frame1-body-lh: 2.3;
+    --frame1-content-text-align: center;
+    --frame1-content-align-items: center;
+
+    /* Frame2 */
+    --frame2-section-padding-x: 2.5rem;
+    --frame2-section-padding-top: 6rem;
+    --frame2-section-padding-bottom: 4.5rem;
+    --frame2-h2-size: 7.5rem;
+    --frame2-body-lh: 2.3;
+    --frame2-icon-size: 8rem;
+    --frame2-body-size: 1.4rem;
+    --frame2-desc-indent: 3rem;
+    --frame2-bg-top: -70vh;
+    --frame2-bg-height: calc(100% + 100vh);
+    --frame2-bg-size: 180% auto;
+    --frame2-bg-position: center center;
+
+    /* Frame4 */
+    --frame4-section-padding-x: 2.5rem;
+    --frame4-heading-size: 5.5rem;
+    --accordion-item-size: 2.4rem;
+    --accordion-item-pl: 2.8rem;
+    --accordion-item-pr: 3rem;
+    --accordion-content-pl: 3rem;
+    --accordion-content-pr: 3rem;
+    --accordion-wrapper-mx: 1.25rem;
+    --accordion-wrapper-px: 1rem;
+    --accordion-button-size: 1.2rem;
+    --accordion-padding-y: 1.6rem;
+    --accordion-margin-top: 8rem;
+    --accordion-content-size: 1.4rem;
+    --accordion-content-px: 1rem;
+    --accordion-content-pt: 1.5rem;
+    --accordion-content-py: 1.5rem;
+    --accordion-content-lh: 2.3;
+
+    /* Frame5 */
+    --frame5-heading-initial-size: 9rem;
+    --frame5-heading-final-size: 5.5rem;
+    --frame5-heading-left: 2.5rem;
+
+    /* Frame6 */
+    --frame6-section-padding-x: 2.5rem;
+    --frame6-section-padding-top: 35rem;
+    --frame6-cta-size: 5rem;
+    --frame6-cta-padding-x: 10rem;
+    --frame6-cta-lh: 1.1;
+    --frame6-form-padding-x: 2rem;
+    --frame6-form-inner-padding: 5rem;
+    --frame6-form-title-size: 2.5rem;
+    --frame6-form-title-padding: 0rem;
+    --frame6-form-fields-pt: 3rem;
+    --frame6-form-label-size: 1.5rem;
+    --frame6-form-input-size: 1.4rem;
+    --frame6-form-input-padding: 1rem 1.25rem;
+    --frame6-form-input-height: auto;
+    --frame6-form-textarea-height: 20rem;
+    --frame6-submit-padding-y: 1rem;
+    --frame6-submit-padding-x: 3rem;
+    --frame6-submit-font-size: 1.5rem;
+    --frame6-form-field-gap: 1.25rem;
+    --frame6-firstname-flex: 0 0 46%;
+    --frame6-lastname-flex: 0 0 43%;
+    --frame6-email-width: 55%;
+    --frame6-comments-width: 96%;
+    --frame6-bg-size: 190% auto;
+
+    /* Footer */
+    --footer-padding-top: 5rem;
+    --footer-padding-bottom: 7.5rem;
+    --footer-contact-row-gap: 15rem;
+    --footer-contact-font-size: 1.4rem;
+    --footer-box-pt: 1.5rem;
+    --footer-box-pb: 1.5rem;
+    --footer-box-pl: 12rem;
+    --footer-box-pr: 24rem;
+    --footer-label-px: 8.5rem;
+    --footer-name-margin-bottom: -0.35em;
+  }
+}
+
+/* ── Tablet media query (768px – 1000px) ──────────────────────────── */
+@media (767px < width <= 1000px) {
   :root {
     --nav-padding-x: 1.5rem;
     --frame1-section-padding-x: 7rem;
@@ -207,15 +530,19 @@
     --frame2-section-padding-x: 1.5rem;
     --frame2-section-padding-top: 9rem;
     --frame2-section-padding-bottom: 20rem;
-    --frame2-h2-size: 7rem;
+    --frame2-h2-size: 10rem;
     --frame2-desc-indent: 4.5rem;
-    --frame2-icon-size: 6rem;
-    --frame2-body-size: 1.3rem;
-    --frame2-padding-right: 4.5rem;
+    --frame2-icon-size: 5rem;
+    --frame2-body-size: 1.4rem;
+    --frame2-padding-right: 0rem;
     --frame2-marquee-icon-size: 6rem;
     --frame2-marquee-icon-padding: 2rem;
     --frame2-marquee-padding-top: 5rem;
     --frame2-body-lh: 2.3;
+    --frame2-bg-top: -90vh;
+    --frame2-bg-height: calc(100% + 100vh);
+    --frame2-bg-size: 260% auto;
+    --frame2-bg-position: center center;
     --frame4-section-padding-x: 1.5rem;
     --frame4-heading-size: 5.2rem;
     --accordion-item-size: 1.8rem;
@@ -259,6 +586,7 @@
     --frame6-lastname-flex: 0 0 42%;
     --frame6-email-width: 100%;
     --frame6-comments-width: 100%;
+    --frame6-bg-size: 250% auto;
     --footer-padding-x: 1.5rem;
     --footer-padding-top: 0rem;
     --footer-padding-bottom: 6rem;
@@ -271,46 +599,185 @@
   }
 }
 
-/* ── Frame2 icon grid gap on laptop ──────────────────────────────── */
-@media (768px <= width <= 1440px) {
-  .frame2-icon-container {
-    gap: 1.5rem 4rem;
+/* ── Mobile media query (481px – 767px) ──────────────────────────── */
+@media (480px < width <= 767px) {
+  :root {
+    --nav-padding-x: 1.5rem;
+    --frame1-section-padding-x: 7rem;
+    --frame1-content-width: 88vw;
+    --frame1-content-text-align: center;
+    --frame1-content-align-items: center;
+    --frame1-h1-size: 2.4rem;
+    --frame1-h1-lh: 1.6;
+    --frame1-p-max-width: 88vw;
+    --frame1-body-size: 1.3rem;
+    --frame1-body-lh: 2.3;
+    --frame2-section-padding-x: 1.5rem;
+    --frame2-section-padding-top: 9rem;
+    --frame2-section-padding-bottom: 20rem;
+    --frame2-h2-size: 6rem;
+    --frame2-desc-indent: 4.5rem;
+    --frame2-icon-size: 5rem;
+    --frame2-body-size: 1.3rem;
+    --frame2-padding-right: 0rem;
+    --frame2-marquee-icon-size: 6rem;
+    --frame2-marquee-icon-padding: 2rem;
+    --frame2-marquee-padding-top: 5rem;
+    --frame2-body-lh: 2.3;
+    --frame2-bg-top: -90vh;
+    --frame2-bg-height: calc(100% + 100vh);
+    --frame2-bg-size: 260% auto;
+    --frame2-bg-position: center center;
+    --frame4-section-padding-x: 1.5rem;
+    --frame4-heading-size: 5.2rem;
+    --accordion-item-size: 1.8rem;
+    --accordion-item-pl: 1.5rem;
+    --accordion-item-pr: 1.5rem;
+    --accordion-content-pl: 1.5rem;
+    --accordion-content-pr: 1.5rem;
+    --accordion-wrapper-mx: 0px;
+    --accordion-wrapper-px: 0px;
+    --accordion-button-size: 1.2rem;
+    --accordion-padding-y: 1.4rem;
+    --accordion-margin-top: 4rem;
+    --accordion-content-size: 1.2rem;
+    --accordion-content-px: 0.75rem;
+    --accordion-content-pt: 2.2rem;
+    --accordion-content-py: 1.5rem;
+    --accordion-content-lh: 2.3;
+    --frame5-heading-initial-size: 7rem;
+    --frame5-heading-final-size: 5.2rem;
+    --frame5-heading-left: 1.5rem;
+    --frame6-section-padding-x: 1.5rem;
+    --frame6-section-padding-top: 28rem;
+    --frame6-cta-size: 2.8rem;
+    --frame6-cta-padding-x: 3rem;
+    --frame6-cta-lh: 1.5;
+    --frame6-form-padding-x: 1.3rem;
+    --frame6-form-inner-padding: 3rem;
+    --frame6-form-title-size: 2rem;
+    --frame6-form-title-padding: 1rem;
+    --frame6-form-fields-pt: 2rem;
+    --frame6-form-label-size: 1.2rem;
+    --frame6-form-input-size: 1rem;
+    --frame6-form-input-padding: 0.85rem 1rem;
+    --frame6-form-input-height: 3.5rem;
+    --frame6-form-textarea-height: 14rem;
+    --frame6-submit-padding-y: 0.6rem;
+    --frame6-submit-padding-x: 2rem;
+    --frame6-submit-font-size: 1rem;
+    --frame6-form-field-gap: 1.5rem;
+    --frame6-firstname-flex: 0 0 46%;
+    --frame6-lastname-flex: 0 0 42%;
+    --frame6-email-width: 100%;
+    --frame6-comments-width: 100%;
+    --frame6-bg-size: 250% auto;
+    --footer-padding-x: 1.5rem;
+    --footer-padding-top: 0rem;
+    --footer-padding-bottom: 6rem;
+    --footer-contact-gap: 2rem;
+    --footer-contact-row-gap: 7rem;
+    --footer-contact-justify: flex-start;
+    --footer-outer-justify: flex-start;
+    --footer-contact-font-size: 1.3rem;
+    --footer-name-margin-bottom: -0.25em;
   }
 }
 
-/* ── Frame1 subtext ──────────────────────────────────────────────── */
+/* ── Phone media query (≤480px) ──────────────────────────────────── */
+@media (width <= 480px) {
+  :root {
+    --nav-padding-x: 1.5rem;
+    --frame1-section-padding-x: 7rem;
+    --frame1-content-width: 88vw;
+    --frame1-content-text-align: center;
+    --frame1-content-align-items: center;
+    --frame1-h1-size: 2.4rem;
+    --frame1-h1-lh: 1.6;
+    --frame1-p-max-width: 88vw;
+    --frame1-body-size: 1.3rem;
+    --frame1-body-lh: 2.3;
+    --frame2-section-padding-x: 1.5rem;
+    --frame2-section-padding-top: 9rem;
+    --frame2-section-padding-bottom: 20rem;
+    --frame2-h2-size: 6rem;
+    --frame2-desc-indent: 4.5rem;
+    --frame2-icon-size: 5rem;
+    --frame2-body-size: 1.3rem;
+    --frame2-padding-right: 0rem;
+    --frame2-marquee-icon-size: 6rem;
+    --frame2-marquee-icon-padding: 2rem;
+    --frame2-marquee-padding-top: 5rem;
+    --frame2-body-lh: 2.3;
+    --frame2-bg-top: -90vh;
+    --frame2-bg-height: calc(100% + 100vh);
+    --frame2-bg-size: 260% auto;
+    --frame2-bg-position: center center;
+    --frame4-section-padding-x: 1.5rem;
+    --frame4-heading-size: 5.2rem;
+    --accordion-item-size: 1.8rem;
+    --accordion-item-pl: 1.5rem;
+    --accordion-item-pr: 1.5rem;
+    --accordion-content-pl: 1.5rem;
+    --accordion-content-pr: 1.5rem;
+    --accordion-wrapper-mx: 0px;
+    --accordion-wrapper-px: 0px;
+    --accordion-button-size: 1.2rem;
+    --accordion-padding-y: 1.4rem;
+    --accordion-margin-top: 4rem;
+    --accordion-content-size: 1.2rem;
+    --accordion-content-px: 0.75rem;
+    --accordion-content-pt: 2.2rem;
+    --accordion-content-py: 1.5rem;
+    --accordion-content-lh: 2.3;
+    --frame5-heading-initial-size: 7rem;
+    --frame5-heading-final-size: 5.2rem;
+    --frame5-heading-left: 1.5rem;
+    --frame6-section-padding-x: 1.5rem;
+    --frame6-section-padding-top: 28rem;
+    --frame6-cta-size: 2.8rem;
+    --frame6-cta-padding-x: 3rem;
+    --frame6-cta-lh: 1.5;
+    --frame6-form-padding-x: 1.3rem;
+    --frame6-form-inner-padding: 3rem;
+    --frame6-form-title-size: 2rem;
+    --frame6-form-title-padding: 1rem;
+    --frame6-form-fields-pt: 2rem;
+    --frame6-form-label-size: 1.2rem;
+    --frame6-form-input-size: 1rem;
+    --frame6-form-input-padding: 0.85rem 1rem;
+    --frame6-form-input-height: 3.5rem;
+    --frame6-form-textarea-height: 14rem;
+    --frame6-submit-padding-y: 0.6rem;
+    --frame6-submit-padding-x: 2rem;
+    --frame6-submit-font-size: 1rem;
+    --frame6-form-field-gap: 1.5rem;
+    --frame6-firstname-flex: 0 0 46%;
+    --frame6-lastname-flex: 0 0 42%;
+    --frame6-email-width: 100%;
+    --frame6-comments-width: 100%;
+    --frame6-bg-size: 250% auto;
+    --footer-padding-x: 1.5rem;
+    --footer-padding-top: 0rem;
+    --footer-padding-bottom: 6rem;
+    --footer-contact-gap: 2rem;
+    --footer-contact-row-gap: 7rem;
+    --footer-contact-justify: flex-start;
+    --footer-outer-justify: flex-start;
+    --footer-contact-font-size: 1.3rem;
+    --footer-name-margin-bottom: -0.25em;
+  }
+}
+
+/* ── Base (default) class styles ──────────────────────────────────── */
 .frame1-subtext {
   padding: 0;
 }
 
-@media (width <= 767px) {
-  .frame1-subtext {
-    padding: 2rem;
-  }
+.frame2-subtext {
+  padding: 0;
 }
 
-/* ── Footer contact layout ───────────────────────────────────────── */
-@media (width <= 767px) {
-  .footer-contact-item {
-    padding-left: 4rem;
-    padding-right: 2rem;
-    padding-bottom: 1rem;
-  }
-
-  .footer-contact-item:first-child {
-    flex: 0 0 100%;
-  }
-
-  .footer-contact-item:nth-child(2) {
-    flex: var(--footer-contact-item-2-flex);
-  }
-
-  .footer-contact-item:nth-child(3) {
-    flex: var(--footer-contact-item-3-flex);
-  }
-}
-
-/* ── Frame5 headings ─────────────────────────────────────────────── */
 .frame5-heading {
   width: calc(100vw - 2 * var(--frame5-heading-left));
 }
@@ -319,24 +786,6 @@
   white-space: nowrap;
 }
 
-@media (width <= 767px) {
-  .frame5-heading-small {
-    white-space: normal;
-  }
-}
-
-/* ── Frame2 subtext ──────────────────────────────────────────────── */
-.frame2-subtext {
-  padding: 0;
-}
-
-@media (width <= 767px) {
-  .frame2-subtext {
-    padding: 0;
-  }
-}
-
-/* ── App nav: hamburger vs links ──────────────────────────────────── */
 .nav-hamburger {
   display: none;
 }
@@ -349,22 +798,6 @@
   display: none;
 }
 
-@media (width <= 767px) {
-  .nav-hamburger {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .nav-mobile-overlay {
-    display: flex;
-  }
-}
-
-/* ── Frame2 marquee ───────────────────────────────────────────────── */
 .frame2-marquee-outer {
   display: none;
   overflow: hidden;
@@ -399,8 +832,6 @@
   border-right: none;
 }
 
-/* ── Frame2 responsive layout ─────────────────────────────────────── */
-
 .frame2-layout {
   position: relative;
   z-index: 1;
@@ -426,7 +857,15 @@
   justify-content: center;
 }
 
-@media (width <= 767px) {
+/* ── Laptop class overrides (1001px – 1440px) ────────────────────── */
+@media (1001px <= width <= 1440px) {
+  .frame2-icon-container {
+    gap: 1.5rem 4rem;
+  }
+}
+
+/* ── Tablet class overrides (768px – 1000px) ─────────────────────── */
+@media (768px <= width <= 1000px) {
   .frame2-layout {
     flex-direction: column;
     align-items: flex-start;
@@ -450,5 +889,157 @@
     border-radius: 0;
     border-left: none;
     border-right: none;
+  }
+}
+
+/* ── Mobile class overrides (481px – 767px) ──────────────────────── */
+@media (480px < width <= 767px) {
+  /* Frame1 */
+  .frame1-subtext {
+    padding: 2rem;
+  }
+
+  /* Frame2 */
+  .frame2-subtext {
+    padding: 0;
+  }
+
+  .frame2-layout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .frame2-left {
+    flex: unset;
+    width: 100%;
+  }
+
+  .frame2-icon-container {
+    display: none;
+  }
+
+  .frame2-marquee-outer {
+    display: block;
+    margin-left: calc(-1 * var(--frame2-section-padding-x));
+    margin-right: calc(-1 * var(--frame2-section-padding-x));
+    margin-top: var(--frame2-marquee-padding-top);
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  /* Frame5 */
+  .frame5-heading-small {
+    white-space: normal;
+  }
+
+  /* Footer */
+  .footer-contact-item {
+    padding-left: 4rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .footer-contact-item:first-child {
+    flex: 0 0 100%;
+  }
+
+  .footer-contact-item:nth-child(2) {
+    flex: var(--footer-contact-item-2-flex);
+  }
+
+  .footer-contact-item:nth-child(3) {
+    flex: var(--footer-contact-item-3-flex);
+  }
+
+  /* Nav */
+  .nav-hamburger {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-mobile-overlay {
+    display: flex;
+  }
+}
+
+/* ── Phone class overrides (≤480px) ──────────────────────────────── */
+@media (width <= 480px) {
+  /* Frame1 */
+  .frame1-subtext {
+    padding: 2rem;
+  }
+
+  /* Frame2 */
+  .frame2-subtext {
+    padding: 0;
+  }
+
+  .frame2-layout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .frame2-left {
+    flex: unset;
+    width: 100%;
+  }
+
+  .frame2-icon-container {
+    display: none;
+  }
+
+  .frame2-marquee-outer {
+    display: block;
+    margin-left: calc(-1 * var(--frame2-section-padding-x));
+    margin-right: calc(-1 * var(--frame2-section-padding-x));
+    margin-top: var(--frame2-marquee-padding-top);
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  /* Frame5 */
+  .frame5-heading-small {
+    white-space: normal;
+  }
+
+  /* Footer */
+  .footer-contact-item {
+    padding-left: 4rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .footer-contact-item:first-child {
+    flex: 0 0 100%;
+  }
+
+  .footer-contact-item:nth-child(2) {
+    flex: var(--footer-contact-item-2-flex);
+  }
+
+  .footer-contact-item:nth-child(3) {
+    flex: var(--footer-contact-item-3-flex);
+  }
+
+  /* Nav */
+  .nav-hamburger {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-mobile-overlay {
+    display: flex;
   }
 }
