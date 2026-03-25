@@ -128,9 +128,11 @@ const Frame5 = () => {
     const navTrigger = nav
       ? ScrollTrigger.create({
           trigger: wrapper,
-          start: "bottom bottom",
-          onEnter: () => gsap.to(nav, { opacity: 1, duration: 0.3, ease: "power2.out" }),
-          onLeaveBack: () => gsap.to(nav, { opacity: 0, duration: 0.2, ease: "power2.in" }),
+          start: "top top",
+          end: "bottom bottom",
+          onLeave: () => gsap.to(nav, { opacity: 1, duration: 0.3, ease: "power2.out" }),
+          onEnterBack: () => gsap.to(nav, { opacity: 0, duration: 0.2, ease: "power2.in" }),
+          onLeaveBack: () => gsap.to(nav, { opacity: 1, duration: 0.3, ease: "power2.out" }),
         })
       : null;
 

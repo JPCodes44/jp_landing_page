@@ -3,6 +3,7 @@ import { PARA_MARGIN_TOP } from "../theme";
 const Frame1 = () => {
   return (
     <section
+      id="home"
       className="frame-bg"
       style={{
         minHeight: "100vh",

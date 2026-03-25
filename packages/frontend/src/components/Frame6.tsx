@@ -697,6 +697,7 @@ const Frame6 = () => {
 
       {/* Form with dashed SVG border overlay */}
       <div
+        id="contact"
         ref={formRef}
         style={{
           position: "relative",

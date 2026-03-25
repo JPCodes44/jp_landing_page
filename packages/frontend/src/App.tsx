@@ -23,7 +23,7 @@ import {
 const NAV_LINKS = [
   { href: "#services", label: "services" },
   { href: "#contact", label: "contact" },
-  { href: "#experience", label: "experiences" },
+  { href: "#experiences", label: "experiences" },
   { href: "#about", label: "about" },
 ];
 
@@ -37,7 +37,6 @@ const BAR_Y_OFFSET = 10;
 
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hoveredHref, setHoveredHref] = useState<string | null>(null);
   const bar1Ref = useRef<HTMLSpanElement>(null);
   const bar2Ref = useRef<HTMLSpanElement>(null);
   const bar3Ref = useRef<HTMLSpanElement>(null);
@@ -122,6 +121,22 @@ const App = () => {
     setMenuOpen(opening);
   };
 
+  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const id = href.replace("#", "");
+    const el = document.getElementById(id);
+    if (el) {
+      window.__lenis?.scrollTo(el);
+    }
+  };
+
+  const hoverEnter = (e: React.MouseEvent<HTMLElement>) => {
+    gsap.to(e.currentTarget, { opacity: 0.5, duration: 0.25, ease: "power2.out" });
+  };
+  const hoverLeave = (e: React.MouseEvent<HTMLElement>) => {
+    gsap.to(e.currentTarget, { opacity: 1, duration: 0.25, ease: "power2.out" });
+  };
+
   const barStyle: React.CSSProperties = {
     display: "block",
     width: BAR_WIDTH,
@@ -154,16 +169,27 @@ const App = () => {
             pointerEvents: "none",
           }}
         >
-          <span
+          <button
+            type="button"
+            onClick={() => {
+              const el = document.getElementById("home");
+              if (el) window.__lenis?.scrollTo(el);
+            }}
+            onMouseEnter={hoverEnter}
+            onMouseLeave={hoverLeave}
             style={{
               fontFamily: '"Fanwood Text", serif',
               color: "#2d2d2d",
               fontSize: FONT_SIZE_LOGO,
               pointerEvents: "auto",
+              cursor: "pointer",
+              background: "none",
+              border: "none",
+              padding: 0,
             }}
           >
             Justin Mak.
-          </span>
+          </button>
 
           {/* Hamburger / X — visible on mobile only, stays above overlay */}
           <button
@@ -202,15 +228,15 @@ const App = () => {
               <li key={href}>
                 <a
                   href={href}
-                  onMouseEnter={() => setHoveredHref(href)}
-                  onMouseLeave={() => setHoveredHref(null)}
+                  onClick={(e) => scrollTo(e, href)}
+                  onMouseEnter={hoverEnter}
+                  onMouseLeave={hoverLeave}
                   style={{
                     fontFamily: '"Fanwood Text", serif',
                     fontWeight: 400,
                     color: "#2d2d2d",
                     textDecoration: "none",
                     fontSize: FONT_SIZE_NAV_LINK,
-                    opacity: hoveredHref === href ? 0.7 : 1,
                   }}
                 >
                   {label}
@@ -248,7 +274,12 @@ const App = () => {
               <li key={href} style={{ borderBottom: NAVBAR_BORDER }}>
                 <a
                   href={href}
-                  onClick={toggleMenu}
+                  onClick={(e) => {
+                    scrollTo(e, href);
+                    toggleMenu();
+                  }}
+                  onMouseEnter={hoverEnter}
+                  onMouseLeave={hoverLeave}
                   style={{
                     fontFamily: '"Fanwood Text", serif',
                     fontWeight: 400,

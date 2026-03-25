@@ -191,6 +191,7 @@ const Frame2 = () => {
 
   return (
     <section
+      id="about"
       ref={sectionRef}
       style={{
         minHeight: "100vh",

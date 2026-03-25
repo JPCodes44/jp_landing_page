@@ -172,6 +172,7 @@ const Frame3 = () => {
 
   return (
     <section
+      id="experiences"
       ref={wrapperRef}
       className="frame-bg"
       style={{

@@ -6,7 +6,5 @@ declare module "*.mp4" {
 }
 
 interface Window {
-  __lenis?: {
-    scrollTo: (target: number, opts: { duration: number; easing: (t: number) => number }) => void;
-  };
+  __lenis?: import("lenis").default;
 }

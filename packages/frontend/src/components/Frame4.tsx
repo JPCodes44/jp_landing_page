@@ -282,6 +282,7 @@ const Frame4 = () => {
 
   return (
     <section
+      id="services"
       ref={sectionRef}
       className="frame-bg"
       style={{
