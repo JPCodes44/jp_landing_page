@@ -139,6 +139,32 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
       >
         {item.description}
       </p>
+      {/* Github link */}
+      <p
+        style={{
+          fontFamily: '"Fanwood Text", serif',
+          fontSize: "var(--exp-card-desc-size)",
+          lineHeight: 1.4,
+          color: "var(--color-text-primary)",
+          margin: 0,
+          flexDirection: "row",
+          display: "inline-flex",
+          alignItems: "flex-start",
+          gap: "0.5rem",
+          marginTop: "0.5rem",
+        }}
+      >
+        <img
+          style={{
+            height: "1.1em",
+            width: "auto",
+            opacity: 0.8,
+          }}
+          src="/styles/assets/2d/icons/github.png"
+          alt="GitHub"
+        />
+        <span>Github Link</span>
+      </p>
     </div>
   );
 };
@@ -296,7 +322,7 @@ export const Experiences = () => {
             margin: 0,
           }}
         >
-          Need a system built for trucking? Let's talk compliance.
+          Need a system built for you? Let's talk automation.
         </p>
         <a
           href="#contact"
