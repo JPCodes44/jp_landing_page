@@ -1,9 +1,8 @@
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint";
-import { ANIM_DURATION_HEADING, ANIM_Y_HEADING } from "../theme";
+import { ANIM_DURATION_HEADING, ANIM_Y_HEADING, NAVBAR_HEIGHT } from "../theme";
 import { CarrierVerificationCard } from "./experiences/CarrierVerificationCard";
 import { FleetDashboardCard } from "./experiences/FleetDashboardCard";
 import { IFTACalculatorCard } from "./experiences/IFTACalculatorCard";
@@ -157,8 +156,6 @@ export const Experiences = () => {
     : "/styles/assets/2d/backgrounds/grid.png";
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
     const header = headerRef.current;
     const grid = gridRef.current;
     const cta = ctaRef.current;
@@ -168,31 +165,22 @@ export const Experiences = () => {
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (prefersReducedMotion) {
-      gsap.set([header, grid, cta], { opacity: 1, y: 0 });
-      return;
-    }
+    if (prefersReducedMotion) return;
 
-    // Entrance animation on mount (not scroll-triggered, since this is a standalone page)
-    const tl = gsap.timeline({ delay: 0.1 });
+    // Set initial hidden state, then animate in on mount
+    gsap.set(header, { opacity: 0, y: ANIM_Y_HEADING });
+    gsap.set(Array.from(grid.children), { opacity: 0, y: "3rem" });
+    gsap.set(cta, { opacity: 0, y: "2rem" });
 
-    tl.fromTo(
-      header,
-      { opacity: 0, y: ANIM_Y_HEADING },
-      { opacity: 1, y: 0, ease: "power2.out", duration: ANIM_DURATION_HEADING },
-    )
-      .fromTo(
-        grid.children,
-        { opacity: 0, y: "3rem" },
+    const tl = gsap.timeline({ delay: 0.15 });
+
+    tl.to(header, { opacity: 1, y: 0, ease: "power2.out", duration: ANIM_DURATION_HEADING })
+      .to(
+        Array.from(grid.children),
         { opacity: 1, y: 0, stagger: 0.15, ease: "power2.out", duration: 0.6 },
         "-=0.3",
       )
-      .fromTo(
-        cta,
-        { opacity: 0, y: "2rem" },
-        { opacity: 1, y: 0, ease: "power2.out", duration: 0.5 },
-        "-=0.2",
-      );
+      .to(cta, { opacity: 1, y: 0, ease: "power2.out", duration: 0.5 }, "-=0.2");
 
     return () => {
       tl.kill();
@@ -205,13 +193,14 @@ export const Experiences = () => {
       className="frame-bg"
       style={{
         width: "100%",
-        minHeight: "100vh",
+        minHeight: `calc(100vh + ${NAVBAR_HEIGHT})`,
         position: "relative",
         isolation: "isolate",
         paddingLeft: "var(--exp-section-padding-x)",
         paddingRight: "var(--exp-section-padding-x)",
-        paddingTop: "var(--exp-section-padding-top)",
+        paddingTop: `calc(var(--exp-section-padding-top) + ${NAVBAR_HEIGHT})`,
         paddingBottom: "var(--exp-section-padding-bottom)",
+        marginTop: `calc(-1 * ${NAVBAR_HEIGHT})`,
         backgroundColor: "#e8e5df",
       }}
     >
@@ -231,7 +220,7 @@ export const Experiences = () => {
       />
 
       {/* Header */}
-      <div ref={headerRef} style={{ opacity: 0, marginBottom: "var(--exp-header-mb)" }}>
+      <div ref={headerRef} style={{ marginBottom: "var(--exp-header-mb)" }}>
         <span
           style={{
             fontFamily: '"Fanwood Text", serif',
@@ -280,7 +269,6 @@ export const Experiences = () => {
           display: "grid",
           gridTemplateColumns: "var(--exp-grid-columns)",
           gap: "var(--exp-grid-gap)",
-          opacity: 0,
         }}
       >
         {EXPERIENCES.map((item) => (
@@ -298,7 +286,6 @@ export const Experiences = () => {
           marginTop: "4rem",
           paddingTop: "2rem",
           borderTop: "0.0625rem solid var(--color-border-warm)",
-          opacity: 0,
         }}
       >
         <p
