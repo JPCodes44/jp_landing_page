@@ -21,11 +21,14 @@ agent/implement-experiences-page
 
 ## Allowed files
 - packages/frontend/src/components/Experiences.tsx
+- packages/frontend/src/components/experiences/**
 - packages/frontend/src/main.tsx
 - packages/frontend/src/App.tsx
 - packages/frontend/src/index.css
 - packages/frontend/src/theme/index.ts
 - packages/frontend/src/App.test.tsx
+- .agents/specs/active/2026-03-25-implement-experiences-page.md
+- .agents/logs/reads/implement-experiences-page.json
 
 ## Forbidden files
 <!-- Files the agent must never touch regardless of what the task seems to require. -->

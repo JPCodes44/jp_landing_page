@@ -1,5 +1,6 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import {
@@ -8,8 +9,13 @@ import {
   ANIM_SCROLL_START,
   ANIM_Y_HEADING,
 } from "../theme";
+import { CarrierVerificationCard } from "./experiences/CarrierVerificationCard";
+import { FleetDashboardCard } from "./experiences/FleetDashboardCard";
+import { IFTACalculatorCard } from "./experiences/IFTACalculatorCard";
+import { T4AComplianceCard } from "./experiences/T4AComplianceCard";
 
 interface ExperienceItem {
+  visual: ReactNode;
   tags: string[];
   title: string;
   description: string;
@@ -17,25 +23,29 @@ interface ExperienceItem {
 
 const EXPERIENCES: ExperienceItem[] = [
   {
+    visual: <T4AComplianceCard />,
     tags: ["ONBOARDING", "CRA", "TAX FILING"],
     title: "T4A Compliance Engine",
     description:
-      "Connects to QuickBooks, identifies all subcontractor payments subject to CRA T4A Door-to-door easy penalty enforcement, and generates T4A slips. Don't get left behind.",
+      "Connects to QuickBooks, identifies all subcontractor payments subject to CRA's December 2025 penalty enforcement, and generates T4A slips. Box 048 compliant.",
   },
   {
-    tags: ["GPS", "FLEET MGMT", "eDRIVING"],
+    visual: <FleetDashboardCard />,
+    tags: ["CVOR", "FLEET MGMT", "AI PARSING"],
     title: "Fleet Compliance Dashboard",
     description:
-      "Real-time tracker for drivers, utilization, vehicle inspections, insurance, and maintenance across your entire fleet. Color-coded status, automated alerts, AI-powered document parsing.",
+      "Real-time tracker for driver qualifications, vehicle inspections, insurance, and maintenance across your entire fleet. Color-coded status, automated alerts, AI-powered document parsing.",
   },
   {
-    tags: ["INSPECT", "INSURANCE", "BROKER"],
+    visual: <CarrierVerificationCard />,
+    tags: ["MCDOT", "INSURANCE", "BROKERAGE"],
     title: "Carrier Compliance Verification",
     description:
-      "Automated carrier onboarding and monitoring for freight brokerages. Handles document capture, AI-powered insurance parsing with alerts on coverage thresholds, and continuous safety monitoring.",
+      "Automated carrier onboarding and monitoring for freight brokerages. Handles document requests, AI-powered insurance parsing with minimum coverage thresholds, and continuous expiry monitoring.",
   },
   {
-    tags: ["IFTA", "FUEL FEES", "FUEL TAX"],
+    visual: <IFTACalculatorCard />,
+    tags: ["IFTA", "ELD DATA", "FUEL TAX"],
     title: "IFTA Fuel Tax Calculator",
     description:
       "Takes fuel card CSVs and ELD mileage exports, allocates by jurisdiction, calculates net tax, and produces a draft IFTA return. Saves 4-8 hours per quarter filing.",
@@ -79,15 +89,8 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
         gap: "0.75rem",
       }}
     >
-      {/* Placeholder image */}
-      <div
-        style={{
-          backgroundColor: "var(--color-text-primary)",
-          borderRadius: "var(--exp-card-image-radius)",
-          aspectRatio: "16 / 10",
-          width: "100%",
-        }}
-      />
+      {/* Card visual */}
+      {item.visual}
 
       {/* Tags */}
       <div
@@ -258,7 +261,7 @@ export const Experiences = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.3,
+          opacity: 0.12,
           zIndex: -1,
           pointerEvents: "none",
         }}
