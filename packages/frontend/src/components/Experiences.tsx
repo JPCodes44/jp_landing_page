@@ -3,12 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint";
-import {
-  ANIM_DURATION_HEADING,
-  ANIM_SCROLL_END,
-  ANIM_SCROLL_START,
-  ANIM_Y_HEADING,
-} from "../theme";
+import { ANIM_DURATION_HEADING, ANIM_Y_HEADING } from "../theme";
 import { CarrierVerificationCard } from "./experiences/CarrierVerificationCard";
 import { FleetDashboardCard } from "./experiences/FleetDashboardCard";
 import { IFTACalculatorCard } from "./experiences/IFTACalculatorCard";
@@ -150,7 +145,6 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
 };
 
 export const Experiences = () => {
-  const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -165,11 +159,10 @@ export const Experiences = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const section = sectionRef.current;
     const header = headerRef.current;
     const grid = gridRef.current;
     const cta = ctaRef.current;
-    if (!section || !header || !grid || !cta) return;
+    if (!header || !grid || !cta) return;
 
     const prefersReducedMotion =
       typeof window.matchMedia === "function" &&
@@ -180,14 +173,8 @@ export const Experiences = () => {
       return;
     }
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: ANIM_SCROLL_START,
-        end: ANIM_SCROLL_END,
-        scrub: false,
-      },
-    });
+    // Entrance animation on mount (not scroll-triggered, since this is a standalone page)
+    const tl = gsap.timeline({ delay: 0.1 });
 
     tl.fromTo(
       header,
@@ -207,49 +194,25 @@ export const Experiences = () => {
         "-=0.2",
       );
 
-    const headingEl = header.querySelector("h2");
-    let headingParallax: gsap.core.Tween | null = null;
-    if (headingEl) {
-      headingParallax = gsap.fromTo(
-        headingEl,
-        { y: 25 },
-        {
-          y: -25,
-          ease: "none",
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: headingEl,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1.5,
-          },
-        },
-      );
-    }
-
     return () => {
-      tl.scrollTrigger?.kill();
       tl.kill();
-      if (headingParallax) {
-        headingParallax.scrollTrigger?.kill();
-        headingParallax.kill();
-      }
     };
   }, []);
 
   return (
     <section
       id="experiences"
-      ref={sectionRef}
       className="frame-bg"
       style={{
         width: "100%",
+        minHeight: "100vh",
         position: "relative",
         isolation: "isolate",
         paddingLeft: "var(--exp-section-padding-x)",
         paddingRight: "var(--exp-section-padding-x)",
         paddingTop: "var(--exp-section-padding-top)",
         paddingBottom: "var(--exp-section-padding-bottom)",
+        backgroundColor: "#e8e5df",
       }}
     >
       {/* Background overlay */}
