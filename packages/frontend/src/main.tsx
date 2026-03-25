@@ -5,9 +5,9 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import { About } from "./components/About";
+import { Experiences } from "./components/Experiences";
 import Frame4 from "./components/Frame4";
 import Frame6 from "./components/Frame6";
-import { Experiences } from "./components/Services";
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Root element not found");
