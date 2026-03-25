@@ -27,10 +27,10 @@ const ITEMS = [
 ];
 
 const SUBITEMS = [
-  "We connect your website forms, CRM, inbox, and outreach workflows so new leads are captured, enriched, routed, and followed up with automatically. Instead of opportunities getting lost between email, spreadsheets, and manual handoffs, the system keeps your pipeline moving from first touch to booked call.",
-  "We pull data directly from the tools your team already uses — CRMs, spreadsheets, internal trackers, form submissions, and communication platforms like Teams — and turn it into structured reports automatically. That means fewer manual updates, less copy-paste, and less misalignment between what leadership sees and what teams are actually working on.",
-  "We connect the platforms your team already uses, including CRMs, spreadsheets, forms, shared inboxes, and tools like Teams, so data and tasks move cleanly between systems. Instead of relying on manual handoffs and copy-paste coordination, your operations become more consistent, trackable, and aligned.",
-  "We build internal AI tools that connect to your CRM, knowledge base, spreadsheets, shared documents, and communication tools so your team can retrieve information, draft updates, complete repetitive actions, and stay aligned from one place. Instead of bouncing between systems and relying on tribal knowledge, your team gets operational tools that actually fit how work moves through the business.",
+  "I connect your website forms, CRM, inbox, and outreach workflows so new leads are captured, enriched, routed, and followed up with automatically. Instead of opportunities getting lost between email, spreadsheets, and manual handoffs, the system keeps your pipeline moving from first touch to booked call.",
+  "I pull data directly from the tools your team already uses — CRMs, spreadsheets, internal trackers, form submissions, and communication platforms like Teams — and turn it into structured reports automatically. That means fewer manual updates, less copy-paste, and less misalignment between what leadership sees and what teams are actually working on.",
+  "I connect the platforms your team already uses, including CRMs, spreadsheets, forms, shared inboxes, and tools like Teams, so data and tasks move cleanly between systems. Instead of relying on manual handoffs and copy-paste coordination, your operations become more consistent, trackable, and aligned.",
+  "I build internal AI tools that connect to your CRM, knowledge base, spreadsheets, shared documents, and communication tools so your team can retrieve information, draft updates, complete repetitive actions, and stay aligned from one place. Instead of bouncing between systems and relying on tribal knowledge, your team gets operational tools that actually fit how work moves through the business.",
 ];
 
 const AccordionItem = ({
