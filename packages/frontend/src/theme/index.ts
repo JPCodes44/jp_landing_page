@@ -52,6 +52,10 @@ export const FRAME3_RECT_TARGET_INSET = "2%";
 export const FRAME4_SECTION_PADDING_TOP = "24vh";
 export const FRAME4_SECTION_PADDING_BOTTOM = "8vh";
 
+// Experiences
+export const EXP_SECTION_PADDING_TOP = "16vh";
+export const EXP_SECTION_PADDING_BOTTOM = "8vh";
+
 // Colors
 export const COLOR_FRAME3_GREEN = "#c2f0c2";
 export const COLOR_FRAME3_TAN = "#dedad5";

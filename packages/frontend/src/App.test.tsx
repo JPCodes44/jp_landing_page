@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import App from "./App";
 
@@ -27,14 +28,22 @@ beforeEach(() => {
 
 describe("App", () => {
   it("renders the main heading", () => {
-    render(<App />);
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
     const heading = screen.getByRole("heading", { level: 1 });
     expect(heading).toBeInTheDocument();
     expect(heading).toHaveTextContent(/scale your business/);
   });
 
   it("renders main element with correct structure", () => {
-    render(<App />);
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
     const main = screen.getByRole("main");
     expect(main).toBeInTheDocument();
     expect(main.children).toHaveLength(9);

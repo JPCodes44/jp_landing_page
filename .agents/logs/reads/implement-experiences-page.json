@@ -1,0 +1,24 @@
+{
+  "task_id": "implement-experiences-page",
+  "timestamp": "2026-03-25T11:12:44Z",
+  "classification": "frontend-only",
+  "spec_path": "/home/jp/wt-implement-experiences-page/.agents/specs/active/2026-03-25-implement-experiences-page.md",
+  "relevant_files": [
+    "packages/frontend/src/components/Experiences.tsx",
+    "packages/frontend/src/main.tsx",
+    "packages/frontend/src/App.tsx",
+    "packages/frontend/src/index.css",
+    "packages/frontend/src/theme/index.ts"
+  ],
+  "planned_reads": [
+    "packages/frontend/src/components/Frame4.tsx",
+    "packages/frontend/src/App.tsx",
+    "packages/frontend/src/main.tsx",
+    "packages/frontend/src/components/Experiences.tsx",
+    "packages/frontend/src/index.css",
+    "packages/frontend/src/theme/index.ts",
+    "packages/frontend/src/hooks/useBreakpoint.ts"
+  ],
+  "why_sufficient": "These files cover the existing stub, routing config, pattern reference component, styling, and the breakpoint hook needed to implement the Experiences page per spec.",
+  "summary": "Implement the Experiences page at `/experiences` by building out the existing `Experiences.tsx` stub into a full project showcase grid. The component will feature a 2x2 card layout with placeholder images, tags, titles, and descriptions, using Fanwood Text font and inline CSSProperties with CSS custom properties. Background switches between grid.png (desktop) and image_frame2.png (mobile) via the useBreakpoint hook. GSAP ScrollTrigger animations follow Frame4.tsx patterns for header fade-in, card stagger, and CTA fade-in. Routing integration in main.tsx and App.tsx ensures the navbar \"experiences\" link navigates correctly. Layout is responsive: 2-col desktop, 1-col phone. No new dependencies required. "
+}

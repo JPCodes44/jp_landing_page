@@ -3,6 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import { useEffect, useRef, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Footer from "./components/Footer";
 import Frame1 from "./components/Frame1";
 import Frame2 from "./components/Frame2";
@@ -23,7 +24,7 @@ import {
 const NAV_LINKS = [
   { href: "#services", label: "services" },
   { href: "#contact", label: "contact" },
-  { href: "#experiences", label: "experiences" },
+  { href: "/experiences", label: "experiences" },
   { href: "#about", label: "about" },
 ];
 
@@ -41,6 +42,9 @@ const App = () => {
   const bar2Ref = useRef<HTMLSpanElement>(null);
   const bar3Ref = useRef<HTMLSpanElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isChildRoute = location.pathname !== "/";
 
   useEffect(() => {
     if (overlayRef.current) {
@@ -121,12 +125,23 @@ const App = () => {
     setMenuOpen(opening);
   };
 
-  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (el) {
-      window.__lenis?.scrollTo(el);
+    if (href.startsWith("/")) {
+      navigate(href);
+    } else {
+      if (location.pathname !== "/") {
+        navigate("/");
+        requestAnimationFrame(() => {
+          const id = href.replace("#", "");
+          const el = document.getElementById(id);
+          if (el) window.__lenis?.scrollTo(el);
+        });
+      } else {
+        const id = href.replace("#", "");
+        const el = document.getElementById(id);
+        if (el) window.__lenis?.scrollTo(el);
+      }
     }
   };
 
@@ -172,8 +187,12 @@ const App = () => {
           <button
             type="button"
             onClick={() => {
-              const el = document.getElementById("home");
-              if (el) window.__lenis?.scrollTo(el);
+              if (location.pathname !== "/") {
+                navigate("/");
+              } else {
+                const el = document.getElementById("home");
+                if (el) window.__lenis?.scrollTo(el);
+              }
             }}
             onMouseEnter={hoverEnter}
             onMouseLeave={hoverLeave}
@@ -228,7 +247,7 @@ const App = () => {
               <li key={href}>
                 <a
                   href={href}
-                  onClick={(e) => scrollTo(e, href)}
+                  onClick={(e) => handleNav(e, href)}
                   onMouseEnter={hoverEnter}
                   onMouseLeave={hoverLeave}
                   style={{
@@ -275,7 +294,7 @@ const App = () => {
                 <a
                   href={href}
                   onClick={(e) => {
-                    scrollTo(e, href);
+                    handleNav(e, href);
                     toggleMenu();
                   }}
                   onMouseEnter={hoverEnter}
@@ -301,13 +320,19 @@ const App = () => {
           </ul>
         </div>
 
-        <Frame1 />
-        <Frame2 />
-        <Frame3 />
-        <Frame4 />
-        <Frame5 />
-        <Frame6 />
-        <Footer />
+        {isChildRoute ? (
+          <Outlet />
+        ) : (
+          <>
+            <Frame1 />
+            <Frame2 />
+            <Frame3 />
+            <Frame4 />
+            <Frame5 />
+            <Frame6 />
+            <Footer />
+          </>
+        )}
       </main>
     </div>
   );
