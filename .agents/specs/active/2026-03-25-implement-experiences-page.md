@@ -22,6 +22,7 @@ agent/implement-experiences-page
 ## Allowed files
 - packages/frontend/src/components/Experiences.tsx
 - packages/frontend/src/components/experiences/**
+- packages/frontend/styles/assets/2d/icons/**
 - packages/frontend/src/main.tsx
 - packages/frontend/src/App.tsx
 - packages/frontend/src/index.css
