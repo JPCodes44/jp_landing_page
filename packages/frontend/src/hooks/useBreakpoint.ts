@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
+const PHONE_SM_BREAKPOINT = 298;
 const PHONE_BREAKPOINT = 480;
+const MOBILE_SM_BREAKPOINT = 620;
 const MOBILE_BREAKPOINT = 767;
 const TABLET_BREAKPOINT = 1000;
 const LAPTOP_SM_BREAKPOINT = 1220;
@@ -9,7 +11,9 @@ const DESKTOP_SM_BREAKPOINT = 1550;
 const DESKTOP_BREAKPOINT = 1700;
 
 type Breakpoint =
+  | "phone-sm"
   | "phone"
+  | "mobile-sm"
   | "mobile"
   | "tablet"
   | "laptop-sm"
@@ -20,7 +24,9 @@ type Breakpoint =
 
 const getBreakpoint = (): Breakpoint => {
   if (typeof window === "undefined") return "desktop";
+  if (window.innerWidth <= PHONE_SM_BREAKPOINT) return "phone-sm";
   if (window.innerWidth <= PHONE_BREAKPOINT) return "phone";
+  if (window.innerWidth <= MOBILE_SM_BREAKPOINT) return "mobile-sm";
   if (window.innerWidth <= MOBILE_BREAKPOINT) return "mobile";
   if (window.innerWidth <= TABLET_BREAKPOINT) return "tablet";
   if (window.innerWidth <= LAPTOP_SM_BREAKPOINT) return "laptop-sm";

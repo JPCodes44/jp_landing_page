@@ -18,7 +18,8 @@
     --nav-padding-x: 3.75rem;
 
     /* Frame1 */
-    --frame1-section-padding-x: 0px;
+    --frame1-section-padding: 0px;
+    --frame1-h1-padding-x: 0;
     --frame1-content-width: 55vw;
     --frame1-content-text-align: left;
     --frame1-content-align-items: flex-start;
@@ -123,7 +124,8 @@
     --nav-padding-x: 3.75rem;
 
     /* Frame1 */
-    --frame1-section-padding-x: 0px;
+    --frame1-section-padding: 0px;
+    --frame1-h1-padding-x: 0;
     --frame1-content-width: 55vw;
     --frame1-content-text-align: left;
     --frame1-content-align-items: flex-start;
@@ -217,7 +219,7 @@
     --footer-contact-item-3-flex: 0 0 90%;
     --footer-contacts-box-flex: 1 1 60%;
     --footer-phone-flex: 1 1 40%;
-    --footer-label-px: 1.75rem;
+    --footer-label-px: 14.75rem;
   }
 }
 
@@ -228,7 +230,8 @@
     --nav-padding-x: 3.75rem;
 
     /* Frame1 */
-    --frame1-section-padding-x: 0px;
+    --frame1-section-padding: 0px;
+    --frame1-h1-padding-x: 0;
     --frame1-content-width: 55vw;
     --frame1-content-text-align: left;
     --frame1-content-align-items: flex-start;
@@ -322,7 +325,7 @@
     --footer-contact-item-3-flex: 0 0 90%;
     --footer-contacts-box-flex: 1 1 60%;
     --footer-phone-flex: 1 1 40%;
-    --footer-label-px: 1.75rem;
+    --footer-label-px: 14.75rem;
   }
 }
 
@@ -333,6 +336,7 @@
     --nav-padding-x: 2.5rem;
 
     /* Frame1 */
+    --frame1-h1-padding-x: 0;
     --frame1-h1-size: 3.8rem;
     --frame1-h1-lh: 1.3;
     --frame1-body-size: 1.4rem;
@@ -427,6 +431,7 @@
     --nav-padding-x: 2.5rem;
 
     /* Frame1 */
+    --frame1-h1-padding-x: 0;
     --frame1-h1-size: 3.8rem;
     --frame1-h1-lh: 1.3;
     --frame1-body-size: 1.4rem;
@@ -518,7 +523,8 @@
 @media (767px < width <= 1000px) {
   :root {
     --nav-padding-x: 1.5rem;
-    --frame1-section-padding-x: 7rem;
+    --frame1-section-padding: 7rem;
+    --frame1-h1-padding-x: 0;
     --frame1-content-width: 88vw;
     --frame1-content-text-align: center;
     --frame1-content-align-items: center;
@@ -599,15 +605,102 @@
   }
 }
 
-/* ── Mobile media query (481px – 767px) ──────────────────────────── */
-@media (480px < width <= 767px) {
+/* ── Mobile media query (621px – 767px) ──────────────────────────── */
+@media (620px < width <= 767px) {
   :root {
     --nav-padding-x: 1.5rem;
-    --frame1-section-padding-x: 7rem;
+    --frame1-section-padding: 7rem;
+    --frame1-h1-padding-x: 0;
     --frame1-content-width: 88vw;
     --frame1-content-text-align: center;
     --frame1-content-align-items: center;
     --frame1-h1-size: 2.4rem;
+    --frame1-h1-lh: 1.6;
+    --frame1-p-max-width: 88vw;
+    --frame1-body-size: 1.3rem;
+    --frame1-body-lh: 2.3;
+    --frame2-section-padding-x: 1.5rem;
+    --frame2-section-padding-top: 9rem;
+    --frame2-section-padding-bottom: 20rem;
+    --frame2-h2-size: 8rem;
+    --frame2-desc-indent: 2.5rem;
+    --frame2-icon-size: 5rem;
+    --frame2-body-size: 1.3rem;
+    --frame2-padding-right: 0rem;
+    --frame2-marquee-icon-size: 6rem;
+    --frame2-marquee-icon-padding: 2rem;
+    --frame2-marquee-padding-top: 5rem;
+    --frame2-body-lh: 2.3;
+    --frame2-bg-top: -90vh;
+    --frame2-bg-height: calc(100% + 100vh);
+    --frame2-bg-size: 260% auto;
+    --frame2-bg-position: center center;
+    --frame4-section-padding-x: 1.5rem;
+    --frame4-heading-size: 5.2rem;
+    --accordion-item-size: 1.8rem;
+    --accordion-item-pl: 1.5rem;
+    --accordion-item-pr: 1.5rem;
+    --accordion-content-pl: 1.5rem;
+    --accordion-content-pr: 1.5rem;
+    --accordion-wrapper-mx: 0px;
+    --accordion-wrapper-px: 0px;
+    --accordion-button-size: 1.2rem;
+    --accordion-padding-y: 1.4rem;
+    --accordion-margin-top: 4rem;
+    --accordion-content-size: 1.2rem;
+    --accordion-content-px: 0.75rem;
+    --accordion-content-pt: 2.2rem;
+    --accordion-content-py: 1.5rem;
+    --accordion-content-lh: 2.3;
+    --frame5-heading-initial-size: 7rem;
+    --frame5-heading-final-size: 5.2rem;
+    --frame5-heading-left: 1.5rem;
+    --frame6-section-padding-x: 1.5rem;
+    --frame6-section-padding-top: 28rem;
+    --frame6-cta-size: 2.8rem;
+    --frame6-cta-padding-x: 3rem;
+    --frame6-cta-lh: 1.5;
+    --frame6-form-padding-x: 1.3rem;
+    --frame6-form-inner-padding: 3rem;
+    --frame6-form-title-size: 2rem;
+    --frame6-form-title-padding: 1rem;
+    --frame6-form-fields-pt: 2rem;
+    --frame6-form-label-size: 1.2rem;
+    --frame6-form-input-size: 1rem;
+    --frame6-form-input-padding: 0.85rem 1rem;
+    --frame6-form-input-height: 3.5rem;
+    --frame6-form-textarea-height: 14rem;
+    --frame6-submit-padding-y: 0.6rem;
+    --frame6-submit-padding-x: 2rem;
+    --frame6-submit-font-size: 1rem;
+    --frame6-form-field-gap: 1.5rem;
+    --frame6-firstname-flex: 0 0 47%;
+    --frame6-lastname-flex: 0 0 47%;
+    --frame6-email-width: 100%;
+    --frame6-comments-width: 100%;
+    --frame6-bg-size: 250% auto;
+    --footer-padding-x: 1.5rem;
+    --footer-padding-top: 0rem;
+    --footer-padding-bottom: 6rem;
+    --footer-contact-gap: 2rem;
+    --footer-contact-row-gap: 7rem;
+    --footer-contact-justify: flex-start;
+    --footer-outer-justify: flex-start;
+    --footer-contact-font-size: 1.3rem;
+    --footer-name-margin-bottom: -0.25em;
+  }
+}
+
+/* ── Mobile-sm media query (481px – 620px) ───────────────────────── */
+@media (480px < width <= 620px) {
+  :root {
+    --nav-padding-x: 1.5rem;
+    --frame1-section-padding: 7rem;
+    --frame1-h1-padding-x: 0;
+    --frame1-content-width: 88vw;
+    --frame1-content-text-align: center;
+    --frame1-content-align-items: center;
+    --frame1-h1-size: 1.4rem;
     --frame1-h1-lh: 1.6;
     --frame1-p-max-width: 88vw;
     --frame1-body-size: 1.3rem;
@@ -667,8 +760,8 @@
     --frame6-submit-padding-x: 2rem;
     --frame6-submit-font-size: 1rem;
     --frame6-form-field-gap: 1.5rem;
-    --frame6-firstname-flex: 0 0 46%;
-    --frame6-lastname-flex: 0 0 42%;
+    --frame6-firstname-flex: 0 0 47%;
+    --frame6-lastname-flex: 0 0 47%;
     --frame6-email-width: 100%;
     --frame6-comments-width: 100%;
     --frame6-bg-size: 250% auto;
@@ -684,18 +777,104 @@
   }
 }
 
-/* ── Phone media query (≤480px) ──────────────────────────────────── */
-@media (width <= 480px) {
+/* ── Phone media query (299px – 480px) ────────────────────────────── */
+@media (298px < width <= 480px) {
   :root {
     --nav-padding-x: 1.5rem;
-    --frame1-section-padding-x: 7rem;
+    --frame1-section-padding: 2rem;
+    --frame1-h1-padding-x: 0;
+    --frame1-content-width: 70vw;
+    --frame1-content-text-align: center;
+    --frame1-content-align-items: center;
+    --frame1-h1-size: 1.9em;
+    --frame1-h1-lh: 1.6;
+    --frame1-p-max-width: 88vw;
+    --frame1-body-size: 1rem;
+    --frame1-body-lh: 2.3;
+    --frame2-section-padding-x: 1.5rem;
+    --frame2-section-padding-top: 9rem;
+    --frame2-section-padding-bottom: 20rem;
+    --frame2-h2-size: 5rem;
+    --frame2-desc-indent: 1rem;
+    --frame2-icon-size: 5rem;
+    --frame2-body-size: 1rem;
+    --frame2-padding-right: 0rem;
+    --frame2-marquee-icon-size: 4rem;
+    --frame2-marquee-icon-padding: 2rem;
+    --frame2-marquee-padding-top: 5rem;
+    --frame2-body-lh: 2.3;
+    --frame2-bg-top: -90vh;
+    --frame2-bg-height: calc(100% + 100vh);
+    --frame2-bg-size: 260% auto;
+    --frame2-bg-position: center center;
+    --frame4-section-padding-x: 1.5rem;
+    --frame4-heading-size: 3.2rem;
+    --accordion-item-size: 1.5rem;
+    --accordion-item-pl: 1.5rem;
+    --accordion-item-pr: 1.5rem;
+    --accordion-content-pl: 1.5rem;
+    --accordion-content-pr: 1.5rem;
+    --accordion-wrapper-mx: 0px;
+    --accordion-wrapper-px: 0px;
+    --accordion-button-size: 1rem;
+    --accordion-padding-y: 1.4rem;
+    --accordion-margin-top: 4rem;
+    --accordion-content-size: 1.2rem;
+    --accordion-content-px: 0.75rem;
+    --accordion-content-pt: 2.2rem;
+    --accordion-content-py: 1.5rem;
+    --accordion-content-lh: 2.3;
+    --frame5-heading-initial-size: 5rem;
+    --frame5-heading-final-size: 3.2rem;
+    --frame5-heading-left: 1.5rem;
+    --frame6-section-padding-x: 0.75rem;
+    --frame6-section-padding-top: 18rem;
+    --frame6-cta-size: 2rem;
+    --frame6-cta-padding-x: 3rem;
+    --frame6-cta-lh: 1.5;
+    --frame6-form-padding-x: 0.75rem;
+    --frame6-form-inner-padding: 2rem;
+    --frame6-form-title-size: 1.3rem;
+    --frame6-form-title-padding: 0.3rem;
+    --frame6-form-fields-pt: 1rem;
+    --frame6-form-label-size: 0.85rem;
+    --frame6-form-input-size: 0.8rem;
+    --frame6-form-input-padding: 0.5rem 0.6rem;
+    --frame6-form-input-height: 2.4rem;
+    --frame6-form-textarea-height: 10rem;
+    --frame6-submit-padding-y: 0.4rem;
+    --frame6-submit-padding-x: 1.5rem;
+    --frame6-submit-font-size: 0.85rem;
+    --frame6-form-field-gap: 0.9rem;
+    --frame6-firstname-flex: 0 0 47%;
+    --frame6-lastname-flex: 0 0 47%;
+    --frame6-email-width: 100%;
+    --frame6-comments-width: 100%;
+    --frame6-bg-size: 250% auto;
+    --footer-padding-x: 2.5rem;
+    --footer-padding-top: 0rem;
+    --footer-padding-bottom: 4rem;
+    --footer-contact-gap: 2rem;
+    --footer-contact-row-gap: 4rem;
+    --footer-contact-justify: flex-start;
+    --footer-outer-justify: flex-start;
+    --footer-contact-font-size: 0.9rem;
+    --footer-name-margin-bottom: -0.25em;
+  }
+}
+
+/* ── Phone-sm media query (≤298px) ───────────────────────────────── */
+@media (width <= 298px) {
+  :root {
+    --nav-padding-x: 1.5rem;
+    --frame1-section-padding: 7rem;
+    --frame1-h1-padding-x: 0;
     --frame1-content-width: 88vw;
     --frame1-content-text-align: center;
     --frame1-content-align-items: center;
     --frame1-h1-size: 2.4rem;
     --frame1-h1-lh: 1.6;
-    --frame1-p-max-width: 88vw;
-    --frame1-body-size: 1.3rem;
+    --frame1-body-size: 0.4rem;
     --frame1-body-lh: 2.3;
     --frame2-section-padding-x: 1.5rem;
     --frame2-section-padding-top: 9rem;
@@ -892,8 +1071,8 @@
   }
 }
 
-/* ── Mobile class overrides (481px – 767px) ──────────────────────── */
-@media (480px < width <= 767px) {
+/* ── Mobile class overrides (621px – 767px) ──────────────────────── */
+@media (620px < width <= 767px) {
   /* Frame1 */
   .frame1-subtext {
     padding: 2rem;
@@ -968,8 +1147,160 @@
   }
 }
 
-/* ── Phone class overrides (≤480px) ──────────────────────────────── */
-@media (width <= 480px) {
+/* ── Mobile-sm class overrides (481px – 620px) ───────────────────── */
+@media (480px < width <= 620px) {
+  /* Frame1 */
+  .frame1-subtext {
+    padding: 2rem;
+  }
+
+  /* Frame2 */
+  .frame2-subtext {
+    padding: 0;
+  }
+
+  .frame2-layout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .frame2-left {
+    flex: unset;
+    width: 100%;
+  }
+
+  .frame2-icon-container {
+    display: none;
+  }
+
+  .frame2-marquee-outer {
+    display: block;
+    margin-left: calc(-1 * var(--frame2-section-padding-x));
+    margin-right: calc(-1 * var(--frame2-section-padding-x));
+    margin-top: var(--frame2-marquee-padding-top);
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  /* Frame5 */
+  .frame5-heading-small {
+    white-space: normal;
+  }
+
+  /* Footer */
+  .footer-contact-item {
+    padding-left: 4rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .footer-contact-item:first-child {
+    flex: 0 0 100%;
+  }
+
+  .footer-contact-item:nth-child(2) {
+    flex: var(--footer-contact-item-2-flex);
+  }
+
+  .footer-contact-item:nth-child(3) {
+    flex: var(--footer-contact-item-3-flex);
+  }
+
+  /* Nav */
+  .nav-hamburger {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-mobile-overlay {
+    display: flex;
+  }
+}
+
+/* ── Phone class overrides (299px – 480px) ───────────────────────── */
+@media (298px < width <= 480px) {
+  /* Frame1 */
+  .frame1-subtext {
+    padding: 2rem;
+  }
+
+  /* Frame2 */
+  .frame2-subtext {
+    padding: 0;
+  }
+
+  .frame2-layout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .frame2-left {
+    flex: unset;
+    width: 100%;
+  }
+
+  .frame2-icon-container {
+    display: none;
+  }
+
+  .frame2-marquee-outer {
+    display: block;
+    margin-left: calc(-1 * var(--frame2-section-padding-x));
+    margin-right: calc(-1 * var(--frame2-section-padding-x));
+    margin-top: var(--frame2-marquee-padding-top);
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  /* Frame5 */
+  .frame5-heading-small {
+    white-space: normal;
+  }
+
+  /* Footer */
+  .footer-contact-item {
+    padding-left: 4rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .footer-contact-item:first-child {
+    flex: 0 0 100%;
+  }
+
+  .footer-contact-item:nth-child(2) {
+    flex: var(--footer-contact-item-2-flex);
+  }
+
+  .footer-contact-item:nth-child(3) {
+    flex: var(--footer-contact-item-3-flex);
+  }
+
+  /* Nav */
+  .nav-hamburger {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-mobile-overlay {
+    display: flex;
+  }
+}
+
+/* ── Phone-sm class overrides (≤298px) ───────────────────────────── */
+@media (width <= 298px) {
   /* Frame1 */
   .frame1-subtext {
     padding: 2rem;

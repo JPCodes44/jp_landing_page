@@ -12,8 +12,7 @@ const Frame1 = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        paddingLeft: "var(--frame1-section-padding-x)",
-        paddingRight: "var(--frame1-section-padding-x)",
+        padding: "var(--frame1-section-padding)",
       }}
     >
       <div
@@ -46,6 +45,8 @@ const Frame1 = () => {
             margin: 0,
             fontSize: "var(--frame1-h1-size)",
             lineHeight: "var(--frame1-h1-lh)",
+            paddingLeft: "var(--frame1-h1-padding-x)",
+            paddingRight: "var(--frame1-h1-padding-x)",
           }}
         >
           I build systems that <span style={{ color: "#7a8b5c" }}>scale your business</span> while

@@ -124,7 +124,7 @@ const Footer = () => {
           position: "absolute",
           inset: 0,
           backgroundImage:
-            bp === "mobile" || bp === "phone"
+            bp === "mobile" || bp === "mobile-sm" || bp === "phone" || bp === "phone-sm"
               ? "url('/styles/assets/2d/backgrounds/image_frame2.png')"
               : "url('/styles/assets/2d/backgrounds/grid.png')",
           backgroundSize: "110% auto",
