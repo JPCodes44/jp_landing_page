@@ -3,10 +3,18 @@ import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import { ANIM_DURATION_HEADING, ANIM_Y_HEADING, NAVBAR_HEIGHT } from "../theme";
+import { CandidateIntakeCard } from "./experiences/CandidateIntakeCard";
 import { CarrierVerificationCard } from "./experiences/CarrierVerificationCard";
+import { ClientIntakeCard } from "./experiences/ClientIntakeCard";
 import { FleetDashboardCard } from "./experiences/FleetDashboardCard";
 import { IFTACalculatorCard } from "./experiences/IFTACalculatorCard";
+import { InterviewSchedulingCard } from "./experiences/InterviewSchedulingCard";
+import { InventoryComplianceCard } from "./experiences/InventoryComplianceCard";
+import { RecruiterPipelineCard } from "./experiences/RecruiterPipelineCard";
+import { ResumeParsingCard } from "./experiences/ResumeParsingCard";
+import { RevenueAnalyticsCard } from "./experiences/RevenueAnalyticsCard";
 import { T4AComplianceCard } from "./experiences/T4AComplianceCard";
+import { TreatmentTrackingCard } from "./experiences/TreatmentTrackingCard";
 
 interface ExperienceItem {
   visual: ReactNode;
@@ -15,7 +23,7 @@ interface ExperienceItem {
   description: string;
 }
 
-const EXPERIENCES: ExperienceItem[] = [
+const TRUCKING_EXPERIENCES: ExperienceItem[] = [
   {
     visual: <T4AComplianceCard />,
     tags: ["ONBOARDING", "CRA", "TAX FILING"],
@@ -43,6 +51,68 @@ const EXPERIENCES: ExperienceItem[] = [
     title: "IFTA Fuel Tax Calculator",
     description:
       "Takes fuel card CSVs and ELD mileage exports, allocates by jurisdiction, calculates net tax, and produces a draft IFTA return. Saves 4-8 hours per quarter filing.",
+  },
+];
+
+const RECRUITING_EXPERIENCES: ExperienceItem[] = [
+  {
+    visual: <CandidateIntakeCard />,
+    tags: ["INTAKE", "SCREENING", "WORKFLOW"],
+    title: "Candidate Intake & Screening",
+    description:
+      "Automated candidate intake and screening workflows. Custom stages for initial screens, technical assessments, and cultural fit interviews with automated status tracking.",
+  },
+  {
+    visual: <ResumeParsingCard />,
+    tags: ["AI", "RESUME PARSING", "CRM"],
+    title: "Resume Parsing & CRM Sync",
+    description:
+      "AI-powered resume parsing that extracts skills, experience, and contact info directly into your CRM or ATS. High-confidence data extraction with automated duplicate detection.",
+  },
+  {
+    visual: <InterviewSchedulingCard />,
+    tags: ["SCHEDULING", "CALENDAR", "FEEDBACK"],
+    title: "Interview Scheduling Automation",
+    description:
+      "Smart scheduling that coordinates between candidate and interviewer availability. Automated feedback collection with Slack/Email reminders for overdue evaluations.",
+  },
+  {
+    visual: <RecruiterPipelineCard />,
+    tags: ["ANALYTICS", "PIPELINE", "REPORTING"],
+    title: "Recruiter Activity & Pipeline",
+    description:
+      "Real-time reporting on recruiter activity and hiring funnel metrics. Track time-to-hire, source effectiveness, and team productivity across all active requisitions.",
+  },
+];
+
+const MEDSPA_EXPERIENCES: ExperienceItem[] = [
+  {
+    visual: <ClientIntakeCard />,
+    tags: ["INTAKE", "BOOKING", "CONSENT"],
+    title: "Client Intake & Scheduling",
+    description:
+      "Automated intake forms, digital consent management, and intelligent appointment scheduling. Syncs health history, photo consent, and skin assessments before the client walks in.",
+  },
+  {
+    visual: <TreatmentTrackingCard />,
+    tags: ["TREATMENTS", "PHOTOS", "PROTOCOLS"],
+    title: "Treatment Tracking & Photo Progress",
+    description:
+      "Logs every injection, peel, and laser session with unit counts, provider attribution, and follow-up scheduling. AI-aligned before/after photos with consistent lighting and angle matching.",
+  },
+  {
+    visual: <InventoryComplianceCard />,
+    tags: ["INVENTORY", "LICENSING", "EXPIRY"],
+    title: "Inventory & Compliance Manager",
+    description:
+      "Real-time product tracking with automatic reorder thresholds. Monitors medical director agreements, laser safety certs, DEA registration, and insurance expiry with automated alerts.",
+  },
+  {
+    visual: <RevenueAnalyticsCard />,
+    tags: ["REVENUE", "MEMBERSHIPS", "ANALYTICS"],
+    title: "Revenue & Membership Analytics",
+    description:
+      "Revenue breakdown by service line, membership churn tracking, and lifetime value calculations. Identifies which treatments drive retention and where to optimize pricing.",
   },
 ];
 
@@ -172,6 +242,10 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
 export const Experiences = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const recruitingHeaderRef = useRef<HTMLDivElement>(null);
+  const recruitingGridRef = useRef<HTMLDivElement>(null);
+  const medSpaHeaderRef = useRef<HTMLDivElement>(null);
+  const medSpaGridRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
   const breakpoint = useBreakpoint();
@@ -184,8 +258,21 @@ export const Experiences = () => {
   useEffect(() => {
     const header = headerRef.current;
     const grid = gridRef.current;
+    const recruitingHeader = recruitingHeaderRef.current;
+    const recruitingGrid = recruitingGridRef.current;
+    const medSpaHeader = medSpaHeaderRef.current;
+    const medSpaGrid = medSpaGridRef.current;
     const cta = ctaRef.current;
-    if (!header || !grid || !cta) return;
+    if (
+      !header ||
+      !grid ||
+      !recruitingHeader ||
+      !recruitingGrid ||
+      !medSpaHeader ||
+      !medSpaGrid ||
+      !cta
+    )
+      return;
 
     const prefersReducedMotion =
       typeof window.matchMedia === "function" &&
@@ -196,6 +283,10 @@ export const Experiences = () => {
     // Set initial hidden state, then animate in on mount
     gsap.set(header, { opacity: 0, y: ANIM_Y_HEADING });
     gsap.set(Array.from(grid.children), { opacity: 0, y: "3rem" });
+    gsap.set(recruitingHeader, { opacity: 0, y: ANIM_Y_HEADING });
+    gsap.set(Array.from(recruitingGrid.children), { opacity: 0, y: "3rem" });
+    gsap.set(medSpaHeader, { opacity: 0, y: ANIM_Y_HEADING });
+    gsap.set(Array.from(medSpaGrid.children), { opacity: 0, y: "3rem" });
     gsap.set(cta, { opacity: 0, y: "2rem" });
 
     const tl = gsap.timeline({ delay: 0.15 });
@@ -203,6 +294,28 @@ export const Experiences = () => {
     tl.to(header, { opacity: 1, y: 0, ease: "power2.out", duration: ANIM_DURATION_HEADING })
       .to(
         Array.from(grid.children),
+        { opacity: 1, y: 0, stagger: 0.15, ease: "power2.out", duration: 0.6 },
+        "-=0.3",
+      )
+      .to(recruitingHeader, {
+        opacity: 1,
+        y: 0,
+        ease: "power2.out",
+        duration: ANIM_DURATION_HEADING,
+      })
+      .to(
+        Array.from(recruitingGrid.children),
+        { opacity: 1, y: 0, stagger: 0.15, ease: "power2.out", duration: 0.6 },
+        "-=0.3",
+      )
+      .to(medSpaHeader, {
+        opacity: 1,
+        y: 0,
+        ease: "power2.out",
+        duration: ANIM_DURATION_HEADING,
+      })
+      .to(
+        Array.from(medSpaGrid.children),
         { opacity: 1, y: 0, stagger: 0.15, ease: "power2.out", duration: 0.6 },
         "-=0.3",
       )
@@ -245,7 +358,7 @@ export const Experiences = () => {
         }}
       />
 
-      {/* Header */}
+      {/* Trucking Header */}
       <div ref={headerRef} style={{ marginBottom: "var(--exp-header-mb)" }}>
         <span
           style={{
@@ -288,7 +401,7 @@ export const Experiences = () => {
         </p>
       </div>
 
-      {/* Cards Grid */}
+      {/* Trucking Cards Grid */}
       <div
         ref={gridRef}
         style={{
@@ -297,7 +410,139 @@ export const Experiences = () => {
           gap: "var(--exp-grid-gap)",
         }}
       >
-        {EXPERIENCES.map((item) => (
+        {TRUCKING_EXPERIENCES.map((item) => (
+          <ExperienceCard key={item.title} item={item} />
+        ))}
+      </div>
+
+      {/* Section divider */}
+      <div
+        style={{
+          borderTop: "0.0625rem solid var(--color-border-warm)",
+          marginTop: "6rem",
+          marginBottom: "2rem",
+        }}
+      />
+
+      {/* Recruiting Header */}
+      <div ref={recruitingHeaderRef} style={{ marginBottom: "var(--exp-header-mb)" }}>
+        <span
+          style={{
+            fontFamily: '"Fanwood Text", serif',
+            fontSize: "var(--exp-label-size)",
+            letterSpacing: "var(--exp-label-spacing)",
+            textTransform: "uppercase",
+            color: "var(--color-text-primary)",
+            display: "block",
+            marginBottom: "1.5rem",
+          }}
+        >
+          Recruiting & Staffing
+        </span>
+        <h2
+          style={{
+            fontFamily: '"Fanwood Text", serif',
+            fontSize: "var(--exp-heading-size)",
+            lineHeight: 1.15,
+            color: "var(--color-text-primary)",
+            margin: 0,
+            maxWidth: "40rem",
+          }}
+        >
+          Automation for high-volume recruitment and staffing agencies
+        </h2>
+        <p
+          style={{
+            fontFamily: '"Fanwood Text", serif',
+            fontSize: "var(--exp-desc-size)",
+            lineHeight: 1.6,
+            color: "var(--color-text-primary)",
+            marginTop: "1.5rem",
+            maxWidth: "50rem",
+          }}
+        >
+          Custom workflows that eliminate administrative overhead. From AI-powered resume parsing to
+          automated interview scheduling and real-time pipeline reporting, our systems ensure your
+          recruiters spend more time talking to talent and less time on data entry.
+        </p>
+      </div>
+
+      {/* Recruiting Cards Grid */}
+      <div
+        ref={recruitingGridRef}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "var(--exp-grid-columns)",
+          gap: "var(--exp-grid-gap)",
+        }}
+      >
+        {RECRUITING_EXPERIENCES.map((item) => (
+          <ExperienceCard key={item.title} item={item} />
+        ))}
+      </div>
+
+      {/* Section divider */}
+      <div
+        style={{
+          borderTop: "0.0625rem solid var(--color-border-warm)",
+          marginTop: "6rem",
+          marginBottom: "2rem",
+        }}
+      />
+
+      {/* Med Spa Header */}
+      <div ref={medSpaHeaderRef} style={{ marginBottom: "var(--exp-header-mb)" }}>
+        <span
+          style={{
+            fontFamily: '"Fanwood Text", serif',
+            fontSize: "var(--exp-label-size)",
+            letterSpacing: "var(--exp-label-spacing)",
+            textTransform: "uppercase",
+            color: "var(--color-text-primary)",
+            display: "block",
+            marginBottom: "1.5rem",
+          }}
+        >
+          Med Spa Automation
+        </span>
+        <h2
+          style={{
+            fontFamily: '"Fanwood Text", serif',
+            fontSize: "var(--exp-heading-size)",
+            lineHeight: 1.15,
+            color: "var(--color-text-primary)",
+            margin: 0,
+            maxWidth: "40rem",
+          }}
+        >
+          Operational systems for aesthetic clinics and med spas
+        </h2>
+        <p
+          style={{
+            fontFamily: '"Fanwood Text", serif',
+            fontSize: "var(--exp-desc-size)",
+            lineHeight: 1.6,
+            color: "var(--color-text-primary)",
+            marginTop: "1.5rem",
+            maxWidth: "50rem",
+          }}
+        >
+          End-to-end automation for client intake, treatment tracking, inventory management, and
+          revenue analytics. Systems that handle the operational burden so providers can focus on
+          patient outcomes.
+        </p>
+      </div>
+
+      {/* Med Spa Cards Grid */}
+      <div
+        ref={medSpaGridRef}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "var(--exp-grid-columns)",
+          gap: "var(--exp-grid-gap)",
+        }}
+      >
+        {MEDSPA_EXPERIENCES.map((item) => (
           <ExperienceCard key={item.title} item={item} />
         ))}
       </div>
